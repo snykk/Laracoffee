@@ -1,0 +1,132 @@
+@import url("https://fonts.googleapis.com/css?family=Varela+Round");
+@import url("https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i");
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-padding-top: calc(4.5rem - 1px) !important;
+}
+
+body {
+    letter-spacing: 0.0625em !important;
+}
+
+.btn {
+    box-shadow: 0 0.1875rem 0.1875rem 0 rgba(0, 0, 0, 0.1) !important;
+    padding: 1.25rem 2rem;
+    font-family: "Varela Round", -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji",
+        "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !important;
+    font-size: 80%;
+    text-transform: uppercase;
+    letter-spacing: 0.15rem;
+    border: 0;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #64a19d;
+    border-color: #64a19d;
+}
+.btn-primary:hover {
+    color: #fff;
+    background-color: #558985;
+    border-color: #50817e;
+}
+.btn-check:focus + .btn-primary,
+.btn-primary:focus {
+    color: #fff;
+    background-color: #558985;
+    border-color: #50817e;
+    box-shadow: 0 0 0 0.25rem rgba(123, 175, 172, 0.5);
+}
+.btn-check:checked + .btn-primary,
+.btn-check:active + .btn-primary,
+.btn-primary:active,
+.btn-primary.active,
+.show > .btn-primary.dropdown-toggle {
+    color: #fff;
+    background-color: #50817e;
+    border-color: #4b7976;
+}
+.btn-check:checked + .btn-primary:focus,
+.btn-check:active + .btn-primary:focus,
+.btn-primary:active:focus,
+.btn-primary.active:focus,
+.show > .btn-primary.dropdown-toggle:focus {
+    box-shadow: 0 0 0 0.25rem rgba(123, 175, 172, 0.5);
+}
+.btn-primary:disabled,
+.btn-primary.disabled {
+    color: #fff;
+    background-color: #64a19d;
+    border-color: #64a19d;
+}
+
+.masthead {
+    position: relative;
+    width: 100%;
+    height: auto;
+    min-height: 35rem;
+    padding: 15rem 0;
+    background: linear-gradient(
+            to bottom,
+            rgba(0, 0, 0, 0.3) 0%,
+            rgba(0, 0, 0, 0.7) 75%,
+            #000 100%
+        ),
+        url("/img/landing-background.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+    background-size: cover;
+}
+.masthead h1,
+.masthead .h1 {
+    font-family: "Varela Round", -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji",
+        "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !important;
+    font-size: 2.5rem;
+    line-height: 2.5rem;
+    letter-spacing: 0.8rem;
+    background: linear-gradient(
+        rgba(255, 255, 255, 0.9),
+        rgba(255, 255, 255, 0)
+    );
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+    background-clip: text;
+}
+.masthead h2,
+.masthead .h2 {
+    max-width: 20rem;
+    font-size: 1rem;
+}
+@media (min-width: 768px) {
+    .masthead h1,
+    .masthead .h1 {
+        font-size: 4rem;
+        line-height: 4rem;
+    }
+}
+@media (min-width: 992px) {
+    .masthead {
+        height: 100vh;
+        padding: 0;
+    }
+    .masthead h1,
+    .masthead .h1 {
+        font-size: 6.5rem;
+        line-height: 6.5rem;
+        letter-spacing: 0.8rem;
+    }
+    .masthead h2,
+    .masthead .h2 {
+        max-width: 30rem;
+        font-size: 1.25rem;
+    }
+}
