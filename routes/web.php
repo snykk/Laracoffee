@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,8 +15,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('/landing.index', [
-        "title" => "Landing Page",
+    return view('landing.index', [
+        "title" => "Landing",
         "css" => "landing"
     ]);
 });
+
+Route::get('/{url}', [AuthController::class, "loginGet"])->where(["url" => "auth|auth/login"]);
+
+Route::get('/auth/register', [AuthController::class, "registrationGet"]);
+Route::post('/auth/register', [AuthController::class, "registrationPost"]);

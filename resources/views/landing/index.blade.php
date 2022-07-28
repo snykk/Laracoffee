@@ -1,5 +1,9 @@
 @extends('/templates/main')
 
+@push('css')
+    <link href="/css/{{ $css }}.css" rel="stylesheet" /> 
+@endpush
+
 @section("content")
 <header class="masthead">
     <div class="container px-4 px-lg-5 d-flex h-100 align-items-center justify-content-center">
