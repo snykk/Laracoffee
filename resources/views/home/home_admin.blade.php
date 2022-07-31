@@ -1,4 +1,5 @@
-<h1 class="mt-4">Dashboard</h1>
+<main class="container-fluid px-3 py-4">
+    <h1>Dashboard</h1>
     <ol class="breadcrumb mb-4">
         <li class="breadcrumb-item active">Dashboard</li>
     </ol>
@@ -548,3 +549,5 @@
             </table>
         </div>
     </div>
+</main>
+

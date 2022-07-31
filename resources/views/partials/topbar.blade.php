@@ -13,7 +13,7 @@
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><img width="40px" class="img-profile rounded-circle" src="/img/profile-default.jpg"></a>
         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-          <li><a class="dropdown-item" href="/profile/user_profile"><i class="fas fa-user-alt fa-sm fa-fw text-gray-400" style="margin-right: 10px;"></i>My Profile</a></li>
+          <li><a class="dropdown-item" href="/profile/my_profile"><i class="fas fa-user-alt fa-sm fa-fw text-gray-400" style="margin-right: 10px;"></i>My Profile</a></li>
           <li><a class="dropdown-item" href="/profile/ganti_password"><i class="fas fa-key fa-sm fa-fw text-gray-400" style="margin-right: 10px;"></i>Change Password</a></li>
           <li>
             <hr class="dropdown-divider" />
