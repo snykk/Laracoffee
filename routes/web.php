@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,8 +22,13 @@ Route::get('/', function () {
     ]);
 });
 
+// Login
 Route::get('/{url}', [AuthController::class, "loginGet"])->where(["url" => "auth|auth/login"]);
 Route::post('/auth/login', [AuthController::class, "loginPost"]);
 
+// Register
 Route::get('/auth/register', [AuthController::class, "registrationGet"]);
 Route::post('/auth/register', [AuthController::class, "registrationPost"]);
+
+//Home 
+Route::get("home", [HomeController::class, "index"]);

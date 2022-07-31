@@ -1,10 +1,10 @@
-@extends('/layouts/main')
+@extends('/layouts/auth')
 
-@push('css')
+@push('css-dependencies')
     @include('/partials/auth_css')    
 @endpush
 
-@push('scripts')
+@push('scripts-dependencies')
     @include('/partials/auth_js')
 @endpush
 

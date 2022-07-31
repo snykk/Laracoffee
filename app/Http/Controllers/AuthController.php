@@ -28,7 +28,7 @@ class AuthController extends Controller
             $message = "Login success";
 
             myFlasherBuilder(message: $message, success: true);
-            return redirect('home');
+            return redirect('/home');
         }
 
         $message = "Wrong credential";
