@@ -34,5 +34,17 @@ class DatabaseSeeder extends Seeder
             "role_id" => "1",
             'remember_token' => Str::random(30),
         ]);
+
+        User::create([
+            "fullname" => "Patrick Star",
+            "username" => "its_me",
+            "email" => "member@gmail.com",
+            "password" => Hash::make("1234"),
+            "phone" => "082918391823",
+            "gender" => "M",
+            "address" => "Shell road number 18",
+            "role_id" => "2",
+            'remember_token' => Str::random(30),
+        ]);
     }
 }
