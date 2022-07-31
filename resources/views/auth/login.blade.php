@@ -25,10 +25,16 @@
                                 <form class="user" method="post" action="/auth/login">
                                     @csrf
                                     <div class="form-group">
-                                        <input type="text" class="form-control" id="email" name="email" placeholder="Enter an email address" >
+                                    <input type="text" class="form-control @error('email') is-invalid @enderror" id="email" name="email" placeholder="Enter an email address" value="{{ @old("email") }}" >
+                                        @error('email')
+                                            <div class="text-danger">{{ $message }}</div>
+                                        @enderror
                                     </div>
                                     <div class="form-group">
-                                        <input type="password" class="form-control" id="password" name="password" placeholder="Password" data-toggle="password">
+                                        <input type="password" class="form-control @error('password') is-invalid @enderror" id="password" name="password" placeholder="Password" data-toggle="password">
+                                        @error('password')
+                                            <div class="text-danger">{{ $message }}</div>
+                                        @enderror
                                     </div>
                                     <button type="submit" class="btn btn-info btn-block">
                                         Login
