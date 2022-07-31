@@ -30,7 +30,8 @@
                                     {!! session("message") !!}
                                 @endif
 
-                                <form class="user" method="post" action="">
+                                <form class="user" method="post" action="/auth/login">
+                                    @csrf
                                     <div class="form-group">
                                         <input type="text" class="form-control" id="email" name="email" placeholder="Enter an email address" >
                                     </div>

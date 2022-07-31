@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
@@ -15,8 +16,25 @@ class AuthController extends Controller
         ]);
     }
 
-    public function loginPost()
+    public function loginPost(Request $request)
     {
+        $credentials = $request->validate([
+            'email' => 'required|email:dns',
+            'password' => 'required'
+        ]);
+
+        if (Auth::attempt($credentials)) {
+            $request->session()->regenerate();
+            $message = "Login success";
+
+            myFlasherBuilder(message: $message, success: true);
+            return redirect('home');
+        }
+
+        $message = "Wrong credential";
+
+        myFlasherBuilder(message: $message, failed: true);
+        return back();
     }
 
     public function registrationGet()
@@ -41,12 +59,19 @@ class AuthController extends Controller
 
         $validated['password'] = Hash::make($validated['password']);
 
-        User::create($validated);
+        try {
+            User::create($validated);
+            $message = "Congratulations, your account has been created!";
 
-        $message = "Congratulations, your account has been created!";
+            myFlasherBuilder(message: $message, success: true);
 
-        myFlasherBuilder(message: $message, berhasil: true);
+            return redirect('/auth/login');
+        } catch (\Illuminate\Database\QueryException $exception) {
+            $message = "Internal server error!";
 
-        return redirect('/auth/login');
+            myFlasherBuilder(message: $message, failed: true);
+
+            return redirect('/auth/register');
+        }
     }
 }

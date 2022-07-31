@@ -2,12 +2,12 @@
 
 use Illuminate\Support\Facades\Session;
 
-function myFlasherBuilder($message, $berhasil = false, $gagal = false)
+function myFlasherBuilder($message, $success = false, $failed = false)
 {
-    if ($berhasil == true) {
+    if ($success == true) {
         $status = "success";
         $logo = "check-circle-fill";
-    } else if ($gagal == true) {
+    } else if ($failed == true) {
         $status = "danger";
         $logo = "exclamation-triangle-fill";
     }

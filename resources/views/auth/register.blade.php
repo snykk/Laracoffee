@@ -19,6 +19,11 @@
                         <div class="text-center">
                             <h1 class="h4 text-gray-900 mb-4">{{ $title }} Page</h1>
                         </div>
+
+                        @if(session()->has('message'))
+                            {!! session("message") !!}
+                        @endif
+
                         <form class="user" method="post" action="/auth/register">
                             @csrf
                             <div class="form-group">

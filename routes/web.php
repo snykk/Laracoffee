@@ -22,6 +22,7 @@ Route::get('/', function () {
 });
 
 Route::get('/{url}', [AuthController::class, "loginGet"])->where(["url" => "auth|auth/login"]);
+Route::post('/auth/login', [AuthController::class, "loginPost"]);
 
 Route::get('/auth/register', [AuthController::class, "registrationGet"]);
 Route::post('/auth/register', [AuthController::class, "registrationPost"]);
