@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
@@ -30,13 +32,21 @@ class AuthController extends Controller
             'fullname' => 'required|max:255',
             'username' => 'required|max:15',
             'email' => 'required|email:rfc,dns|unique:users,email',
-            'password' => 'required|confirmed|min:8',
+            'password' => 'required|confirmed|min:4',
             'phone' => 'required|numeric',
             'gender' => 'required',
             'address' => 'required',
             'role_id' => 'required|numeric',
         ]);
 
-        dd($request->all());
+        $validated['password'] = Hash::make($validated['password']);
+
+        User::create($validated);
+
+        $message = "Congratulations, your account has been created!";
+
+        myFlasherBuilder(message: $message, berhasil: true);
+
+        return redirect('/auth/login');
     }
 }

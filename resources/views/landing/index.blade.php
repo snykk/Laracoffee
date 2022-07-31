@@ -1,4 +1,4 @@
-@extends('/templates/main')
+@extends('/layouts/main')
 
 @push('css')
     <link href="/css/{{ $css }}.css" rel="stylesheet" /> 

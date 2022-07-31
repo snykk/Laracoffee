@@ -1,8 +1,11 @@
-@extends('/templates/main')
+@extends('/layouts/main')
 
 @push('css')
-    <link href="/css/auth.css" rel="stylesheet" /> 
-    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+    @include('/partials/auth_css')    
+@endpush
+
+@push('scripts')
+    @include('/partials/auth_js')
 @endpush
 
 @section("content")
@@ -23,15 +26,16 @@
                                     <h1 class="h4 text-gray-900 mb-4">{{ $title }} Page</h1>
                                 </div>
 
-                                <?php
-                                ?>
+                                @if(session()->has('message'))
+                                    {!! session("message") !!}
+                                @endif
 
                                 <form class="user" method="post" action="">
                                     <div class="form-group">
                                         <input type="text" class="form-control" id="email" name="email" placeholder="Enter an email address" >
                                     </div>
                                     <div class="form-group">
-                                        <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+                                        <input type="password" class="form-control" id="password" name="password" placeholder="Password" data-toggle="password">
                                     </div>
                                     <button type="submit" class="btn btn-info btn-block">
                                         Login
