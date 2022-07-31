@@ -1,6 +1,6 @@
-@extends('/layouts/main')
+@extends('/layouts/auth')
 
-@push('css')
+@push('css-dependencies')
     <link href="/css/{{ $css }}.css" rel="stylesheet" /> 
 @endpush
 

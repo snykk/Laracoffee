@@ -74,4 +74,25 @@ class AuthController extends Controller
             return redirect('/auth/register');
         }
     }
+
+
+    public function logoutPost()
+    {
+        try {
+            Auth::logout();
+            request()->session()->invalidate();
+            request()->session()->regenerateToken();
+            $message = "Session ended, you logout <strong>successfully</strong>";
+
+            myFlasherBuilder(message: $message, success: true);
+
+            return redirect('/auth');
+        } catch (\Illuminate\Database\QueryException $exception) {
+            $message = "Internal server error";
+
+            myFlasherBuilder(message: $message, failed: true);
+
+            return redirect('/home');
+        }
+    }
 }

@@ -14,7 +14,7 @@ function myFlasherBuilder($message, $success = false, $failed = false)
 
     Session::flash('message', '<div class="alert alert-' . $status . ' d-flex justify-content-between align-items-center mt-3" role="alert">
         <i class="bi bi-' . $logo . ' me-2" style="font-size:1.5rem"></i>
-        ' . $message . '
+        <div>' . $message . '</div>
         <button type="button" class="btn-close ms-auto p-2 bd-highlight" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>');
 }

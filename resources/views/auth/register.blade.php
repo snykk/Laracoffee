@@ -1,13 +1,5 @@
 @extends('/layouts/auth')
 
-@push('css-dependencies')
-    @include('/partials/auth_css')    
-@endpush
-
-@push('scripts-dependencies')
-    @include('/partials/auth_js')
-@endpush
-
 @section("content")
 <div class="container pb-2">
 

@@ -1,5 +1,4 @@
 @charset "UTF-8";
-
 :root {
     --bs-blue: #0d6efd;
     --bs-indigo: #6610f2;
@@ -12224,15 +12223,192 @@ body {
     border-radius: 0.25rem !important;
 }
 
-.btn-block {
-    display: block;
+/* Hero home user */
+#hero {
     width: 100%;
+    background-image: url("../img/home/hero-bg.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: right top;
+    margin-top: 70px;
+    padding: 60px 0;
 }
-.btn-block + .btn-block {
-    margin-top: 0.5rem;
+#hero h1 {
+    margin: 0 0 20px 0;
+    font-size: 48px;
+    font-weight: 700;
+    line-height: 56px;
+    color: #364146;
 }
-input[type="button"].btn-block,
-input[type="reset"].btn-block,
-input[type="submit"].btn-block {
+#hero h2 {
+    color: #576971;
+    margin-bottom: 30px;
+    font-size: 24px;
+}
+#hero .btn-get-started {
+    font-family: "Raleway", sans-serif;
+    font-weight: 600;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    display: inline-block;
+    padding: 12px 28px;
+    border-radius: 3px;
+    transition: 0.5s;
+    color: #fff;
+    background: #009cea;
+}
+#hero .btn-get-started:hover {
+    background: #008bd1;
+}
+#hero .hero-img {
+    text-align: center;
+}
+#hero .hero-img img {
+    width: 70%;
+}
+@media (min-width: 1024px) {
+    #hero {
+        background-attachment: fixed;
+    }
+}
+@media (max-width: 992px) {
+    #hero h1 {
+        font-size: 32px;
+        line-height: 40px;
+    }
+    #hero h2 {
+        font-size: 20px;
+    }
+}
+
+/* default section */
+
+section {
+    padding: 60px 0;
+    overflow: hidden;
+}
+
+.section-bg {
+    background-color: #f7f8f9;
+}
+
+.section-title {
+    text-align: center;
+    padding-bottom: 30px;
+}
+.section-title h2 {
+    font-size: 32px;
+    font-weight: 400;
+    margin-bottom: 20px;
+    padding-bottom: 0;
+    font-family: "Poppins", sans-serif;
+    color: #627680;
+}
+.section-title p {
+    margin-bottom: 0;
+}
+
+/* tentang rosela */
+
+#about {
+    padding: 80px 0;
+}
+#about .about-content {
+    padding-top: 40px;
+}
+#about .about-content h2 {
+    color: #413e66;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 700;
+}
+#about .about-content h3 {
+    color: #696592;
+    font-weight: 400;
+    font-size: 22px;
+    font-style: italic;
+}
+#about .about-content ul {
+    list-style: none;
+    padding: 0;
+}
+#about .about-content ul li {
+    padding-bottom: 10px;
+}
+#about .about-content ul li i {
+    font-size: 20px;
+    padding-right: 4px;
+    color: #1bb1dc;
+}
+#about .about-img {
+    position: relative;
+    margin: 30px 30px 30px 30px;
+}
+#about .about-img img {
     width: 100%;
+    border: 8px solid #fff;
+    transition: 0.5s;
+}
+#about .about-img img:hover {
+    width: 100%;
+    transform: scale(1.03);
+}
+#about .about-img::before {
+    position: absolute;
+    left: -31px;
+    top: -30px;
+    width: 90%;
+    height: 92%;
+    z-index: -1;
+    content: "";
+    background-color: #ebf1fa;
+    transition: 0.5s;
+}
+#about .about-img::after {
+    position: absolute;
+    right: -31px;
+    bottom: -30px;
+    width: 90%;
+    height: 92%;
+    z-index: -1;
+    content: "";
+    background-color: #ebf1fa;
+    transition: 0.5s;
+}
+
+/* info tambahan */
+.services .icon-box {
+    padding: 30px;
+    position: relative;
+    overflow: hidden;
+    margin: 0;
+    background: #fff;
+    box-shadow: 0 10px 29px 0 rgba(68, 88, 144, 0.1);
+    transition: all 0.3s ease-in-out;
+    border-radius: 4px;
+    border-bottom: 3px solid #fff;
+}
+.services .icon-box:hover {
+    transform: translateY(-5px);
+}
+.services .title {
+    font-weight: 700;
+    margin-bottom: 15px;
+    font-size: 18px;
+}
+.services .title a {
+    color: #111;
+    text-decoration: none !important;
+}
+.services .description {
+    font-size: 15px;
+    line-height: 28px;
+    justify-content: start !important;
+    margin-bottom: 0;
+}
+.services .icon-box-pink:hover {
+    border-color: orange;
+}
+.services .icon-box-cyan:hover {
+    border-color: #3fcdc7;
 }
