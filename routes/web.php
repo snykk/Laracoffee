@@ -40,6 +40,7 @@ Route::middleware(['auth'])->group(function () {
     // Home
     Route::controller(HomeController::class)->group(function () {
         Route::get("/home", "index");
+        Route::get("/home/customers", "customers");
     });
 
     // profile

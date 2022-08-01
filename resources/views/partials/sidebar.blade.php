@@ -3,10 +3,14 @@
         <div class="nav">
             @can("is_admin")
             <div class="sb-sidenav-menu-heading">Administrator</div>
-            <a class="nav-link" href="index.html">
+            <a class="nav-link" href="/home">
                 <div class="sb-nav-link-icon"><i class="fas fa-fw fa-tachometer-alt"></i></div>
                 Dashboard
             </a>
+            <a class="nav-link" href="/home/customers">
+                <div class="sb-nav-link-icon"><i class="fas fa-fw fa-solid fa-users"></i></div>
+                Customers
+              </a>
             @else
             <div class="sb-sidenav-menu-heading">User</div>
             <a class="nav-link" href="index.html">

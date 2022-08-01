@@ -69,7 +69,7 @@ class ProfileController extends Controller
                 myFlasherBuilder(message: $message, success: true);
                 return redirect("/home");
             } else {
-                $message = "There is no changes detected!";
+                $message = "Action <strong>failed</strong>, no changes detected!";
 
                 myFlasherBuilder(message: $message, failed: true);
                 return redirect("/profile/edit_profile");
