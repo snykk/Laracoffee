@@ -1,7 +1,7 @@
 @extends('/layouts/auth')
 
 @push('css-dependencies')
-    <link href="/css/{{ $css }}.css" rel="stylesheet" /> 
+    <link href="/css/landing.css" rel="stylesheet" /> 
 @endpush
 
 @section("content")
