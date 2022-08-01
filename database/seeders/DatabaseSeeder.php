@@ -50,6 +50,8 @@ class DatabaseSeeder extends Seeder
             'remember_token' => Str::random(30),
         ]);
 
+        User::factory(5)->create();
+
         Role::create([
             "id" => 1,
             "role_name" => "Admin"

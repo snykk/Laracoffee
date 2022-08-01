@@ -39,7 +39,7 @@
                                 <td>{{ $row->fullname }}</td>
                                 <td>{{ $row->username }}</td>
                                 <td>{{ $row->email }}</td>
-                                <td>{{ $row->gender }}</td>
+                                <td>{{ $row->gender == "M" ? "Male" : "Female" }}</td>
                                 <td>{{ $row->phone }}</td>
                                 <td>{{ $row->address }}</td>
                                 <td>{{ date('d-m-Y', strtotime($row->created_at))  }}</td>

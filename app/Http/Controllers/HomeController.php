@@ -16,7 +16,8 @@ class HomeController extends Controller
 
     public function customers()
     {
-        $customers = DB::table("users")->where("id", 2)->get();
+        $customers = DB::table("users")->where("role_id", 2)->get();
+
         return view("home/customers", [
             "title" => "Customers",
             "customers" => $customers,
