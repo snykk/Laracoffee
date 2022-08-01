@@ -1,12 +1,17 @@
 @extends('/layouts/main')
 
-@push('js-dependencies')
+@push('css-dependencies')
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css" />
+@endpush
+
+@push('scripts-dependencies')
+    <script src="/js/customers_table.js"></script>
     <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
 @endpush
 
 @section('content')
 <main>
-    <div class="container-fluid px-4 mt-4">
+    <div class="container-fluid mt-4">
         <!-- inisial value -->
         <input type="hidden" name="username" id="username" value="{{ (isset($_GET["username"])) ? $_GET["username"] : "" }}">
 
