@@ -3,10 +3,11 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Role;
 use App\Models\User;
+use Illuminate\Support\Str;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Str;
 
 class DatabaseSeeder extends Seeder
 {
@@ -45,6 +46,16 @@ class DatabaseSeeder extends Seeder
             "address" => "Shell road number 18",
             "role_id" => "2",
             'remember_token' => Str::random(30),
+        ]);
+
+        Role::create([
+            "id" => 1,
+            "role_name" => "Admin"
+        ]);
+
+        Role::create([
+            "id" => 2,
+            "role_name" => "Customer"
         ]);
     }
 }

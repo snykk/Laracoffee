@@ -29,8 +29,8 @@
             <img src="/img/profile-default.jpg" width="150">
             <div class="mt-3">
                 <h4>{{ auth()->user()->username }}</h4>
-                <!-- <p class="text-secondary mb-1">Full Stack Developer</p> -->
-            <p class="text-muted font-size-sm">Member sejak {{ auth()->user()->created_at->format('d M Y') }}</p>
+                <p class="text-secondary mb-1">{{ auth()->user()->role->role_name }}</p> 
+            <p class="text-muted font-size-sm">User since {{ auth()->user()->created_at->format('d M Y') }}</p>
             </div>
             </div>
         </div>
