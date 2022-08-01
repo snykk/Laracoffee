@@ -33,14 +33,17 @@
                 <div class="card-header">Profile Picture</div>
                 <div class="card-body text-center">
                     <!-- Profile picture image-->
-                    <img class="img-account-profile mb-2" src="/img/profile-default.jpg" width="150" alt="">
+                    <img class="img-account-profile mb-2" src="{{ asset("storage/" . auth()->user()->image) }}" width="150" alt="">
                     <!-- Profile picture help block-->
-                    <div class="small font-italic text-muted mb-4">[Jpg, Gif, Png] no more than 2 MB</div>
+                    <div class="small font-italic text-muted mb-4">Must be an image no more than 2 MB</div>
                     <!-- Profile picture upload button-->
                     <form method="post" action="/profile/edit_profile/{{ auth()->user()->id }}" enctype="multipart/form-data">
                     @csrf
                     <div class="custom-file">
-                        <input type="file" class="custom-file-input" id="image" name="image">
+                        <input type="file" class="custom-file-input @error('image') is-invalid @enderror" id="image" name="image">
+                        @error('image')
+                            <div class="text-danger">{{ $message }}</div>
+                        @enderror
                     </div>
                 </div>
             </div>

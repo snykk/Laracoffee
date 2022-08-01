@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
 use Exception;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Contracts\Support\ValidatedData;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Contracts\Support\ValidatedData;
 
 class ProfileController extends Controller
 {
@@ -41,10 +42,25 @@ class ProfileController extends Controller
             $rules['username'] = 'required|max:15';
         }
 
+        if ($request->file("image")) {
+            $rules["image"] = "image|file|max:2048";
+        }
+
         $validatedData = $request->validate($rules);
 
+        $path = "";
+        if ($request->file("image")) {
+            $path = Storage::putFile('profile', $request->file('image'));
+            $validatedData["image"] = $path;
+        }
+
         try {
+            if ($request->file("image")) {
+                $validatedData["image"] = $request->file("image")->store("profile");
+            }
+
             $user->fill($validatedData);
+
             if ($user->isDirty()) {
                 $user->save();
 
