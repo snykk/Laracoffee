@@ -67,11 +67,7 @@ class AuthController extends Controller
 
             return redirect('/auth/login');
         } catch (\Illuminate\Database\QueryException $exception) {
-            $message = "Internal server error!";
-
-            myFlasherBuilder(message: $message, failed: true);
-
-            return redirect('/auth/register');
+            return abort(500);
         }
     }
 
@@ -88,11 +84,7 @@ class AuthController extends Controller
 
             return redirect('/auth');
         } catch (\Illuminate\Database\QueryException $exception) {
-            $message = "Internal server error";
-
-            myFlasherBuilder(message: $message, failed: true);
-
-            return redirect('/home');
+            return abort(500);
         }
     }
 }

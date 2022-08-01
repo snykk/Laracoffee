@@ -44,6 +44,8 @@ Route::middleware(['auth'])->group(function () {
 
     // profile
     Route::controller(ProfileController::class)->group(function () {
-        Route::get("/profile/my_profile", "my_profile");
+        Route::get("/profile/my_profile", "myProfile");
+        Route::get("/profile/edit_profile", "editProfileGet");
+        Route::post("/profile/edit_profile/{user:id}", "editProfilePost");
     });
 });

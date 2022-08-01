@@ -24,11 +24,7 @@
         </div>
         <div id="layoutSidenav_content">
             <main>
-                <div class="container-fluid">
-                    @if(session()->has('message'))
-                        {!! session("message") !!}
-                    @endif
-                    
+                <div class="container-fluid px-3">
                     {{-- content --}}
                     @yield("content")
                 </div>

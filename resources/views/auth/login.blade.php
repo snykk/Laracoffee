@@ -25,7 +25,7 @@
                                 <form class="user" method="post" action="/auth/login">
                                     @csrf
                                     <div class="form-group">
-                                    <input type="text" class="form-control @error('email') is-invalid @enderror" id="email" name="email" placeholder="Enter an email address" value="{{ @old("email") }}" >
+                                        <input type="text" class="form-control @error('email') is-invalid @enderror" id="email" name="email" placeholder="Enter an email address" value="{{ @old("email") }}" >
                                         @error('email')
                                             <div class="text-danger">{{ $message }}</div>
                                         @enderror

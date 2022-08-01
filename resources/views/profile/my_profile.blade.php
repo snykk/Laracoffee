@@ -28,9 +28,9 @@
             <div class="d-flex flex-column align-items-center text-center">
             <img src="/img/profile-default.jpg" width="150">
             <div class="mt-3">
-                <h4>Username</h4>
+                <h4>{{ auth()->user()->username }}</h4>
                 <!-- <p class="text-secondary mb-1">Full Stack Developer</p> -->
-                {{-- <p class="text-muted font-size-sm">Member sejak <?= date('d F Y', 6716171); ?></p> --}}
+            <p class="text-muted font-size-sm">Member sejak {{ auth()->user()->created_at->format('d M Y') }}</p>
             </div>
             </div>
         </div>
@@ -45,7 +45,7 @@
                 <h6 class="mb-0">Full Name</h6>
             </div>
             <div class="col-sm-9 text-secondary">
-                Full Name
+                {{ auth()->user()->fullname }}
             </div>
             </div>
             <hr>
@@ -54,7 +54,7 @@
                 <h6 class="mb-0">Email</h6>
             </div>
             <div class="col-sm-9 text-secondary">
-                Email
+                {{ auth()->user()->email }}
             </div>
             </div>
             <hr>
@@ -63,7 +63,7 @@
                 <h6 class="mb-0">Phone</h6>
             </div>
             <div class="col-sm-9 text-secondary">
-                Phone
+                {{ auth()->user()->phone }}
             </div>
             </div>
             <hr>
@@ -72,7 +72,7 @@
                 <h6 class="mb-0">Gender</h6>
             </div>
             <div class="col-sm-9 text-secondary">
-                Gender
+                {{ auth()->user()->gender == "M" ? "Male" : "Female" }}
             </div>
             </div>
             <hr>
@@ -81,13 +81,13 @@
                 <h6 class="mb-0">Address</h6>
             </div>
             <div class="col-sm-9 text-secondary">
-                Address
+                {{ auth()->user()->address}}
             </div>
             </div>
             <hr>
             <div class="row">
             <div class="col-sm-12">
-                <a class="btn btn-dark " href="/profile/edit_profile">Ubah Profile</a>
+                <a class="btn btn-dark " href="/profile/edit_profile">Edit Profile</a>
             </div>
             </div>
         </div>
