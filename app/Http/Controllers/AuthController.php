@@ -46,7 +46,7 @@ class AuthController extends Controller
 
     public function registrationPost(Request $request)
     {
-        $validated = $request->validate([
+        $validatedData = $request->validate([
             'fullname' => 'required|max:255',
             'username' => 'required|max:15',
             'email' => 'required|email:rfc,dns|unique:users,email',
@@ -57,10 +57,11 @@ class AuthController extends Controller
             'role_id' => 'required|numeric',
         ]);
 
-        $validated['password'] = Hash::make($validated['password']);
+        $validatedData['password'] = Hash::make($validatedData['password']);
+        $validatedData['image'] = env("DEFAULT_IMAGE_PROFILE");
 
         try {
-            User::create($validated);
+            User::create($validatedData);
             $message = "Congratulations, your account has been created!";
 
             myFlasherBuilder(message: $message, success: true);

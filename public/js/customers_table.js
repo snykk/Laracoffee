@@ -2,7 +2,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
     $("#datatablesSimple").dataTable({
         oSearch: { sSearch: $("#username").val() },
         columnDefs: [
-            { orderable: false, targets: 6 },
+            // { orderable: false, targets: 8 },
             { className: "dt-center", targets: "_all" },
         ],
         lengthMenu: [

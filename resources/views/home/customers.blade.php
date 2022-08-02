@@ -27,6 +27,7 @@
                             <th>Full Name</th>
                             <th>Username</th>
                             <th>Email</th>
+                            <th>Role</th>
                             <th>Gender</th>
                             <th>Phone</th>
                             <th>Address</th>
@@ -34,17 +35,18 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <?php foreach ($customers as $row) : ?>
+                        @foreach ($customers as $row)
                             <tr>
                                 <td>{{ $row->fullname }}</td>
                                 <td>{{ $row->username }}</td>
                                 <td>{{ $row->email }}</td>
+                                <td>{{ $row->role->role_name }}</td>
                                 <td>{{ $row->gender == "M" ? "Male" : "Female" }}</td>
                                 <td>{{ $row->phone }}</td>
                                 <td>{{ $row->address }}</td>
                                 <td>{{ date('d-m-Y', strtotime($row->created_at))  }}</td>
                             </tr>
-                        <?php endforeach; ?>
+                        @endforeach
                     </tbody>
                 </table>
             </div>

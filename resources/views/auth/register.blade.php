@@ -56,13 +56,13 @@
                             </div>
                             <div class="ml-2">Gender</div>
                             <div class="form-check ml-3">
-                                <input class="form-check-input" type="radio" name="gender" id="male" value="L" {{ old('gender') == "L" ? 'checked' : ''}}>
+                                <input class="form-check-input" type="radio" name="gender" id="male" value="M" {{ old('gender') == "M" ? 'checked' : ''}}>
                                 <label class="form-check-label" for="male">
                                     Male
                                 </label>
                             </div>
                             <div class="form-check ml-3">
-                                <input class="form-check-input" type="radio" name="gender" id="female" value="P" {{ old('gender') == "P" ? 'checked' : ''}}>
+                                <input class="form-check-input" type="radio" name="gender" id="female" value="F" {{ old('gender') == "F" ? 'checked' : ''}}>
                                 <label class="form-check-label" for="female">
                                     Female
                                 </label>

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -51,6 +52,10 @@ Route::middleware(['auth'])->group(function () {
         Route::post("/profile/edit_profile/{user:id}", "editProfilePost");
         Route::get("/profile/change_password", "changePasswordGet");
         Route::post("/profile/change_password", "changePasswordPost");
+    });
+
+    Route::controller(ProductController::class)->group(function () {
+        Route::get("/product", "index");
     });
 
     // Logout

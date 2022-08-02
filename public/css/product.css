@@ -1,0 +1,258 @@
+@import url("https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css");
+@import url("https://fonts.googleapis.com/css2?family=My+Soul&display=swap");
+
+#product {
+    background: #eee !important;
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+    background-color: #673503;
+    border-color: #673503;
+    box-shadow: none;
+    outline: none;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #a77057;
+    border-color: #a77057;
+}
+
+section {
+    padding: 30px 0;
+}
+
+section .section-title {
+    text-align: center;
+    color: #a77057;
+    text-transform: uppercase;
+}
+
+#product .card {
+    border: none;
+    background: #ffffff;
+}
+
+.image-flip:hover .backside,
+.image-flip.hover .backside {
+    -webkit-transform: rotateY(0deg);
+    -moz-transform: rotateY(0deg);
+    -o-transform: rotateY(0deg);
+    -ms-transform: rotateY(0deg);
+    transform: rotateY(0deg);
+    border-radius: 0.25rem;
+}
+
+.image-flip:hover .frontside,
+.image-flip.hover .frontside {
+    -webkit-transform: rotateY(180deg);
+    -moz-transform: rotateY(180deg);
+    -o-transform: rotateY(180deg);
+    transform: rotateY(180deg);
+}
+
+.mainflip {
+    -webkit-transition: 1s;
+    -webkit-transform-style: preserve-3d;
+    -ms-transition: 1s;
+    -moz-transition: 1s;
+    transform: perspective(1000px);
+    -moz-transform: perspective(1000px);
+    -moz-transform-style: preserve-3d;
+    -ms-transform-style: preserve-3d;
+    transition: 1s;
+    transform-style: preserve-3d;
+    position: relative;
+}
+
+.frontside {
+    position: relative;
+    transform: rotateY(0deg);
+    -webkit-transform: rotateY(0deg);
+    -ms-transform: rotateY(0deg);
+    z-index: 2;
+    margin-bottom: 30px;
+}
+
+.backside {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: white;
+    -webkit-transform: rotateY(-180deg);
+    -moz-transform: rotateY(-180deg);
+    -o-transform: rotateY(-180deg);
+    -ms-transform: rotateY(-180deg);
+    transform: rotateY(-180deg);
+    -webkit-box-shadow: 5px 7px 9px -4px rgb(158, 158, 158);
+    -moz-box-shadow: 5px 7px 9px -4px rgb(158, 158, 158);
+    box-shadow: 5px 7px 9px -4px rgb(158, 158, 158);
+}
+
+.frontside,
+.backside {
+    -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+    -ms-backface-visibility: hidden;
+    backface-visibility: hidden;
+    -webkit-transition: 1s;
+    -webkit-transform-style: preserve-3d;
+    -moz-transition: 1s;
+    -moz-transform-style: preserve-3d;
+    -o-transition: 1s;
+    -o-transform-style: preserve-3d;
+    -ms-transition: 1s;
+    -ms-transform-style: preserve-3d;
+    transition: 1s;
+    transform-style: preserve-3d;
+}
+
+.frontside .card,
+.backside .card {
+    min-height: 312px;
+}
+
+.backside .card a {
+    font-size: 18px;
+    color: #a77057 !important;
+}
+
+.frontside .card .card-title,
+.backside .card .card-title {
+    color: #a77057 !important;
+}
+
+.frontside .card .card-body img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+}
+
+/* modal */
+
+.program-modal .modal-dialog {
+    margin: 1rem;
+    max-width: 100vw !important;
+}
+.program-modal .modal-content {
+    padding-top: 6rem;
+    padding-bottom: 6rem;
+    /* text-align: center; */
+    /* font-family: "Roboto Slab", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"; */
+    /* font-family: "My Soul", cursive; */
+    font-family: "Merriweather", serif;
+}
+.program-modal .modal-content h2,
+.program-modal .modal-content .h2 {
+    font-size: 3rem;
+    line-height: 3rem;
+    text-align: center;
+}
+.program-modal .modal-content p.item-intro {
+    font-style: italic;
+    margin-bottom: 2rem;
+}
+.program-modal .modal-content ul.list-inline {
+    margin-bottom: 2rem;
+}
+.program-modal .modal-content img {
+    margin-bottom: 2rem;
+}
+.program-modal .close-modal {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    width: 3rem;
+    height: 3rem;
+    cursor: pointer;
+    background-color: transparent;
+}
+.program-modal .close-modal:hover {
+    opacity: 0.3;
+}
+
+.pembagi {
+    height: 3px;
+    background: #921515;
+    margin-bottom: 1rem;
+}
+
+/* style tombol button */
+
+.button-kemren {
+    text-decoration: none !important;
+    border: 3px solid white;
+    width: 10rem;
+    color: transparent !important;
+    padding: 5px 25px;
+    letter-spacing: 3px;
+    transition: all 0.5s;
+    position: relative;
+}
+.button-kemren:before {
+    content: "Add Product";
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    background: #a77057;
+    top: 0;
+    left: 100%;
+    font-family: "Merriweather", serif;
+    letter-spacing: 5px;
+    transition: all 1s;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    transform: scale(0) rotatey(0);
+    opacity: 0;
+}
+.button-kemren:hover:before {
+    transform: scale(1) rotatey(360deg);
+    left: 0;
+    opacity: 1;
+}
+.button-kemren:after {
+    content: "Add Product";
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    background: #a77057;
+    top: 0;
+    left: 0;
+    font-family: "Merriweather", serif;
+    letter-spacing: 5px;
+    transition: all 1s;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    transform: scale(1) rotatey(0);
+    opacity: 1;
+}
+.button-kemren:hover:after {
+    transform: scale(0) rotatey(360deg);
+    left: -100%;
+    opacity: 0;
+}
+
+/* style discont strikethrough */
+strong.strikethrough {
+    position: relative;
+}
+strong.strikethrough:before {
+    position: absolute;
+    content: "";
+    left: 0;
+    top: 50%;
+    right: 0;
+    border-top: 1px solid;
+    border-color: inherit;
+
+    -webkit-transform: rotate(-5deg);
+    -moz-transform: rotate(-5deg);
+    -ms-transform: rotate(-5deg);
+    -o-transform: rotate(-5deg);
+    transform: rotate(-5deg);
+}
