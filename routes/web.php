@@ -16,29 +16,29 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('landing.index', [
-        "title" => "Landing",
-    ]);
+// pre authenticate
+Route::middleware(['alreadyLogin'])->group(function () {
+    // landing
+    Route::get('/', function () {
+        return view('landing.index', [
+            "title" => "Landing",
+        ]);
+    });
+
+    // Login
+    Route::get('/{url}', [AuthController::class, "loginGet"])->where(["url" => "auth|auth/login"])->name("auth");
+    Route::post('/auth/login', [AuthController::class, "loginPost"]);
+
+    // Register
+    Route::get('/auth/register', [AuthController::class, "registrationGet"]);
+    Route::post('/auth/register', [AuthController::class, "registrationPost"]);
 });
-
-// Login
-Route::get('/{url}', [AuthController::class, "loginGet"])->where(["url" => "auth|auth/login"])->name("auth");
-Route::post('/auth/login', [AuthController::class, "loginPost"]);
-
-// Register
-Route::get('/auth/register', [AuthController::class, "registrationGet"]);
-Route::post('/auth/register', [AuthController::class, "registrationPost"]);
-
-// Logout
-Route::post('/auth/logout', [AuthController::class, "logoutPost"]);
-
 
 // main
 Route::middleware(['auth'])->group(function () {
     // Home
     Route::controller(HomeController::class)->group(function () {
-        Route::get("/home", "index");
+        Route::get("/home", "index")->name("home");
         Route::get("/home/customers", "customers");
     });
 
@@ -48,4 +48,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get("/profile/edit_profile", "editProfileGet");
         Route::post("/profile/edit_profile/{user:id}", "editProfilePost");
     });
+
+    // Logout
+    Route::post('/auth/logout', [AuthController::class, "logoutPost"]);
 });
