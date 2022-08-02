@@ -6,6 +6,7 @@ use Exception;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Contracts\Support\ValidatedData;
 
@@ -14,18 +15,18 @@ class ProfileController extends Controller
     public function myProfile()
     {
         $data["title"] = "My Profile";
-        $data["css"] = "profile";
 
         return view('/profile/my_profile', $data);
     }
 
+
     public function editProfileGet()
     {
         $data["title"] = "Edit Profile";
-        $data["css"] = "profile";
 
         return view("/profile/edit_profile", $data);
     }
+
 
     public function editProfilePost(Request $request, User $user)
     {
@@ -47,12 +48,6 @@ class ProfileController extends Controller
         }
 
         $validatedData = $request->validate($rules);
-
-        $path = "";
-        if ($request->file("image")) {
-            $path = Storage::putFile('profile', $request->file('image'));
-            $validatedData["image"] = $path;
-        }
 
         try {
             if ($request->file("image")) {
@@ -81,5 +76,43 @@ class ProfileController extends Controller
         } catch (Exception $exception) {
             return abort(500);
         }
+    }
+
+
+    public function changePasswordGet()
+    {
+        $data["title"] = "Change Password";
+
+        return view("/profile/change_password", $data);
+    }
+
+
+    public function changePasswordPost(Request $request)
+    {
+        $validated = $request->validate([
+            "current_password" => "required|min:4",
+            "password" => "required|confirmed|min:4",
+            "password_confirmation" => "required|min:4",
+        ]);
+
+        if (!(Hash::check($request->current_password, auth()->user()->password))) {
+            $message = "Current password is wrong!";
+
+            myFlasherBuilder(message: $message, failed: true);
+            return back();
+        } else if ($request->current_password == $request->password) {
+            $message = "Current password cannot be the same as new password!";
+
+            myFlasherBuilder(message: $message, failed: true);
+            return back();
+        }
+
+        User::where('id', auth()->user()->id)
+            ->update(['password' => Hash::make($validated['password'])]);
+
+        $message = "Password has been updated";
+
+        myFlasherBuilder(message: $message, success: true);
+        return redirect("/home");
     }
 }

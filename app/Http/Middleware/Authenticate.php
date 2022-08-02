@@ -15,6 +15,9 @@ class Authenticate extends Middleware
     protected function redirectTo($request)
     {
         if (!$request->expectsJson()) {
+            $message = "Please login first!";
+
+            myFlasherBuilder(message: $message, failed: true);
             return route('auth', ["url" => "auth/login"]);
         }
     }

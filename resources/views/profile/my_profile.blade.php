@@ -1,7 +1,7 @@
 @extends('/layouts/main')
 
 @push('css-dependencies')
-    <link href="/css/{{ $css }}.css" rel="stylesheet" /> 
+    <link href="/css/profile.css" rel="stylesheet" /> 
 @endpush
 
 @section('content')

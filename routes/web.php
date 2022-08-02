@@ -34,11 +34,13 @@ Route::middleware(['alreadyLogin'])->group(function () {
     Route::post('/auth/register', [AuthController::class, "registrationPost"]);
 });
 
+
+
 // main
 Route::middleware(['auth'])->group(function () {
     // Home
     Route::controller(HomeController::class)->group(function () {
-        Route::get("/home", "index")->name("home");
+        Route::get("/home", "index");
         Route::get("/home/customers", "customers");
     });
 
@@ -47,6 +49,8 @@ Route::middleware(['auth'])->group(function () {
         Route::get("/profile/my_profile", "myProfile");
         Route::get("/profile/edit_profile", "editProfileGet");
         Route::post("/profile/edit_profile/{user:id}", "editProfilePost");
+        Route::get("/profile/change_password", "changePasswordGet");
+        Route::post("/profile/change_password", "changePasswordPost");
     });
 
     // Logout

@@ -1,7 +1,7 @@
 @extends('/layouts/main')
 
 @push('css-dependencies')
-    <link href="/css/{{ $css }}.css" rel="stylesheet" />
+    <link href="/css/profile.css" rel="stylesheet" />
 @endpush
 
 @push('scripts-dependencies')
@@ -64,7 +64,7 @@
                         <input class="form-control" id="email" name="email" type="text" placeholder="Enter your email address" value="{{ auth()->user()->email }}" readonly>
                     </div>
                     <div class="mb-3">
-                        <label class="small mb-1" for="username">Username (will show as identity in the website)</label>
+                        <label class="small mb-1" for="username">Username <em class="link-danger">will show as your identity in the website</em></label>
                         <input class="form-control @error('username') is-invalid @enderror" id="username" name="username" type="text" placeholder="your username" value="{{ auth()->user()->username }}">
                         @error('username')
                             <div class="text-danger">{{ $message }}</div>
