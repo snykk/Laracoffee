@@ -2,6 +2,10 @@
 
 @section('content')
 
+@push('css-dependencies')
+    <link rel="stylesheet" type="text/css" href="/css/home.css" />
+@endpush
+
 @if(session()->has('message'))
     {!! session("message") !!}
 @endif

@@ -13,7 +13,7 @@
               </a>
             @else
             <div class="sb-sidenav-menu-heading">User</div>
-            <a class="nav-link" href="index.html">
+            <a class="nav-link" href="/home">
                 <div class="sb-nav-link-icon"><i class="fas fa-fw fa-home-alt"></i></i></div>
                 Home
             </a>
