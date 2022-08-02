@@ -1,7 +1,11 @@
 @extends('/layouts/main')
 
 @push('css-dependencies')
-    <link href="/css/{{ $css }}.css" rel="stylesheet" /> 
+    <link href="/css/{{ $css }}.css" rel="stylesheet" />
+@endpush
+
+@push('scripts-dependencies')
+    <script src="/js/profile.js"></script>
 @endpush
 
 @section('content')
@@ -33,12 +37,13 @@
                 <div class="card-header">Profile Picture</div>
                 <div class="card-body text-center">
                     <!-- Profile picture image-->
-                    <img class="img-account-profile mb-2" src="{{ asset("storage/" . auth()->user()->image) }}" width="150" alt="">
+                    <img class="img-account-profile mb-2" id="image-preview" src="{{ asset("storage/" . auth()->user()->image) }}" width="150" alt="">
                     <!-- Profile picture help block-->
                     <div class="small font-italic text-muted mb-4">Must be an image no more than 2 MB</div>
                     <!-- Profile picture upload button-->
                     <form method="post" action="/profile/edit_profile/{{ auth()->user()->id }}" enctype="multipart/form-data">
                     @csrf
+                    <input type="hidden" name="oldImage" value="{{ auth()->user()->image }}">
                     <div class="custom-file">
                         <input type="file" class="custom-file-input @error('image') is-invalid @enderror" id="image" name="image">
                         @error('image')
@@ -98,7 +103,10 @@
                     </div>
 
                     <!-- Save changes button-->
-                    <button class="btn btn-dark" type="submit">Save Changes</button>
+                    <div class="col-6 d-flex justify-content-start align-items-center">
+                        <a href="/profile/my_profile" class="btn btn-outline-secondary me-2">Back</a>
+                        <button class="btn btn-dark" type="submit">Save Changes</button>
+                    </div>
                     </form>
                 </div>
             </div>

@@ -56,6 +56,10 @@ class ProfileController extends Controller
 
         try {
             if ($request->file("image")) {
+                if ($request->oldImage != env("DEFAULT_IMAGE_PROFILE")) {
+                    Storage::delete($request->oldImage);
+                }
+
                 $validatedData["image"] = $request->file("image")->store("profile");
             }
 
