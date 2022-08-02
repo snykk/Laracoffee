@@ -12226,12 +12226,12 @@ body {
 
 /* Hero home user */
 #hero {
+    height: calc(100vh - 56px);
     width: 100%;
-    background-image: url("../img/home/hero-bg.png");
+    background-image: url("/storage/home/hero-bg.png");
     background-repeat: no-repeat;
     background-size: contain;
     background-position: right top;
-    margin-top: 70px;
     padding: 60px 0;
 }
 #hero h1 {
@@ -12257,10 +12257,11 @@ body {
     border-radius: 3px;
     transition: 0.5s;
     color: #fff;
-    background: #009cea;
+    background: #a77057;
+    text-decoration: none;
 }
 #hero .btn-get-started:hover {
-    background: #008bd1;
+    background: #673503;
 }
 #hero .hero-img {
     text-align: center;
