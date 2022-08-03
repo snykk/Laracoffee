@@ -4,6 +4,10 @@
     <link href="/css/landing.css" rel="stylesheet" /> 
 @endpush
 
+@push('scripts-dependencies')
+    <script src="/js/landing.js"></script> 
+@endpush
+
 @section("content")
 <header class="masthead">
     <div class="container px-4 px-lg-5 d-flex h-100 align-items-center justify-content-center">

@@ -9,7 +9,7 @@
 @endpush
 
 @section('content')
-<div class="main-body">
+<div class="main-body px-5">
 
     <!-- breadcumb -->
     <nav aria-label="breadcrumb" class="main-breadcrumb">

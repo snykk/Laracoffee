@@ -23,12 +23,8 @@
             @include('/partials/sidebar')
         </div>
         <div id="layoutSidenav_content">
-            <main>
-                <div class="container-fluid px-3">
-                    {{-- content --}}
-                    @yield("content")
-                </div>
-            </main>
+            {{-- content --}}
+            @yield("content")
             {{-- footer --}}
             @include('/partials/footer')
         </div>

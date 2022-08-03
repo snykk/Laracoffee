@@ -20,7 +20,7 @@ return new class extends Migration
             $table->text('description');
             $table->integer('price');
             $table->integer('stock');
-            $table->double('discount', 3, 2);
+            $table->integer('discount');
             $table->string('image');
             $table->timestamps();
         });

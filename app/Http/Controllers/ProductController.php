@@ -14,4 +14,12 @@ class ProductController extends Controller
 
         return view('/product/index', $data);
     }
+
+
+    public function getProductData($id)
+    {
+        $product = Product::find($id);
+
+        return $product;
+    }
 }

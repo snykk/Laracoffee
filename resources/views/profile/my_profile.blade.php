@@ -5,7 +5,7 @@
 @endpush
 
 @section('content')
-<div class="main-body">
+<div class="main-body px-5">
 
     <!-- Hierarki -->
     <nav aria-label="breadcrumb" class="main-breadcrumb">
