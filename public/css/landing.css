@@ -68,7 +68,6 @@ body {
 }
 
 .masthead {
-    position: relative;
     width: 100%;
     height: auto;
     min-height: 35rem;
@@ -80,10 +79,10 @@ body {
             #000 100%
         ),
         url("/img/landing-background.jpg");
-    background-position: center;
+    background-position: 3% 50%;
     background-repeat: no-repeat;
     background-attachment: scroll;
-    background-size: cover;
+    background-size: 110% 110%;
 }
 .masthead h1,
 .masthead .h1 {
