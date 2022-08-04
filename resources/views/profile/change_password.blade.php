@@ -1,26 +1,17 @@
 @extends('/layouts/main')
 
 @push('css-dependencies')
-    <link href="/css/profile.css" rel="stylesheet" />
+<link href="/css/profile.css" rel="stylesheet" />
 @endpush
 
 @section('content')
 <div class="main-body px-5">
-    <!-- Hierarki -->
-    <nav aria-label="breadcrumb" class="main-breadcrumb">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item">Home</li>
-            <li class="breadcrumb-item">Profile</li>
-            <li class="breadcrumb-item active" aria-current="page">Change Password</li>
-        </ol>
-    </nav>
-    <!-- Tutup hierarki -->        
 
-    <hr class="mt-0 mb-4">
+    @include('/partials/breadcumb')
 
     <div class="col-12 col-sm-11 col-md-10 col-xl-8">
         @if(session()->has('message'))
-            {!! session("message") !!}
+        {!! session("message") !!}
         @endif
     </div>
 
@@ -30,7 +21,8 @@
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-12 col-xl-4 col-sm-5 separator social-login-box"> <br>
-                            <img alt="gambar profile user" class="img-thumbnail" src="{{ asset("storage/" . auth()->user()->image) }}">
+                            <img alt="gambar profile user" class="img-thumbnail" src="{{ asset('storage/'    .
+                              auth()->user()->image) }}">
                         </div>
                         <div style="margin-top:20px;" class="col-12 col-xl-8 col-sm-7 login-box">
 
@@ -38,23 +30,28 @@
                                 @csrf
                                 <div class="form-group">
                                     <label for="current_password">Current Password</label>
-                                    <input type="password" class="form-control @error('current_password') is-invalid @enderror" id="current_password" name="current_password">
+                                    <input type="password"
+                                      class="form-control @error('current_password') is-invalid @enderror"
+                                      id="current_password" name="current_password">
                                     @error('current_password')
-                                        <div class="text-danger">{{ $message }}</div>
+                                    <div class="text-danger">{{ $message }}</div>
                                     @enderror
                                 </div>
                                 <div class="form-group">
                                     <label for="password">New Password</label>
-                                    <input type="password" class="form-control @error('password') is-invalid @enderror" id="password" name="password">
+                                    <input type="password" class="form-control @error('password') is-invalid @enderror"
+                                      id="password" name="password">
                                     @error('password')
-                                        <div class="text-danger">{{ $message }}</div>
+                                    <div class="text-danger">{{ $message }}</div>
                                     @enderror
                                 </div>
                                 <div class="form-group">
                                     <label for="password_confirmation">Repeat New Password</label>
-                                    <input type="password" class="form-control @error('password_confirmation') is-invalid @enderror" id="password_confirmation" name="password_confirmation">
+                                    <input type="password"
+                                      class="form-control @error('password_confirmation') is-invalid @enderror"
+                                      id="password_confirmation" name="password_confirmation">
                                     @error('password_confirmation')
-                                        <div class="text-danger">{{ $message }}</div>
+                                    <div class="text-danger">{{ $message }}</div>
                                     @enderror
                                 </div>
                                 <div class="form-group my-3">

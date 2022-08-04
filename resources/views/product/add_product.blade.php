@@ -6,17 +6,9 @@
 
 @section('content')
 <div class="container-fluid p-4" style="background: #eee;">
-  <!-- Hierarki -->
-  <nav aria-label="breadcrumb" class="main-breadcrumb">
-    <ol class="breadcrumb">
-      <li class="breadcrumb-item">Home</li>
-      <li class="breadcrumb-item">Product</li>
-      <li class="breadcrumb-item active" aria-current="page">{{ $title }}</li>
-    </ol>
-  </nav>
-  <!-- Tutup hierarki -->
 
-  <hr class="mt-0 mb-4">
+  @include('partials/breadcumb')
+
   <div class="row flex-lg-nowrap">
 
     <div class="col">
