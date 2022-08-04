@@ -61,7 +61,8 @@
 
                                     <!-- [admin] ubah -->
                                     @can('is_admin')
-                                    <a href=""><button class="btn btn-primary btn-sm ubah">Edit</button></a>
+                                    <a href="/product/edit_product/{{ $row->id }}"><button
+                                          class="btn btn-primary btn-sm ubah">Edit</button></a>
                                     @else
                                     <a href=""><button class="btn btn-primary btn-sm ubah">Buy</button></a>
                                     @endcan

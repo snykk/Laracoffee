@@ -57,7 +57,9 @@ Route::middleware(['auth'])->group(function () {
     Route::controller(ProductController::class)->group(function () {
         Route::get("/product", "index");
         Route::get("/product/add_product", "addProductGet");
+        Route::get("/product/edit_product/{product:id}", "editProductGet");
         Route::post("/product/add_product", "addProductPost");
+        Route::post("/product/edit_product/{product:id}", "editProductPost");
         Route::get("/product/data/{id}", "getProductData");
     });
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
@@ -35,7 +36,7 @@ class ProductController extends Controller
     public function addProductPost(Request $request)
     {
         $validatedData = $request->validate([
-            "product_name" => "required",
+            "product_name" => "required|max:25",
             "stock" => "required|numeric|gt:0",
             "price" => "required|numeric|gt:0",
             "discount" => "required|numeric|gt:0|lt:100",
@@ -57,6 +58,70 @@ class ProductController extends Controller
             myFlasherBuilder(message: $message, success: true);
 
             return redirect('/product');
+        } catch (\Illuminate\Database\QueryException $exception) {
+            return abort(500);
+        }
+    }
+
+
+    public function editProductGet(Product $product)
+    {
+        $data["title"] = "Edit Product";
+        $data["product"] = $product;
+
+        return view("/product/edit_product", $data);
+    }
+
+
+    public function editProductPost(Request $request, Product $product)
+    {
+        $rules = [
+            'orientation' => 'required',
+            'description' => 'required',
+            'price' => 'required|numeric|gt:0',
+            'stock' => 'required|numeric|gt:0',
+            'discount' => 'required|numeric|gt:0|lt:100',
+        ];
+
+
+        if ($product->product_name != $request->product_name) {
+            $rules['product_name'] = 'required|max:25|unique:products,product_name';
+        } else {
+            $rules['product_name'] = 'required|max:25';
+        }
+
+
+        if ($request->file("image")) {
+            $rules["image"] = "image|file|max:2048";
+        }
+
+        $validatedData = $request->validate($rules);
+
+        try {
+            if ($request->file("image")) {
+                if ($request->oldImage != env("IMAGE_PRODUCT")) {
+                    Storage::delete($request->oldImage);
+                }
+
+                $validatedData["image"] = $request->file("image")->store("product");
+            }
+
+            $product->fill($validatedData);
+
+
+            if ($product->isDirty()) {
+                $product->save();
+
+                $message = "Product has been updated!";
+
+                myFlasherBuilder(message: $message, success: true);
+                return redirect("/product");
+            } else {
+                $message = "Action <strong>failed</strong>, no changes detected!";
+
+                myFlasherBuilder(message: $message, failed: true);
+                return redirect("/product/edit_product/$product->id");
+            }
         } catch (\Illuminate\Database\QueryException $exception) {
             return abort(500);
         }
