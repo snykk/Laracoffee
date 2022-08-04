@@ -51,7 +51,7 @@ class ProfileController extends Controller
 
         try {
             if ($request->file("image")) {
-                if ($request->oldImage != env("DEFAULT_IMAGE_PROFILE")) {
+                if ($request->oldImage != env("IMAGE_PROFILE")) {
                     Storage::delete($request->oldImage);
                 }
 

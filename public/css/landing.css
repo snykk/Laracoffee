@@ -78,7 +78,7 @@ body {
             rgba(0, 0, 0, 0.7) 75%,
             #000 100%
         ),
-        url("/img/landing-background.jpg");
+        url("/storage/landing/landing-background.jpg");
     background-position: 3% 50%;
     background-repeat: no-repeat;
     background-attachment: scroll;

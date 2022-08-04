@@ -1,10 +1,11 @@
 <!-- Product Detail Modal -->
 <div class="program-modal modal fade" id="ProductDetailModal" tabindex="-1" role="dialog" aria-hidden="true"
-    data-bs-keyboard="false" data-bs-backdrop="static">
+  data-bs-keyboard="false" data-bs-backdrop="static">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="close-modal" data-bs-dismiss="modal"><img src="{{ asset(" storage/icons/close-icon.svg") }}"
-                    alt="Close Modal" /></div>
+            <div class="close-modal" data-bs-dismiss="modal"><img src="{{ asset('storage/icons/close-icon.svg') }}"
+                  alt="Close Modal" />
+            </div>
             <div class="container">
                 <div class="row justify-content-center">
                     <div class="col-lg-8">
@@ -16,8 +17,8 @@
                             <p class="orientasi text-center">
                                 <!-- Orientation -->
                             </p>
-                            <img id="modal-image" src="{{ asset(" storage/") }}" width="70%"
-                                class="img-fluid d-block mx-auto" alt="" />
+                            <img id="modal-image" src="{{ asset('storage/') }}" width="70%"
+                              class="img-fluid d-block mx-auto" alt="" />
                             <div>
                                 <h3>
                                     Description

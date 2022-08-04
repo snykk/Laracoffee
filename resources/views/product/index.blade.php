@@ -38,7 +38,7 @@
                             <div class="card">
                                 <div class="card-body text-center">
                                     <p><img class=" img-fluid" src="{{ asset('storage/' . $row->image) }}"
-                                            alt="Product Name"></p>
+                                          alt="Product Name"></p>
                                     <h4 class="card-title">{{ $row->product_name }}</h4>
                                     <p class="card-text">{{ $row->orientation }}</p>
                                     <div class="btn btn-primary btn-sm"><i class="fa fa-plus"></i></div>
@@ -54,16 +54,16 @@
 
                                     <!-- detail -->
                                     <button data-id="{{ $row->id }}" class="btn btn-primary btn-sm detail"
-                                        data-bs-toggle="modal" data-bs-target="#ProductDetailModal">Detail</button>
+                                      data-bs-toggle="modal" data-bs-target="#ProductDetailModal">Detail</button>
 
                                     <!-- ulasan -->
                                     <a href=""><button class="btn btn-primary btn-sm ubah">Review</button></a>
 
                                     <!-- [admin] ubah -->
                                     @can('is_admin')
-                                    <a href=""><button class="btn btn-primary btn-sm ubah">Ubah</button></a>
+                                    <a href=""><button class="btn btn-primary btn-sm ubah">Edit</button></a>
                                     @else
-                                    <a href=""><button class="btn btn-primary btn-sm ubah">Beli</button></a>
+                                    <a href=""><button class="btn btn-primary btn-sm ubah">Buy</button></a>
                                     @endcan
                                 </div>
                             </div>

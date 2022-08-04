@@ -25,7 +25,7 @@ class UserFactory extends Factory
             'username' => fake()->firstName(),
             'email' => fake()->safeEmail(),
             'password' => Hash::make("1234"), // password,
-            'image' => env("DEFAULT_IMAGE_PROFILE"),
+            'image' => env("IMAGE_PROFILE"),
             'phone' => fake()->phoneNumber(),
             'gender' => $str_gender[rand(0, 1)],
             'address' => fake()->address(),

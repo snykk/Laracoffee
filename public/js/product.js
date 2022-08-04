@@ -1,24 +1,21 @@
 $("button.detail").click(function (event) {
-    console.log("jalan");
     var id = $(this).attr("data-id");
-    console.log(id);
-    var url = "/product/:id";
-    url = url.replace(":id", id);
+    console.log("/product/data/" + id);
     $.ajax({
-        url: url,
+        url: "/product/data/" + id,
         method: "get",
         dataType: "json",
-        success: function (response) {
-            $("#modal-image").attr("src", "/storage/" + response["image"]);
-            $(".text-uppercase").html(response["product_name"]);
-            $(".orientation").html(response["orientation"]);
-            $(".description").html(response["description"]);
+        success: function (res) {
+            $("#modal-image").attr("src", "/storage/" + res["image"]);
+            $(".text-uppercase").html(res["product_name"]);
+            $(".orientation").html(res["orientation"]);
+            $(".description").html(res["description"]);
             $(".stock").html(
-                "Available: " + "<em>" + response["stock"] + " unit" + "</em>"
+                "Available: " + "<em>" + res["stock"] + " unit" + "</em>"
             );
-            if (response["discount"] == 0) {
+            if (res["discount"] == 0) {
                 $(".price").html(
-                    "Price: " + "<strong>Rp. " + response["price"] + "</strong>"
+                    "Price: " + "<strong>Rp. " + res["price"] + "</strong>"
                 );
                 $(".discount").html(
                     "Discount: " +
@@ -28,17 +25,16 @@ $("button.detail").click(function (event) {
                 $(".price").html(
                     "Price: " +
                         "<strong class='me-2'>" +
-                        ((100 - response["discount"]) / 100) *
-                            response["price"] +
+                        ((100 - res["discount"]) / 100) * res["price"] +
                         "</strong>" +
                         "<strong class='strikethrough'>" +
-                        response["price"] +
+                        res["price"] +
                         "</strong>"
                 );
                 $(".discount").html(
                     "Discount: " +
                         "<em class='text-danger'>" +
-                        response["discount"] +
+                        res["discount"] +
                         "%" +
                         "</em>"
                 );

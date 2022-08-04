@@ -58,7 +58,7 @@ class AuthController extends Controller
         ]);
 
         $validatedData['password'] = Hash::make($validatedData['password']);
-        $validatedData['image'] = env("DEFAULT_IMAGE_PROFILE");
+        $validatedData['image'] = env("IMAGE_PROFILE");
 
         try {
             User::create($validatedData);

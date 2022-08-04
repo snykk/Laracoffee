@@ -31,7 +31,7 @@ class DatabaseSeeder extends Seeder
             "username" => "pStar7",
             "email" => "najibfikri13@gmail.com",
             "password" => Hash::make("1234"),
-            "image" => env("DEFAULT_IMAGE_PROFILE"),
+            "image" => env("IMAGE_PROFILE"),
             "phone" => "08123456789123",
             "gender" => "M",
             "address" => "Shell road number 10",
@@ -44,7 +44,7 @@ class DatabaseSeeder extends Seeder
             "username" => "its_me",
             "email" => "member@gmail.com",
             "password" => Hash::make("1234"),
-            "image" => env("DEFAULT_IMAGE_PROFILE"),
+            "image" => env("IMAGE_PROFILE"),
             "phone" => "082918391823",
             "gender" => "M",
             "address" => "Shell road number 18",
@@ -72,7 +72,7 @@ class DatabaseSeeder extends Seeder
         //         "price" => rand(5000, 30000),
         //         "stock" => rand(10, 100),
         //         "discount" => 0.05,
-        //         "image" => env("DEFAULT_IMAGE_PRODUCT"),
+        //         "image" => env("IMAGE_PRODUCT"),
         //     ]);
         // }
         // gaamRDJEO5xNbQMfgSXx91ZNIVYxid2S110yVkKg.jpg

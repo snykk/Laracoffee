@@ -56,7 +56,9 @@ Route::middleware(['auth'])->group(function () {
 
     Route::controller(ProductController::class)->group(function () {
         Route::get("/product", "index");
-        Route::get("/product/{id}", "getProductData")->name("getProductData");
+        Route::get("/product/add_product", "addProductGet");
+        Route::post("/product/add_product", "addProductPost");
+        Route::get("/product/data/{id}", "getProductData");
     });
 
     // Logout
