@@ -5,7 +5,7 @@
 @endpush
 
 @push('scripts-dependencies')
-<script src="/js/profile.js"></script>
+<script src="/js/image_preview.js"></script>
 @endpush
 
 @section('content')
@@ -46,9 +46,9 @@
             </div>
         </div>
         <div class="col-xl-8">
-            <!-- Account details card-->
+            <!-- Profile details card-->
             <div class="card mb-4">
-                <div class="card-header">Account Details</div>
+                <div class="card-header">Profile Details</div>
                 <div class="card-body">
                     <!-- Form Group (username)-->
                     <div class="mb-3">

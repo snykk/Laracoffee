@@ -4,6 +4,10 @@
 <link rel="stylesheet" type="text/css" href="/css/product.css" />
 @endpush
 
+@push('scripts-dependencies')
+<script src="/js/image_preview.js"></script>
+@endpush
+
 @section('content')
 <div class="container-fluid p-4" style="background: #eee;">
 
@@ -94,6 +98,8 @@
                           </div>
                           <div class="custom-file">
                             <label class="custom-file-label" for="image">Image</label> <br>
+                            <img class="img-account-profile mb-2 d-block" id="image-preview" width="150"
+                              alt="Default Product Image" src="{{ asset('storage/' . env('IMAGE_PRODUCT')) }}">
                             <input type="file" class="custom-file-input" id="image" name="image">
                             @error('image')
                             <div class="text-danger">{{ $message }}</div>

@@ -81,6 +81,7 @@ class ProductController extends Controller
             'price' => 'required|numeric|gt:0',
             'stock' => 'required|numeric|gt:0',
             'discount' => 'required|numeric|gt:0|lt:100',
+            'image' => 'image|file|max:2048'
         ];
 
 
@@ -88,11 +89,6 @@ class ProductController extends Controller
             $rules['product_name'] = 'required|max:25|unique:products,product_name';
         } else {
             $rules['product_name'] = 'required|max:25';
-        }
-
-
-        if ($request->file("image")) {
-            $rules["image"] = "image|file|max:2048";
         }
 
         $validatedData = $request->validate($rules);
@@ -120,7 +116,7 @@ class ProductController extends Controller
                 $message = "Action <strong>failed</strong>, no changes detected!";
 
                 myFlasherBuilder(message: $message, failed: true);
-                return redirect("/product/edit_product/$product->id");
+                return back();
             }
         } catch (\Illuminate\Database\QueryException $exception) {
             return abort(500);

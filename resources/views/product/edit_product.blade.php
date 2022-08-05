@@ -4,6 +4,10 @@
 <link rel="stylesheet" type="text/css" href="/css/product.css" />
 @endpush
 
+@push('scripts-dependencies')
+<script src="/js/image_preview.js"></script>
+@endpush
+
 @section('content')
 <div class="container-fluid p-4" style="background: #eee;">
 
@@ -23,7 +27,7 @@
               <div class="e-profile">
                 <div class="row">
                   <div class="col-12 col-sm-auto mb-3">
-                    <img class="img-account-profile mb-2" src="{{ asset('storage/' . $product->image) }}" width="200"
+                    <img class="mb-2" id="image-preview" src="{{ asset('storage/' . $product->image) }}" width="200"
                       alt="{{ $product->product_name }}">
                   </div>
                   <div class="col d-flex flex-column flex-sm-row justify-content-between mb-3">
@@ -39,7 +43,6 @@
                         <form action="/product/edit_product/{{ $product->id }}" method="post"
                           enctype="multipart/form-data">
                           @csrf
-                          <input type="hidden" name="id" value="{{ $product->id }}">
                           <input type="hidden" name="oldImage" value="{{ $product->image }}">
                           <div class="custom-file">
                             <input type="file" class="custom-file-input" id="image" name="image">
