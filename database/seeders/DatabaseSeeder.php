@@ -36,6 +36,7 @@ class DatabaseSeeder extends Seeder
             "gender" => "M",
             "address" => "Shell road number 10",
             "role_id" => "1",
+            "coupon" => "0",
             'remember_token' => Str::random(30),
         ]);
 
@@ -49,6 +50,7 @@ class DatabaseSeeder extends Seeder
             "gender" => "M",
             "address" => "Shell road number 18",
             "role_id" => "2",
+            "coupon" => "0",
             'remember_token' => Str::random(30),
         ]);
 

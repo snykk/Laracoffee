@@ -29,6 +29,8 @@ class UserFactory extends Factory
             'phone' => fake()->phoneNumber(),
             'gender' => $str_gender[rand(0, 1)],
             'address' => fake()->address(),
+            'role_id' => 2,
+            'coupon' => 0,
             'remember_token' => Str::random(30),
         ];
     }

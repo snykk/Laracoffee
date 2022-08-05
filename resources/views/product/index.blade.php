@@ -64,7 +64,8 @@
                                     <a href="/product/edit_product/{{ $row->id }}"><button
                                           class="btn btn-primary btn-sm ubah">Edit</button></a>
                                     @else
-                                    <a href=""><button class="btn btn-primary btn-sm ubah">Buy</button></a>
+                                    <a href="/order/make_order/{{ $row->id }}"><button
+                                          class="btn btn-primary btn-sm ubah">Buy</button></a>
                                     @endcan
                                 </div>
                             </div>

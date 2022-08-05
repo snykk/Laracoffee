@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -62,6 +63,13 @@ Route::middleware(['auth'])->group(function () {
         Route::post("/product/edit_product/{product:id}", "editProductPost");
         Route::get("/product/data/{id}", "getProductData");
     });
+
+
+    Route::controller(OrderController::class)->group(function () {
+        Route::get("/order/make_order/{product:id}", "makeOrderGet");
+    });
+
+
 
     // Logout
     Route::post('/auth/logout', [AuthController::class, "logoutPost"]);

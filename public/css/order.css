@@ -1,0 +1,242 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    background: #eee;
+}
+
+.btn-group > .dropdown-menu > a {
+    text-decoration: none;
+}
+
+.main-title {
+    font-size: 28px;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    font-family: "Merriweather", serif;
+    font-weight: 500;
+}
+
+.card {
+    box-shadow: 0 20px 27px 0 rgb(0 0 0 / 5%);
+}
+
+.card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 0 solid rgba(0, 0, 0, 0.125);
+    border-radius: 1rem;
+}
+
+.card-body {
+    -webkit-box-flex: 1;
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+    padding: 1.5rem 1.5rem;
+}
+
+.panel-order .row {
+    border-bottom: 1px solid #ccc !important;
+}
+.panel-order .row:last-child {
+    border: 0px !important;
+}
+.panel-order .row .col-md-1 {
+    text-align: center !important;
+    padding-top: 15px !important;
+}
+.panel-order .row .col-md-1 img {
+    width: 50px !important;
+    max-height: 50px !important;
+}
+.panel-order .row .row {
+    border-bottom: 0 !important;
+}
+.panel-order .row .col-md-11 {
+    border-left: 1px solid #ccc !important;
+}
+.panel-order .row .row .col-md-12 {
+    padding-top: 7px !important;
+    padding-bottom: 7px !important;
+}
+.panel-order .row .row .col-md-12:last-child {
+    font-size: 11px !important;
+    color: #555 !important;
+    background: #efefef !important;
+}
+.panel-order .btn-group {
+    margin: 0px !important;
+    padding: 0px !important;
+}
+.panel-order .panel-body {
+    padding-top: 0px !important;
+    padding-bottom: 0px !important;
+}
+.panel-order .panel-deading {
+    margin-bottom: 0 !important;
+}
+
+.panel-body > .row {
+    background-color: white !important;
+}
+
+ul > li > a {
+    text-decoration: none;
+    color: black;
+}
+
+/* div.collapseCC > div.accordion-body > div.form-check.w-100 > span.colapse_pilih_bank {
+    cursor: pointer;
+  } */
+
+.collapse-pilih-bank {
+    width: auto;
+    margin-left: 45px;
+}
+
+#collapseCC > div > .form-check {
+    padding-left: 10px !important;
+}
+
+.divider {
+    width: auto;
+    height: 2px;
+    margin: 10px 0;
+    background-color: grey;
+}
+
+.no-rek {
+    color: red;
+}
+
+.salin-rek {
+    text-transform: uppercase;
+    color: green;
+}
+
+.note {
+    color: green;
+}
+
+.content-cod {
+    width: auto;
+    margin-left: 30px;
+    color: red;
+}
+
+.accordion-body {
+    padding-top: 0 !important;
+    padding-left: 40px;
+}
+
+div.accordion-item > h2 > div > label.form-check-label {
+    cursor: pointer;
+}
+
+/* petunjuk */
+
+div#container-petunjuk {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+#accordionPetunjuk {
+    margin: 20px 0;
+}
+#accordionPetunjuk .item {
+    margin: 0;
+}
+#accordionPetunjuk .item:hover {
+    margin: 0;
+    border-bottom: 2.5px solid black;
+}
+
+.t-p {
+    color: black;
+    padding: 10px 30px 0px 30px;
+    margin-bottom: 20px;
+}
+#accordionPetunjuk .item .item-header h2 button.btn.btn-link {
+    background: whitesmoke;
+    color: black;
+    border-radius: 0px;
+    font-family: "Poppins";
+    font-size: 16px;
+    font-weight: 400;
+    /* line-height: 2.5; */
+    text-decoration: none;
+}
+#accordionPetunjuk .item .item-header {
+    border-bottom: none;
+    background: transparent;
+    padding: 0px;
+    margin: 2px;
+}
+
+#accordionPetunjuk .item .item-header > h2 > button.btn.btn-link {
+    color: black;
+    font-size: 20px;
+    padding: 15px;
+    display: block;
+    width: 100%;
+    text-align: left;
+}
+
+#accordionPetunjuk
+    .item
+    .item-header
+    > h2
+    > button.btn.btn-link
+    > img.title-accordion-petunjuk {
+    float: right;
+    color: green;
+    width: 18px;
+    display: flex;
+}
+
+#accordionPetunjuk
+    .item
+    .item-header
+    > h2
+    > button.btn.btn-link.collapsed
+    > img.title-accordion-petunjuk {
+    transform: rotate(0deg);
+}
+
+#accordionPetunjuk
+    .item
+    .item-header
+    > h2
+    > button.btn.btn-link
+    > img.title-accordion-petunjuk {
+    transform: rotate(180deg);
+    transition: 0.25s;
+}
+/* tutup petunjuk */
+
+/* style discont strikethrough */
+span.strikethrough {
+    position: relative;
+}
+span.strikethrough:before {
+    position: absolute;
+    content: "";
+    left: 0;
+    top: 50%;
+    right: 0;
+    border-top: 1px solid;
+    border-color: inherit;
+
+    -webkit-transform: rotate(-5deg);
+    -moz-transform: rotate(-5deg);
+    -ms-transform: rotate(-5deg);
+    -o-transform: rotate(-5deg);
+    transform: rotate(-5deg);
+}
