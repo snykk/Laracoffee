@@ -1,6 +1,5 @@
 $("button.detail").click(function (event) {
     var id = $(this).attr("data-id");
-    console.log("/product/data/" + id);
     $.ajax({
         url: "/product/data/" + id,
         method: "get",

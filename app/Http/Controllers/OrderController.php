@@ -90,8 +90,14 @@ class OrderController extends Controller
         $title = "Order Data";
         $orders = Order::with("bank", "note", "payment", "user", "status", "product")->where("status_id", $status_id)->get();
         $status = Status::all();
-        $is_filtered = true;
 
-        return view("/order/order_data", compact("title", "orders", "status", "is_filtered"));
+        return view("/order/order_data", compact("title", "orders", "status"));
+    }
+
+
+    public function getOrderData($id)
+    {
+        $order = Order::with("product", "user", "note", "status", "bank", "payment")->find($id);
+        return $order;
     }
 }

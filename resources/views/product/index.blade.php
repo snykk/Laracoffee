@@ -8,6 +8,10 @@
 <script src="/js/product.js"></script>
 @endpush
 
+@push('modals-dependencies')
+@include('/partials/product/product_detail_modal')
+@endpush
+
 @section('content')
 <!-- product -->
 <section id="product" class="pb-5">
@@ -80,5 +84,4 @@
 </section>
 <!-- product -->
 
-@include('/partials/product/product_detail_modal')
 @endsection

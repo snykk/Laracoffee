@@ -3,9 +3,9 @@
 <div class="row">
   <div class="col-md-1">
     <img src="{{ asset('storage/'. $row->product->image) }}" class="media-object img-thumbnail" />
-    <div class="detail-pemesanan"><a class="detail_data_pemesanan" data-bs-toggle="modal"
-        data-bs-target="#ModalDetailDataPemesanan" title="detail pemesanan" style="cursor: pointer;" data-id="<?= $row["
-        id_pemesanan"]; ?>" data-dipesan="{{ $row->created_at->format('d M Y') }}">detail
+    <div class="order-detail"><a class="order-detail-link" data-bs-toggle="modal" data-bs-target="#OrderDetailModal"
+        title="order detail" style="cursor: pointer;" data-id="{{ $row->id }}"
+        data-dipesan="{{ $row->created_at->format('d M Y') }}">detail
       </a></div>
   </div>
   <div class="col-md-11">
@@ -21,12 +21,10 @@
             {{ $row->product->product_name }}
           </strong></span> <span class="badge bg-primary">
           {{ $row->payment->payment_method }}
-        </span><br />
-        Kuantitas :
-        {{ $row->quantity }}, Total harga: Rp.
-        {{ $row->total_price }} <br />
-        <small>Catatan:
-          {{ (isset($row->refusal_reason)) ? $row->refusal_reason : $row->note->order_notes }}
+        </span> <br />
+        Quantity : {{ $row->quantity }}, Total price: Rp. {{ $row->total_price }} <br />
+        <small>
+          Notes: {{ (isset($row->refusal_reason)) ? $row->refusal_reason : $row->note->order_notes }}
         </small><br>
 
         @if ($row->payment->payment_method == "Transfer Bank" && auth()->user()->id == 2)
@@ -60,14 +58,12 @@
       @endphp
 
       @if ($row->is_done == '1')
-      <div class="col-md-12">pesanan diakhiri pada
-        {{ $row->updated_at->format('d M Y') }}
-        oleh <span class="link-danger" style="cursor: pointer;">@admin</span>
+      <div class="col-md-12">order ends at {{ $row->updated_at->format('d M Y') }} by <span class="link-danger"
+          style="cursor: pointer;">@admin</span>
       </div>
       @else
-      <div class="col-md-12">pesanan dibuat pada
-        {{ $row->created_at->format('d M Y') }}
-        oleh <a href="{{ $dest }}" style="text-decoration:none;">{{ "@" . auth()->user()->username }}</a>
+      <div class="col-md-12">order created at {{ $row->created_at->format('d M Y') }} by <a href="{{ $dest }}"
+          style="text-decoration:none;">{{ "@" . auth()->user()->username }}</a>
       </div>
       @endif
     </div>

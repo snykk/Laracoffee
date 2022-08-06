@@ -82,8 +82,7 @@
             <div class="row mb-3">
               <div class="col-12">Destination</div>
               <div class="form-group col-7">
-                <select class="form-control  @error('province') is-invalid @enderror" id="select_provinsi"
-                  name="province">
+                <select class="form-control  @error('province') is-invalid @enderror" id="province" name="province">
                   <option value="{{ old('province', '0') }}" selected="selected">Select Province</option>
                 </select>
                 @error('province')

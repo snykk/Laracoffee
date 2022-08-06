@@ -69,10 +69,9 @@ Route::middleware(['auth'])->group(function () {
         Route::get("/order/make_order/{product:id}", "makeOrderGet");
         Route::get("/order/order_data", "orderData");
         Route::get("/order/order_data/{status_id}", "orderDataFilter");
+        Route::get("/order/data/{id}", "getOrderData");
         Route::post("/order/make_order/{product:id}", "makeOrderPost");
     });
-
-
 
     // Logout
     Route::post('/auth/logout', [AuthController::class, "logoutPost"]);

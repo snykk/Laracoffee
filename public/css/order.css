@@ -217,7 +217,7 @@ div#container-petunjuk {
 }
 /* tutup petunjuk */
 
-div.row > div.col-md-1 > div.detail-pemesanan > a[title="detail pemesanan"] {
+div.row > div.col-md-1 > div.order-detail > a[title="order detail"] {
     color: rgb(21, 156, 156) !important;
     font-size: 0.8rem !important;
     text-decoration: none !important;
