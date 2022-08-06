@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Order;
 use App\Models\Product;
+use App\Models\Status;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -76,10 +77,21 @@ class OrderController extends Controller
     public function orderData()
     {
         $title = "Order Data";
-
         $orders = Order::with("bank", "note", "payment", "user", "status", "product")->latest()->get();
+        $status = Status::all();
 
 
-        return view("/order/order_data", compact("title", "orders"));
+        return view("/order/order_data", compact("title", "orders", "status"));
+    }
+
+
+    public function orderDataFilter(Request $request, $status_id)
+    {
+        $title = "Order Data";
+        $orders = Order::with("bank", "note", "payment", "user", "status", "product")->where("status_id", $status_id)->get();
+        $status = Status::all();
+        $is_filtered = true;
+
+        return view("/order/order_data", compact("title", "orders", "status", "is_filtered"));
     }
 }
