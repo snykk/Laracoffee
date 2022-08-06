@@ -71,4 +71,15 @@ class OrderController extends Controller
             return abort(500);
         }
     }
+
+
+    public function orderData()
+    {
+        $title = "Order Data";
+
+        $orders = Order::with("bank", "note", "payment", "user", "status", "product")->latest()->get();
+
+
+        return view("/order/order_data", compact("title", "orders"));
+    }
 }

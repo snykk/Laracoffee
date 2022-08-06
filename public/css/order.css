@@ -92,10 +92,6 @@ ul > li > a {
     color: black;
 }
 
-/* div.collapseCC > div.accordion-body > div.form-check.w-100 > span.colapse_pilih_bank {
-    cursor: pointer;
-  } */
-
 .collapse-pilih-bank {
     width: auto;
     margin-left: 45px;
@@ -221,6 +217,65 @@ div#container-petunjuk {
 }
 /* tutup petunjuk */
 
+div.row > div.col-md-1 > div.detail-pemesanan > a[title="detail pemesanan"] {
+    color: rgb(21, 156, 156) !important;
+    font-size: 0.8rem !important;
+    text-decoration: none !important;
+    cursor: pointer !important;
+}
+
+/* modal detail data pemesanan */
+div.fade.modal#ModalDetailDataPemesanan {
+    font-family: "Quicksand", sans-serif;
+}
+
+.close:focus {
+    outline: 1px dotted #fff !important;
+}
+
+.modal-body.detail {
+    padding: 0rem !important;
+}
+
+.modal-title {
+    color: #fff;
+}
+
+.modal-header {
+    background: black;
+    color: #fff !important;
+}
+
+.fa-close {
+    color: #fff;
+}
+
+.heading {
+    font-weight: 500 !important;
+}
+
+.subheadings {
+    font-size: 12px;
+    color: black;
+}
+
+.dots {
+    height: 10px;
+    width: 10px;
+    background-color: green;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 5px;
+}
+
+.gallery img {
+    margin-right: 10px;
+}
+
+.fs-9 {
+    font-size: 9px;
+}
+
 /* style discont strikethrough */
 span.strikethrough {
     position: relative;
@@ -239,4 +294,22 @@ span.strikethrough:before {
     -ms-transform: rotate(-5deg);
     -o-transform: rotate(-5deg);
     transform: rotate(-5deg);
+}
+
+.badgebox {
+    opacity: 0;
+}
+
+.badgebox + .badge {
+    text-indent: -999999px;
+    width: 27px;
+}
+
+.badgebox:focus + .badge {
+    box-shadow: inset 0px 0px 5px;
+}
+
+.badgebox:checked + .badge {
+    /* Move the check mark back when checked */
+    text-indent: 0;
 }

@@ -67,6 +67,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::controller(OrderController::class)->group(function () {
         Route::get("/order/make_order/{product:id}", "makeOrderGet");
+        Route::get("/order/order_data", "orderData");
         Route::post("/order/make_order/{product:id}", "makeOrderPost");
     });
 
