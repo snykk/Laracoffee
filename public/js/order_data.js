@@ -1,34 +1,25 @@
-console.log("jalan");
-function hideMessage(payment_method) {
-    if (
-        $("#" + payment_method + "_alert").html() != null &&
-        $("#" + payment_method + "_alert").css("display") != "none"
-    ) {
-        $("#" + payment_method + "_alert").css("display", "none");
-    } else if (payment_method == "cod") {
-        $("#bank_alert").css("display", "block");
-    } else {
-        $("#cod_alert").css("display", "block");
-    }
-}
-
-function hideBankMessage() {
-    $("#bank_id_alert").css("display") != "none";
-}
-
 // modal order detail
-$("a.order-detail-link[title='order detail']").click(function (event) {
+$("span.order-detail-link[title='order detail']").click(function (event) {
+    setVisible("#loading", true);
     var id = $(this).attr("data-id");
+
     $.ajax({
         url: "/order/data/" + id,
         method: "get",
         dataType: "json",
         success: function (response) {
-            console.log(response);
-            // restrict fitur upload bukti untuk metode pembayaran COD
+            const date = new Date(response["created_at"]).toLocaleDateString(
+                "id-id",
+                {
+                    weekday: "long",
+                    year: "numeric",
+                    month: "short",
+                    day: "numeric",
+                }
+            );
 
             $("#username_detail").html("@" + response["user"]["username"]);
-            $("#order_date_detail").html(response["created_at"]);
+            $("#order_date_detail").html(date);
             $("#quantiity_detail").html(response["quantity"]);
             $("#address_detail").html(response["address"]);
             $("#payment_method_detail").html(
@@ -75,6 +66,7 @@ $("a.order-detail-link[title='order detail']").click(function (event) {
                 );
             }
 
+            // restrict fitur upload bukti untuk metode pembayaran COD
             if (response["payment"]["payment_method"] == "COD") {
                 console.log("jalannih");
                 // menghilangkan element sesuai metode pembayaran
@@ -85,6 +77,15 @@ $("a.order-detail-link[title='order detail']").click(function (event) {
                 $("#modal_section_payment_proof").css("display", "unset");
                 $("#row_bank").css("display", "table-row");
             }
+
+            $("#OrderDetailModal").modal("show");
+            setVisible("#loading", false);
         },
     });
 });
+
+const setVisible = (elementOrSelector, visible) =>
+    ((typeof elementOrSelector === "string"
+        ? document.querySelector(elementOrSelector)
+        : elementOrSelector
+    ).style.display = visible ? "block" : "none");

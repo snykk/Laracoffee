@@ -57,8 +57,8 @@
                                         Doloremque nam voluptas distinctio facere assumenda delectus.</p>
 
                                     <!-- detail -->
-                                    <button data-id="{{ $row->id }}" class="btn btn-primary btn-sm detail"
-                                      data-bs-toggle="modal" data-bs-target="#ProductDetailModal">Detail</button>
+                                    <button data-id="{{ $row->id }}"
+                                      class="btn btn-primary btn-sm detail">Detail</button>
 
                                     <!-- ulasan -->
                                     <a href=""><button class="btn btn-primary btn-sm ubah">Review</button></a>

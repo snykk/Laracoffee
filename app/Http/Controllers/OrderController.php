@@ -77,7 +77,7 @@ class OrderController extends Controller
     public function orderData()
     {
         $title = "Order Data";
-        $orders = Order::with("bank", "note", "payment", "user", "status", "product")->latest()->get();
+        $orders = Order::with("bank", "note", "payment", "user", "status", "product")->orderBy("id", "ASC")->get();
         $status = Status::all();
 
 
@@ -88,7 +88,7 @@ class OrderController extends Controller
     public function orderDataFilter(Request $request, $status_id)
     {
         $title = "Order Data";
-        $orders = Order::with("bank", "note", "payment", "user", "status", "product")->where("status_id", $status_id)->get();
+        $orders = Order::with("bank", "note", "payment", "user", "status", "product")->where("status_id", $status_id)->orderBy("id", "ASC")->get();
         $status = Status::all();
 
         return view("/order/order_data", compact("title", "orders", "status"));

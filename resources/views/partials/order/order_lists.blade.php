@@ -3,10 +3,9 @@
 <div class="row">
   <div class="col-md-1">
     <img src="{{ asset('storage/'. $row->product->image) }}" class="media-object img-thumbnail" />
-    <div class="order-detail"><a class="order-detail-link" data-bs-toggle="modal" data-bs-target="#OrderDetailModal"
-        title="order detail" style="cursor: pointer;" data-id="{{ $row->id }}"
-        data-dipesan="{{ $row->created_at->format('d M Y') }}">detail
-      </a></div>
+    <div class="order-detail"><span class="order-detail-link" title="order detail" style="cursor: pointer;"
+        data-id="{{ $row->id }}" data-dipesan="{{ $row->created_at->format('d M Y') }}">detail
+      </span></div>
   </div>
   <div class="col-md-11">
     <div class="row">

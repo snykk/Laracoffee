@@ -5,7 +5,7 @@
 @endpush
 
 @push('scripts-dependencies')
-<script src="/js/order.js"></script>
+<script src="/js/make_order.js"></script>
 @endpush
 
 @section('content')

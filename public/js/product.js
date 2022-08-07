@@ -1,5 +1,7 @@
 $("button.detail").click(function (event) {
     var id = $(this).attr("data-id");
+    setVisible("#loading", true);
+
     $.ajax({
         url: "/product/data/" + id,
         method: "get",
@@ -38,6 +40,15 @@ $("button.detail").click(function (event) {
                         "</em>"
                 );
             }
+
+            $("#ProductDetailModal").modal("show");
+            setVisible("#loading", false);
         },
     });
 });
+
+const setVisible = (elementOrSelector, visible) =>
+    ((typeof elementOrSelector === "string"
+        ? document.querySelector(elementOrSelector)
+        : elementOrSelector
+    ).style.display = visible ? "block" : "none");

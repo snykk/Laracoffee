@@ -5,7 +5,7 @@
 @endpush
 
 @push('scripts-dependencies')
-<script src="/js/order.js"></script>
+<script src="/js/order_data.js"></script>
 @endpush
 
 @push('modals-dependencies')

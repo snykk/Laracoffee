@@ -15,6 +15,7 @@
 </head>
 
 <body class="sb-nav-fixed">
+  <div id="loading" style="display: none"></div>
   {{-- topbar --}}
   @include('/partials/topbar')
   <div id="layoutSidenav">

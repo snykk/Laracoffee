@@ -256,3 +256,15 @@ strong.strikethrough:before {
     -o-transform: rotate(-5deg);
     transform: rotate(-5deg);
 }
+
+#loading {
+    display: flex;
+    position: fixed;
+    z-index: 100;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(192, 192, 192, 0.5);
+    background-image: url("https://i.stack.imgur.com/MnyxU.gif");
+    background-repeat: no-repeat;
+    background-position: center;
+}
