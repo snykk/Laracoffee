@@ -26,7 +26,7 @@
                 <div class="card-header">Profile Picture</div>
                 <div class="card-body text-center">
                     <!-- Profile picture image-->
-                    <img class="img-account-profile mb-2" id="image-preview" src="{{ asset(" storage/" .
+                    <img class="img-account-profile mb-2" id="image-preview" src="{{ asset('storage/' .
                       auth()->user()->image) }}" width="150" alt="">
                     <!-- Profile picture help block-->
                     <div class="small font-italic text-muted mb-4">Must be an image no more than 2 MB</div>

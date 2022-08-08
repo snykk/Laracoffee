@@ -68,7 +68,6 @@ $("span.order-detail-link[title='order detail']").click(function (event) {
 
             // restrict fitur upload bukti untuk metode pembayaran COD
             if (response["payment"]["payment_method"] == "COD") {
-                console.log("jalannih");
                 // menghilangkan element sesuai metode pembayaran
                 $("#modal_section_payment_proof").css("display", "none");
                 $("#row_bank").css("display", "none");
@@ -79,7 +78,6 @@ $("span.order-detail-link[title='order detail']").click(function (event) {
             }
 
             $("#OrderDetailModal").modal("show");
-            setVisible("#loading", false);
         },
     });
 });

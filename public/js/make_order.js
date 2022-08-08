@@ -1,3 +1,9 @@
+const setVisible = (elementOrSelector, visible) =>
+    ((typeof elementOrSelector === "string"
+        ? document.querySelector(elementOrSelector)
+        : elementOrSelector
+    ).style.display = visible ? "block" : "none");
+
 function hideMessage(payment_method) {
     if (
         $("#" + payment_method + "_alert").html() != null &&
@@ -48,10 +54,8 @@ function myCounter() {
         document.getElementById("shipping").getAttribute("data-shippingCost")
     );
 
-    console.log(num, price, shipping);
-
     if (quantity != null && product_id != null && destinasi != null) {
-        setOngkir({ destination: destinasi, qty: num });
+        setOngkir({ destination: destinasi, quantity: num });
     }
 
     if (isUseCoupon && couponTotal > 0 && currentNum < num) {
@@ -78,17 +82,14 @@ function myCounter() {
 }
 
 function refresh_data({ sub_total = 0, shipping = 0, total = 0 }) {
-    console.log(total);
-    console.log(sub_total);
-    console.log(shipping);
-    if (total != 0) {
+    if (total >= 0) {
         $("#total_price").val(total);
         $("#total").html(total);
     }
-    if (sub_total != 0) {
+    if (sub_total >= 0) {
         $("#sub-total").html(sub_total);
     }
-    if (shipping != 0) {
+    if (shipping >= 0) {
         $("#shipping").attr("data-shippingCost", shipping);
         $("#shipping").html(shipping);
     }
@@ -136,19 +137,23 @@ $("#province").on("change", function (e) {
     }
 });
 
-$("#city").on("change", function (e) {
-    e.preventDefault();
+$("#city").on("click", function (e) {
+    if ($(this).val() != "0") {
+        setCity();
+    }
+});
 
+function setCity() {
     product_id = $("#quantity").attr("data-productId");
-    destinasi = $(this).val();
+    destinasi = $("#city").val();
     quantity = $("#quantity").val();
 
     setOngkir({
         destination: destinasi,
-        qty: quantity,
+        quantity: quantity,
         product_id: product_id,
     });
-});
+}
 
 function getCity(province_id) {
     var op = $("#city");
@@ -171,23 +176,30 @@ function getCity(province_id) {
 function setOngkir({
     origin = 42, // banyuwangi
     destination,
-    qty,
+    quantity,
     courier = "jne",
 }) {
-    console.log("getdata");
+    if (quantity == 0) {
+        refresh_data({
+            shipping: 0,
+            sub_total: 0,
+            total: 0,
+        });
+
+        return;
+    }
     destination = parseInt(destination);
     quantity = parseInt(quantity);
-    $.getJSON(
-        "/shipping/cost/" +
-            origin +
-            "/" +
-            destination +
-            "/" +
-            qty +
-            "/" +
-            courier,
-        function (data) {
-            console.log(data);
+
+    setVisible("#loading_transaction", true);
+    setVisible("#transaction", false);
+    console.log("jalan dahal");
+
+    $.ajax({
+        url: `/shipping/cost/${origin}/${destination}/${quantity}/${courier}`,
+        method: "get",
+        dataType: "json",
+        success: function (data) {
             var city = $("#city option:selected");
             var province = $("#province option:selected");
             $("#shipping_address").val(city.html() + ", " + province.html());
@@ -199,7 +211,9 @@ function setOngkir({
                 total: total,
             });
 
-            console.log("selesai");
-        }
-    );
+            setVisible("#transaction", true);
+            setVisible("#loading_transaction", false);
+            console.log("end");
+        },
+    });
 }

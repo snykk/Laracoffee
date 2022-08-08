@@ -6,6 +6,7 @@
 
 @push('scripts-dependencies')
 <script src="/js/make_order.js"></script>
+<script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
 @endpush
 
 @section('content')
@@ -330,37 +331,48 @@
       <div class="card position-sticky top-0">
         <div class="p-3 bg-light bg-opacity-10">
           <h6 class="card-title mb-3">Order Summary</h6>
-          <div class="d-flex justify-content-between mb-1 small">
-            <span>Subtotal</span> <span><span>Rp. </span> <span id="sub-total">0</span></span>
+          {{-- loading --}}
+          <div id="loading_transaction" style="display: none">
+            <lottie-player src="https://assets8.lottiefiles.com/packages/lf20_raiw2hpe.json" background="transparent"
+              speed="1" style="width: auto; height: 125px;" loop autoplay>
+            </lottie-player>
           </div>
-          <div class="d-flex justify-content-between mb-1 small">
-            <span>Delivery</span> <span><span>Rp. </span><span id="shipping" data-shippingCost="0">0</span></span>
-          </div>
-
-          <input type="hidden" name="coupon_used" id="coupon_used" value="0">
-
-          <div class="d-flex justify-content-between mb-1 small">
-            <span>Coupon
-              @if (auth()->user()->coupon == 0)
-              (no coupon)
-              @else
-              <span class="align-items-center">
-                <label for="gunakan_kupon">Use</label>
+          {{-- transaction resume --}}
+          <div id="transaction">
+            <div class="d-flex justify-content-between mb-1 small">
+              <span>Subtotal</span> <span><span>Rp. </span> <span id="sub-total">0</span></span>
+            </div>
+            <div class="d-flex justify-content-between mb-1 small">
+              <span>Delivery</span><span>
+                <span>Rp. </span><span id="shipping" data-shippingCost="0">0</span>
               </span>
-              <span>
-                <input id="gunakan_kupon" type="checkbox" onchange="changeStatesCoupon()">
-              </span>
-              )
-              @endif
-            </span><span><span></span><span id="coupon" data-valueCoupon="{{ auth()->user()->coupon }}">
-                {{ auth()->user()->coupon }} Coupon
-              </span></span>
+            </div>
+
+            <input type="hidden" name="coupon_used" id="coupon_used" value="0">
+
+            <div class="d-flex justify-content-between mb-1 small">
+              <span>Coupon
+                @if (auth()->user()->coupon == 0)
+                (no coupon)
+                @else
+                <span class="align-items-center">
+                  <label for="gunakan_kupon">Use</label>
+                </span>
+                <span>
+                  <input id="gunakan_kupon" type="checkbox" onchange="changeStatesCoupon()">
+                </span>
+                )
+                @endif
+              </span><span><span></span><span id="coupon" data-valueCoupon="{{ auth()->user()->coupon }}">
+                  {{ auth()->user()->coupon }} Coupon
+                </span></span>
+            </div>
+            @if (auth()->user()->coupon != 0)
+            <div class="d-flex justify-content-between mb-1 small text-danger">
+              <span>Coupon used</span> <span><span id="couponUsedShow">0 coupon</span></span>
+            </div>
+            @endif
           </div>
-          @if (auth()->user()->coupon != 0)
-          <div class="d-flex justify-content-between mb-1 small text-danger">
-            <span>Coupon used</span> <span><span id="couponUsedShow">0 coupon</span></span>
-          </div>
-          @endif
           <hr>
           <div class="d-flex justify-content-between mb-4 small">
             <span>TOTAL</span> <strong class="text-dark"><span>Rp. </span><span id="total">0</span></strong>
