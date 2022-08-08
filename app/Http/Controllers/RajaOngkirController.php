@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 class RajaOngkirController extends Controller
 {
-    function _ongkir_post($origin, $des, $qty, $cour)
+    function _ongkir_post($origin, $destination, $weight, $courier)
     {
         $curl = curl_init();
         curl_setopt_array($curl, array(
@@ -17,7 +17,7 @@ class RajaOngkirController extends Controller
             CURLOPT_TIMEOUT => 30,
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST => "POST",
-            CURLOPT_POSTFIELDS => "origin=" . $origin . "&destination=" . $des . "&weight=" . $qty . "&courier=" . $cour,
+            CURLOPT_POSTFIELDS => "origin=" . $origin . "&destination=" . $destination . "&weight=" . $weight . "&courier=" . $courier,
             CURLOPT_HTTPHEADER => array(
                 "content-type: application/x-www-form-urlencoded",
                 "key: " . env("API_RAJAONGKIR")
@@ -64,14 +64,15 @@ class RajaOngkirController extends Controller
     {
         $province = $this->_ongkir_get('province');
         $data = json_decode($province, true);
+        header("Content-Type: application/json");
         echo json_encode($data['rajaongkir']['results']);
     }
 
-    public function city($province = "")
+    public function city($province_id)
     {
-        if (!empty($province)) {
-            if (is_numeric($province)) {
-                $city = $this->_ongkir_get('city?province=' . $province);
+        if (!empty($province_id)) {
+            if (is_numeric($province_id)) {
+                $city = $this->_ongkir_get('city?province=' . $province_id);
                 $data = json_decode($city, true);
                 echo json_encode($data['rajaongkir']['results']);
             } else {
@@ -83,9 +84,10 @@ class RajaOngkirController extends Controller
     }
 
 
-    public function price($origin, $des, $qty, $cour)
+    public function cost($origin, $destination, $quantity, $courier)
     {
-        $price = $this->_ongkir_post($origin, $des, 300, $cour); // 300 gram/pieces for every product
+        $weight = (int)$quantity * 300; // 300 gram/pieces for every product
+        $price = $this->_ongkir_post($origin, $destination, $weight, $courier);
         $data = json_decode($price, true);
         echo json_encode($data['rajaongkir']["results"]);
     }

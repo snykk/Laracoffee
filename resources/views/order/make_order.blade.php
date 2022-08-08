@@ -39,12 +39,12 @@
                 <div class="form-group">
                   <label for="price">Price per pieces</label>
                   @if ($product->discount == 0)
-                  <input type="hidden" id="price" name="price" data-trueHarga="{{ old('price', $product->price) }}"
+                  <input type="hidden" id="price" name="price" data-truePrice="{{ old('price', $product->price) }}"
                     value="Rp.
                 {{ old('price', $product->price) }}" type="text" class="form-control" disabled>
                   @else
                   <input type="hidden" id="price" name="price"
-                    data-trueHarga="{{ old('price', ((100 - $product->discount)/100) *$product->price) }}"
+                    data-truePrice="{{ old('price', ((100 - $product->discount)/100) * $product->price) }}"
                     value="Rp. {{ old('price', ((100 - $product->discount)/100) *$product->price) }}" type="text"
                     class="form-control" disabled>
                   @endif
@@ -70,7 +70,7 @@
             </div>
             <div class="form-group col-2">
               <label for="quantity">Quantity</label>
-              <input id="quantity" name="quantity" data-idProduk="{{ $product->id }}"
+              <input id="quantity" name="quantity" data-productId="{{ $product->id }}"
                 value="{{ old('quantity', '0' ) }}" type="number" min="0"
                 class="form-control @error('quantity') is-invalid @enderror" onchange="myCounter()">
             </div>
@@ -83,16 +83,15 @@
               <div class="col-12">Destination</div>
               <div class="form-group col-7">
                 <select class="form-control  @error('province') is-invalid @enderror" id="province" name="province">
-                  <option value="{{ old('province', '0') }}" selected="selected">Select Province</option>
+                  <option value="0" selected="selected">Select Province</option>
                 </select>
                 @error('province')
                 <div class="text-danger">{{ $message }}</div>
                 @enderror
               </div>
               <div class="form-group col-5">
-                <select class="form-control  @error('quantity') is-invalid @enderror" id="select_kota" disabled
-                  name="city">
-                  <option value="{{ old('city', '0') }}" selected="selected">Select City</option>
+                <select class="form-control  @error('quantity') is-invalid @enderror" id="city" name="city" disabled>
+                  <option value="0" selected="selected">Select City</option>
                 </select>
                 @error('city')
                 <div class="text-danger">{{ $message }}</div>
@@ -101,6 +100,7 @@
             </div>
             <div class="form-group mb-3">
               <label for="address">Address Detail</label>
+              <input type="hidden" name="shipping_address" id="shipping_address">
               <input id="address" name="address" type="text" class="form-control @error('address') is-invalid @enderror"
                 value="{{ old('address', auth()->user()->address) }}">
               @error('address')
@@ -334,7 +334,7 @@
             <span>Subtotal</span> <span><span>Rp. </span> <span id="sub-total">0</span></span>
           </div>
           <div class="d-flex justify-content-between mb-1 small">
-            <span>Delivery</span> <span><span>Rp. </span><span id="ongkir" data-valueOngkir="0">0</span></span>
+            <span>Delivery</span> <span><span>Rp. </span><span id="shipping" data-shippingCost="0">0</span></span>
           </div>
 
           <input type="hidden" name="coupon_used" id="coupon_used" value="0">
@@ -348,17 +348,17 @@
                 <label for="gunakan_kupon">Use</label>
               </span>
               <span>
-                <input id="gunakan_kupon" type="checkbox" onchange="changeKuponStatus()">
+                <input id="gunakan_kupon" type="checkbox" onchange="changeStatesCoupon()">
               </span>
               )
               @endif
-            </span><span><span></span><span id="kupon" data-valueKupon="{{ auth()->user()->coupon }}">
+            </span><span><span></span><span id="coupon" data-valueCoupon="{{ auth()->user()->coupon }}">
                 {{ auth()->user()->coupon }} Coupon
               </span></span>
           </div>
           @if (auth()->user()->coupon != 0)
           <div class="d-flex justify-content-between mb-1 small text-danger">
-            <span>Coupon used</span> <span><span id="kuponUsedShow">0 coupon</span></span>
+            <span>Coupon used</span> <span><span id="couponUsedShow">0 coupon</span></span>
           </div>
           @endif
           <hr>

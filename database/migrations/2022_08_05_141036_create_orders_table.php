@@ -19,6 +19,7 @@ return new class extends Migration
             $table->integer("user_id");
             $table->integer("quantity");
             $table->string("address");
+            $table->string("shipping_address");
             $table->integer("total_price");
             $table->integer("payment_id");
             $table->integer("bank_id")->nullable();

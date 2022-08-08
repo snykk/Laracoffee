@@ -20,19 +20,23 @@ class OrderController extends Controller
 
     public function makeOrderPost(Request $request, Product $product)
     {
-
         $rules = [
             'address' => 'required|max:255',
             'payment_method' => 'required|numeric',
             'quantity' => 'required|numeric|gt:0|lt:' . $product->stock,
-            'total_price' => 'required|numeric|gte:0',
-            'coupon_used' => 'required|numeric|gte:0',
+            'province' => 'required|numeric|gt:0',
+            'city' => 'required|numeric|gt:0',
+            'total_price' => 'required|gt:0',
+            'shipping_address' => 'required',
+            'coupon_used' => 'required|gte:0'
         ];
+
 
         $message = [
             'payment_method.required' => 'Please select the payment method',
-            'quantity.lt' . $product->stock => '
-            sorry the current available stock is ' . $product->stock,
+            'province.gt' => 'Please select the province',
+            'city.gt' => 'Please select the city',
+            'quantity.lt' => 'sorry the current available stock is ' . $product->stock,
         ];
 
         if ($request->payment_method == 1) {
@@ -48,6 +52,7 @@ class OrderController extends Controller
                 "user_id" => auth()->user()->id,
                 "quantity" => $validatedData["quantity"],
                 "address" => $validatedData["address"],
+                "shipping_address" => $validatedData["shipping_address"],
                 "total_price" => $validatedData["total_price"],
                 "payment_id" => $validatedData["payment_method"],
                 "note_id" => ($validatedData["payment_method"] == 1) ? 2 : 1,
@@ -62,12 +67,10 @@ class OrderController extends Controller
             }
 
             Order::create($data);
-
             $message = "Orders has been created!";
 
             myFlasherBuilder(message: $message, success: true);
-
-            return redirect("/home");
+            return redirect("/order/order_data");
         } catch (\Illuminate\Database\QueryException $exception) {
             return abort(500);
         }

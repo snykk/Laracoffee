@@ -5,6 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RajaOngkirController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -55,6 +56,7 @@ Route::middleware(['auth'])->group(function () {
         Route::post("/profile/change_password", "changePasswordPost");
     });
 
+    // Product
     Route::controller(ProductController::class)->group(function () {
         Route::get("/product", "index");
         Route::get("/product/add_product", "addProductGet");
@@ -64,13 +66,20 @@ Route::middleware(['auth'])->group(function () {
         Route::get("/product/data/{id}", "getProductData");
     });
 
-
+    // Order
     Route::controller(OrderController::class)->group(function () {
         Route::get("/order/make_order/{product:id}", "makeOrderGet");
         Route::get("/order/order_data", "orderData");
         Route::get("/order/order_data/{status_id}", "orderDataFilter");
         Route::get("/order/data/{id}", "getOrderData");
         Route::post("/order/make_order/{product:id}", "makeOrderPost");
+    });
+
+    // Ongkir
+    Route::controller(RajaOngkirController::class)->group(function () {
+        Route::get("/shipping/province", "province");
+        Route::get("/shipping/city/{province_id}", "city");
+        Route::get("/shipping/cost/{origin}/{destination}/{quantity}/{courier}", "cost");
     });
 
     // Logout

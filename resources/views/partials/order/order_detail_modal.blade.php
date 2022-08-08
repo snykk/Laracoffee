@@ -7,7 +7,7 @@
         <h5 class="modal-title" id="OrderDetailModalLabel">Detail Order</h5>
         <button type="button" class="btn m-0 p-0 d-flex justify-content-center align-items-center"
           data-bs-dismiss="modal" aria-label="Close"><i class="fa fa-fw fa-solid fa-xmark"
-            style="color: white;font-size:1.5rem;"></i></button>
+            style="color: white;font-size:1.5rem; padding:0"></i></button>
       </div>
       <div class="modal-body detail">
         <div class="row g-0">
