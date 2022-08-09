@@ -70,11 +70,13 @@ Route::middleware(['auth'])->group(function () {
     Route::controller(OrderController::class)->group(function () {
         Route::get("/order/make_order/{product:id}", "makeOrderGet");
         Route::get("/order/order_data", "orderData");
+        Route::get("/order/order_history", "orderHistory");
         Route::get("/order/order_data/{status_id}", "orderDataFilter");
         Route::get("/order/data/{id}", "getOrderData");
         Route::post("/order/make_order/{product:id}", "makeOrderPost");
         Route::post("/order/cancel_order/{order:id}", "cancelOrder");
         Route::post("/order/reject_order/{order}/{product}", "rejectOrder");
+        Route::post("/order/end_order/{order}/{product}", "endOrder");
         Route::post("/order/approve_order/{order}/{product}", "approveOrder");
     });
 

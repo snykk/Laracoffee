@@ -136,15 +136,17 @@
                     <button class="btn btn-outline-danger" id="button_logout">cancel</button>
                   </form>
                 </div>
-                <div><em id="message" class="link-danger">Order has been canceled by user</em></div>
+                <div><em id="message" class="link-danger"></em></div>
                 <?php endif; ?>
 
                 <?php if (auth()->user()->id == 1) : ?>
                 <div class="d-flex justify-content-center align-items-center">
                   <a id="link_reject_order" data-bs-dismiss="modal" data-bs-toggle="modal" href="#ModalRejectOrder"
                     title="reject order"><button class="btn btn-outline-danger">reject</button></a>
-                  <a id="link_end_order" class="mx-2" title="end order"><button
-                      class="btn btn-outline-info">done</button></a>
+                  <form method="post" id="form_end_order" class="mx-2"> {{-- define form action using jquery --}}
+                    @csrf
+                    <button class="btn btn-outline-info" id="button_logout">done</button>
+                  </form>
                   <form method="post" id="form_approve_order"> {{-- define form action using jquery --}}
                     @csrf
                     <button class="btn btn-outline-success" id="button_logout">approve</button>

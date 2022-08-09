@@ -137,8 +137,10 @@ $("#province").on("change", function (e) {
     }
 });
 
+var currentCity = "0";
 $("#city").on("click", function (e) {
-    if ($(this).val() != "0") {
+    if ($(this).val() != currentCity) {
+        currentCity = $(this).val();
         setCity();
     }
 });

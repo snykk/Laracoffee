@@ -80,7 +80,11 @@ class OrderController extends Controller
     public function orderData()
     {
         $title = "Order Data";
-        $orders = Order::with("bank", "note", "payment", "user", "status", "product")->orderBy("id", "ASC")->get();
+        if (auth()->user()->role_id == 1) {
+            $orders = Order::with("bank", "note", "payment", "user", "status", "product")->where(["is_done" => "0"])->orderBy("id", "ASC")->get();
+        } else {
+            $orders = Order::with("bank", "note", "payment", "user", "status", "product")->where(["user_id", auth()->user()->id, "is_done" => "0"])->orderBy("id", "ASC")->get();
+        }
         $status = Status::all();
 
 
@@ -210,7 +214,7 @@ class OrderController extends Controller
         }
 
         if ($order->status_id == 3) {
-            $message = "Can't approve the order that have been rejected by admin";
+            $message = "Can't approve the order that have been rejected before";
             myFlasherBuilder(message: $message, failed: true);
 
             return redirect("/order/order_data");
@@ -254,5 +258,49 @@ class OrderController extends Controller
         myFlasherBuilder(message: $message, success: true);
 
         return redirect("/order/order_data");
+    }
+
+
+    public function endOrder(Order $order, Product $product)
+    {
+        if ($order->status->order_status != "approve") {
+            $message = "Order has not been approved by the admin!";
+            myFlasherBuilder(message: $message, failed: true);
+
+            return redirect("/order/order_data");
+        }
+
+        // ubah status di tabel pemesanan
+        $updated_data = [
+            "status_id" => 4,
+            "note_id" => $order->payment->payment_method == "COD" ? 1 : 4,
+            "is_done" => 1,
+            "refusal_reason" => null,
+        ];
+
+        $order->fill($updated_data);
+
+        if ($order->isDirty()) {
+            $order->save();
+        }
+
+        $message = "Order has been ended by admin";
+        myFlasherBuilder(message: $message, success: true);
+
+        return redirect("/order/order_history");
+    }
+
+
+    public function orderHistory()
+    {
+        $title = "History Data";
+        if (auth()->user()->role_id == 1) {
+            $orders = Order::with("bank", "note", "payment", "user", "status", "product")->where(["is_done" => "1"])->orderBy("id", "ASC")->get();
+        } else {
+            $orders = Order::with("bank", "note", "payment", "user", "status", "product")->where(["user_id" => auth()->user()->id, "is_done" => "1"])->orderBy("id", "ASC")->get();
+        }
+        $status = Status::all();
+
+        return view("/order/order_data", compact("title", "orders", "status"));
     }
 }

@@ -59,10 +59,19 @@ $("span.order-detail-link[title='order detail']").click(function (event) {
                 "/order/cancel_order/" + response["id"]
             );
 
-            // refusal reason form
+            // reject order form
             $("#form_reject_order").attr(
                 "action",
                 "/order/reject_order/" +
+                    response["id"] +
+                    "/" +
+                    response["product_id"]
+            );
+
+            // end order form
+            $("#form_end_order").attr(
+                "action",
+                "/order/end_order/" +
                     response["id"] +
                     "/" +
                     response["product_id"]
@@ -89,23 +98,38 @@ $("span.order-detail-link[title='order detail']").click(function (event) {
                 );
             }
 
-            // restrict fitur upload bukti untuk metode pembayaran COD
+            // restrict proof of transfer for COD payment method
             if (response["payment"]["payment_method"] == "COD") {
                 // menghilangkan element sesuai metode pembayaran
                 $("#modal_section_payment_proof").css("display", "none");
                 $("#row_bank").css("display", "none");
             } else {
-                // untuk memunculkan kembali element yang dihilangkan
+                // to restore undisplayed elements
                 $("#modal_section_payment_proof").css("display", "unset");
                 $("#row_bank").css("display", "table-row");
             }
 
+            // if order has been canceled by user
             if (response["status_id"] == 5) {
                 $("#link_edit_order").css("display", "none");
                 $("#form_cancel_order").css("display", "none");
+                $("#message").html("Order has been canceled by user");
                 $("#message").css("display", "unset");
             } else {
-                // untuk memunculkan kembali element yang dihilangkan
+                // to restore undisplayed elements
+                $("#link_edit_order").css("display", "unset");
+                $("#form_cancel_order").css("display", "unset");
+                $("#message").css("display", "none");
+            }
+
+            // if order has been rejected by admin
+            if (response["status_id"] == 3) {
+                $("#link_edit_order").css("display", "none");
+                $("#form_cancel_order").css("display", "none");
+                $("#message").html("Order has been rejected by admin");
+                $("#message").css("display", "unset");
+            } else {
+                // to restore undisplayed elements
                 $("#link_edit_order").css("display", "unset");
                 $("#form_cancel_order").css("display", "unset");
                 $("#message").css("display", "none");
