@@ -45,6 +45,20 @@ class UserSeeder extends Seeder
             'remember_token' => Str::random(30),
         ]);
 
+        User::create([
+            "fullname" => "Squidy",
+            "username" => "goodman",
+            "email" => "squidy@gmail.com",
+            "password" => Hash::make("1234"),
+            "image" => env("IMAGE_PROFILE"),
+            "phone" => "019292823382",
+            "gender" => "M",
+            "address" => "Small healt",
+            "role_id" => "2",
+            "coupon" => "0",
+            'remember_token' => Str::random(30),
+        ]);
+
         User::factory(5)->create();
     }
 }
