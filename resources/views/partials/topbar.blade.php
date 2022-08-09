@@ -24,13 +24,13 @@
         <li>
           <hr class="dropdown-divider" />
         </li>
-        <form action="/auth/logout" method="post" id="form_auth_logout">
-          @csrf
-          <button type="submit" class="dropdown-item auth_logout" style="cursor: pointer;"><i
-              class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400" style="margin-right: 10px;"></i>Logout</a>
+        <li>
+          <form action="/auth/logout" method="post" id="form_auth_logout">
+            @csrf
+            <button type="submit" class="dropdown-item auth_logout" style="cursor: pointer;"><i
+                class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400" style="margin-right: 10px;"></i>Logout</a>
+          </form>
+        </li>
     </li>
-    </form>
-  </ul>
-  </li>
   </ul>
 </nav>

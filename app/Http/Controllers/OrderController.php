@@ -2,9 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Order;
-use App\Models\Status;
-use App\Models\Product;
+use App\Models\{Order, Status, Product};
 use Illuminate\Http\Request;
 use Illuminate\Auth\Events\Failed;
 use Illuminate\Support\Facades\Auth;
@@ -149,6 +147,13 @@ class OrderController extends Controller
     {
         if ($request->refusal_reason == "") {
             $message = "Refusal reason cannot be empty!";
+
+            myFlasherBuilder(message: $message, failed: true);
+            return redirect("/order/order_data");
+        }
+
+        if ($order->status_id = 5) {
+            $message = "Order status is already canceled by user";
 
             myFlasherBuilder(message: $message, failed: true);
             return redirect("/order/order_data");
