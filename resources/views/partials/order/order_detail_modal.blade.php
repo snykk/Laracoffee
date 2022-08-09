@@ -123,14 +123,14 @@
               <div class="Produk">
                 <h1 style="font-size: 18px;">Produk</h1>
                 <img id="image_product_detail" width="150px">
-                <span class="d-block my-2" style="font-size: 14px;" id="nama_produk_detail"></span>
+                <span class="d-block my-2" style="font-size: 15px;" id="product_name_detail"></span>
                 <div class="d-flex justify-content-center align-items-cetner mb-3">
                   <div>Total Harga: Rp.</div>
                   <div style="margin-left:5px" id="total_price_detail"></div>
                 </div>
                 <?php if (auth()->user()->id == 2) : ?>
                 <div class="d-flex justify-content-center align-items-center">
-                  <a id="link_edit" title="ubah data pemesanan"><button class="btn btn-outline-dark">edit</button></a>
+                  <a id="link_edit_order" title="Edit order data"><button class="btn btn-outline-dark">edit</button></a>
                   <form method="post" class="ms-2" id="form_cancel_order"> {{-- define form action using jquery --}}
                     @csrf
                     <button class="btn btn-outline-danger" id="button_logout">cancel</button>
@@ -140,12 +140,14 @@
                 <?php endif; ?>
 
                 <?php if (auth()->user()->id == 1) : ?>
-                <a id="link_tolak" data-bs-dismiss="modal" data-bs-toggle="modal" href="#ModalPenolakan"
-                  title="tolak data pemesanan"><button class="btn btn-outline-danger mb-3">reject</button></a>
-                <a id="link_selesai" title="akhiri data pemesanan"><button
-                    class="btn btn-outline-info mb-3">done</button></a>
-                <a id="link_setujui" title="setujui data pemesanan"><button
-                    class="btn btn-outline-success mb-3">approve</button></a>
+                <div class="d-flex justify-content-center align-items-center">
+                  <a id="link_reject_order" data-bs-dismiss="modal" data-bs-toggle="modal" href="#ModalRejectOrder"
+                    title="reject order"><button class="btn btn-outline-danger mb-3">reject</button></a>
+                  <a id="link_end_order" class="mx-2" title="end order"><button
+                      class="btn btn-outline-info mb-3">done</button></a>
+                  <a id="link_approve_order" title="approve order"><button
+                      class="btn btn-outline-success mb-3">approve</button></a>
+                </div>
                 <?php endif; ?>
 
               </div>

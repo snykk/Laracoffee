@@ -6,6 +6,7 @@ use App\Models\Order;
 use App\Models\Status;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Auth\Events\Failed;
 use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
@@ -106,7 +107,7 @@ class OrderController extends Controller
     }
 
 
-    public function cancelOrder(Request $request, Order $order)
+    public function cancelOrder(Order $order)
     {
         $updated_data = [
             "status_id" => 5,
@@ -129,7 +130,7 @@ class OrderController extends Controller
     }
 
 
-    public function couponBack(Order $order)
+    private function couponBack(Order $order)
     {
         // return the user's coupon if using a coupon
         $user = Auth::user();
@@ -138,6 +139,58 @@ class OrderController extends Controller
 
         $user->coupon = $new_coupon;
 
-        $user->save();
+        if ($user->isDirty()) {
+            $user->save();
+        }
+    }
+
+
+    public function rejectOrder(Request $request, Order $order, Product $product)
+    {
+        if ($request->refusal_reason == "") {
+            $message = "Refusal reason cannot be empty!";
+
+            myFlasherBuilder(message: $message, failed: true);
+            return redirect("/order/order_data");
+        }
+
+        if ($order->status_id == 3) {
+            $message = "Order status is already rejected";
+
+            myFlasherBuilder(message: $message, failed: true);
+            return redirect("/order/order_data");
+        }
+
+        $updated_data = [
+            "status_id" => 3,
+            "refusal_reason" => $request->refusal_reason
+        ];
+
+        $order->fill($updated_data);
+
+        if ($order->isDirty()) {
+            $order->save();
+
+            if ($order->status_id == 1) {
+                $this->stockReturn($order, $product);
+            }
+
+            $this->couponBack($order);
+
+            $message = "Order rejected successfully!";
+
+            myFlasherBuilder(message: $message, success: true);
+            return redirect("/order/order_data");
+        }
+    }
+
+
+    private function stockReturn(Order $order, Product $product)
+    {
+        $product->stock = $product->stock + $order->quantity;
+
+        if ($product->isDirty()) {
+            $product->save();
+        }
     }
 }

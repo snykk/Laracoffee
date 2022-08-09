@@ -10,6 +10,7 @@
 
 @push('modals-dependencies')
 @include('/partials/order/order_detail_modal')
+@include('/partials/order/reject_order_modal')
 @endpush
 
 @section('content')

@@ -39,7 +39,7 @@ $("span.order-detail-link[title='order detail']").click(function (event) {
                 response["bank"] ? response["bank"]["account_number"] : ""
             );
             $("#notes_transaction_detail").html(
-                response.alasan_penolakan
+                response["refusal_reason"]
                     ? response["refusal_reason"]
                     : response["note"]["order_notes"]
             );
@@ -48,6 +48,7 @@ $("span.order-detail-link[title='order detail']").click(function (event) {
                 "src",
                 "/storage/" + response["transaction_doc"]
             );
+            $("#product_name_detail").html(response["product"]["product_name"]);
             $("#image_product_detail").attr(
                 "src",
                 "/storage/" + response["product"]["image"]
@@ -56,6 +57,12 @@ $("span.order-detail-link[title='order detail']").click(function (event) {
             $("#form_cancel_order").attr(
                 "action",
                 "/order/cancel_order/" + response["id"]
+            );
+
+            // refusal reason form
+            $("#form_reject_order").attr(
+                "action",
+                "/order/reject_order/" + response["id"]
             );
 
             if (response["coupon_used"] != null) {
@@ -82,12 +89,12 @@ $("span.order-detail-link[title='order detail']").click(function (event) {
             }
 
             if (response["status_id"] == 5) {
-                $("#link_edit").css("display", "none");
+                $("#link_edit_order").css("display", "none");
                 $("#form_cancel_order").css("display", "none");
                 $("#message").css("display", "unset");
             } else {
                 // untuk memunculkan kembali element yang dihilangkan
-                $("#link_edit").css("display", "unset");
+                $("#link_edit_order").css("display", "unset");
                 $("#form_cancel_order").css("display", "unset");
                 $("#message").css("display", "none");
             }
