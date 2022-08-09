@@ -73,6 +73,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get("/order/order_data/{status_id}", "orderDataFilter");
         Route::get("/order/data/{id}", "getOrderData");
         Route::post("/order/make_order/{product:id}", "makeOrderPost");
+        Route::post("/order/cancel_order/{order:id}", "cancelOrder");
     });
 
     // Ongkir

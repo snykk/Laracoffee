@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Order;
-use App\Models\Product;
 use App\Models\Status;
+use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
 {
@@ -102,5 +103,41 @@ class OrderController extends Controller
     {
         $order = Order::with("product", "user", "note", "status", "bank", "payment")->find($id);
         return $order;
+    }
+
+
+    public function cancelOrder(Request $request, Order $order)
+    {
+        $updated_data = [
+            "status_id" => 5,
+            "note_id" => 6,
+            "refusal_reason" => null,
+        ];
+
+        $order->fill($updated_data);
+
+        if ($order->isDirty()) {
+            $order->save();
+
+            $this->couponBack($order);
+
+            $message = "Your order has been canceled!";
+
+            myFlasherBuilder(message: $message, success: true);
+            return redirect("/order/order_data");
+        }
+    }
+
+
+    public function couponBack(Order $order)
+    {
+        // return the user's coupon if using a coupon
+        $user = Auth::user();
+
+        $new_coupon = (int)$user->coupon + (int)$order->coupon_used;
+
+        $user->coupon = $new_coupon;
+
+        $user->save();
     }
 }

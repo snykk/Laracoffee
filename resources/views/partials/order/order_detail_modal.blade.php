@@ -129,20 +129,23 @@
                   <div style="margin-left:5px" id="total_price_detail"></div>
                 </div>
                 <?php if (auth()->user()->id == 2) : ?>
-                <a id="link_ubah" title="ubah data pemesanan"><button
-                    class="btn btn-outline-dark mb-3">ubah</button></a>
-                <a id="link_batalkan" title="batalkan pemesanan"><button id="btn_batalkan_pemesanan"
-                    class="btn btn-outline-danger mb-3">batalkan</button></a>
-                <em id="message" class="link-danger"></em>
+                <div class="d-flex justify-content-center align-items-center">
+                  <a id="link_edit" title="ubah data pemesanan"><button class="btn btn-outline-dark">edit</button></a>
+                  <form method="post" class="ms-2" id="form_cancel_order"> {{-- define form action using jquery --}}
+                    @csrf
+                    <button class="btn btn-outline-danger" id="button_logout">cancel</button>
+                  </form>
+                </div>
+                <div><em id="message" class="link-danger">Order has been canceled by user</em></div>
                 <?php endif; ?>
 
                 <?php if (auth()->user()->id == 1) : ?>
                 <a id="link_tolak" data-bs-dismiss="modal" data-bs-toggle="modal" href="#ModalPenolakan"
-                  title="tolak data pemesanan"><button class="btn btn-outline-danger mb-3">ditolak</button></a>
+                  title="tolak data pemesanan"><button class="btn btn-outline-danger mb-3">reject</button></a>
                 <a id="link_selesai" title="akhiri data pemesanan"><button
-                    class="btn btn-outline-info mb-3">selesai</button></a>
+                    class="btn btn-outline-info mb-3">done</button></a>
                 <a id="link_setujui" title="setujui data pemesanan"><button
-                    class="btn btn-outline-success mb-3">setujui</button></a>
+                    class="btn btn-outline-success mb-3">approve</button></a>
                 <?php endif; ?>
 
               </div>

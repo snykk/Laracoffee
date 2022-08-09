@@ -53,6 +53,10 @@ $("span.order-detail-link[title='order detail']").click(function (event) {
                 "/storage/" + response["product"]["image"]
             );
             $("#link_bukti_transfer").attr("data-id", response["id"]);
+            $("#form_cancel_order").attr(
+                "action",
+                "/order/cancel_order/" + response["id"]
+            );
 
             if (response["coupon_used"] != null) {
                 $("#content-kuponUsed").html(
@@ -77,7 +81,19 @@ $("span.order-detail-link[title='order detail']").click(function (event) {
                 $("#row_bank").css("display", "table-row");
             }
 
+            if (response["status_id"] == 5) {
+                $("#link_edit").css("display", "none");
+                $("#form_cancel_order").css("display", "none");
+                $("#message").css("display", "unset");
+            } else {
+                // untuk memunculkan kembali element yang dihilangkan
+                $("#link_edit").css("display", "unset");
+                $("#form_cancel_order").css("display", "unset");
+                $("#message").css("display", "none");
+            }
+
             $("#OrderDetailModal").modal("show");
+            setVisible("#loading", false);
         },
     });
 });
