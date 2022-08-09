@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\{Order, Status, Product};
 use Illuminate\Http\Request;
 use Illuminate\Auth\Events\Failed;
 use Illuminate\Support\Facades\Auth;
+use App\Models\{Order, Status, Product, Role, Transaction, User};
 
 class OrderController extends Controller
 {
@@ -23,7 +23,7 @@ class OrderController extends Controller
         $rules = [
             'address' => 'required|max:255',
             'payment_method' => 'required|numeric',
-            'quantity' => 'required|numeric|gt:0|lt:' . $product->stock,
+            'quantity' => 'required|numeric|gt:0|lte:' . $product->stock,
             'province' => 'required|numeric|gt:0',
             'city' => 'required|numeric|gt:0',
             'total_price' => 'required|gt:0',
@@ -36,7 +36,7 @@ class OrderController extends Controller
             'payment_method.required' => 'Please select the payment method',
             'province.gt' => 'Please select the province',
             'city.gt' => 'Please select the city',
-            'quantity.lt' => 'sorry the current available stock is ' . $product->stock,
+            'quantity.lte' => 'sorry the current available stock is ' . $product->stock,
         ];
 
         if ($request->payment_method == 1) {
@@ -80,10 +80,10 @@ class OrderController extends Controller
     public function orderData()
     {
         $title = "Order Data";
-        if (auth()->user()->role_id == 1) {
-            $orders = Order::with("bank", "note", "payment", "user", "status", "product")->where(["is_done" => "0"])->orderBy("id", "ASC")->get();
+        if (auth()->user()->role_id == Role::ADMIN_ID) {
+            $orders = Order::with("bank", "note", "payment", "user", "status", "product")->where(["is_done" => 0])->orderBy("id", "ASC")->get();
         } else {
-            $orders = Order::with("bank", "note", "payment", "user", "status", "product")->where(["user_id", auth()->user()->id, "is_done" => "0"])->orderBy("id", "ASC")->get();
+            $orders = Order::with("bank", "note", "payment", "user", "status", "product")->where(["user_id" => auth()->user()->id, "is_done" => 0])->orderBy("id", "ASC")->get();
         }
         $status = Status::all();
 
@@ -270,7 +270,7 @@ class OrderController extends Controller
             return redirect("/order/order_data");
         }
 
-        // ubah status di tabel pemesanan
+        // change order status
         $updated_data = [
             "status_id" => 4,
             "note_id" => $order->payment->payment_method == "COD" ? 1 : 4,
@@ -284,6 +284,28 @@ class OrderController extends Controller
             $order->save();
         }
 
+        $point_rules = [
+            "1" => 3,
+            "2" => 4,
+            "3" => 5
+        ];
+
+        // add point to user
+        $user = User::find($order->user_id);
+        $point_total = ($point_rules[$product->id] * (int)$order->quantity) + $user->point;
+        $user->point = $point_total;
+        $user->save();
+
+        $transactional_data = [
+            "title" => "product sale",
+            "description" => "sales of {$order->quantity} unit of product {$product->product_name}",
+            "income" => $order->total_price,
+            "outcome" => null,
+        ];
+
+        // add transactional data
+        Transaction::create($transactional_data);
+
         $message = "Order has been ended by admin";
         myFlasherBuilder(message: $message, success: true);
 
@@ -294,10 +316,10 @@ class OrderController extends Controller
     public function orderHistory()
     {
         $title = "History Data";
-        if (auth()->user()->role_id == 1) {
-            $orders = Order::with("bank", "note", "payment", "user", "status", "product")->where(["is_done" => "1"])->orderBy("id", "ASC")->get();
+        if (auth()->user()->role_id == Role::ADMIN_ID) {
+            $orders = Order::with("bank", "note", "payment", "user", "status", "product")->where(["is_done" => 1])->orderBy("id", "ASC")->get();
         } else {
-            $orders = Order::with("bank", "note", "payment", "user", "status", "product")->where(["user_id" => auth()->user()->id, "is_done" => "1"])->orderBy("id", "ASC")->get();
+            $orders = Order::with("bank", "note", "payment", "user", "status", "product")->where(["user_id" => auth()->user()->id, "is_done" => 1])->orderBy("id", "ASC")->get();
         }
         $status = Status::all();
 

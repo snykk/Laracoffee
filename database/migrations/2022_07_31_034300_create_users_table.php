@@ -25,6 +25,7 @@ return new class extends Migration
             $table->char('gender');
             $table->string('address');
             $table->integer('coupon');
+            $table->integer('point');
             $table->rememberToken();
             $table->timestamps();
         });

@@ -26,8 +26,9 @@ class UserSeeder extends Seeder
             "phone" => "08123456789123",
             "gender" => "M",
             "address" => "Shell road number 10",
-            "role_id" => "1",
-            "coupon" => "0",
+            "role_id" => 1,
+            "coupon" => 0,
+            "point" => 0,
             'remember_token' => Str::random(30),
         ]);
 
@@ -40,8 +41,9 @@ class UserSeeder extends Seeder
             "phone" => "082918391823",
             "gender" => "M",
             "address" => "Shell road number 18",
-            "role_id" => "2",
-            "coupon" => "0",
+            "role_id" => 2,
+            "coupon" => 0,
+            "point" => 0,
             'remember_token' => Str::random(30),
         ]);
 
@@ -54,8 +56,9 @@ class UserSeeder extends Seeder
             "phone" => "019292823382",
             "gender" => "M",
             "address" => "Small healt",
-            "role_id" => "2",
-            "coupon" => "0",
+            "role_id" => 2,
+            "coupon" => 0,
+            "point" => 0,
             'remember_token' => Str::random(30),
         ]);
 

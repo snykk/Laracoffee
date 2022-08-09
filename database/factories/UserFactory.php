@@ -31,6 +31,7 @@ class UserFactory extends Factory
             'address' => fake()->address(),
             'role_id' => 2,
             'coupon' => 0,
+            'point' => 0,
             'remember_token' => Str::random(30),
         ];
     }
