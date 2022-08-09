@@ -142,11 +142,13 @@
                 <?php if (auth()->user()->id == 1) : ?>
                 <div class="d-flex justify-content-center align-items-center">
                   <a id="link_reject_order" data-bs-dismiss="modal" data-bs-toggle="modal" href="#ModalRejectOrder"
-                    title="reject order"><button class="btn btn-outline-danger mb-3">reject</button></a>
+                    title="reject order"><button class="btn btn-outline-danger">reject</button></a>
                   <a id="link_end_order" class="mx-2" title="end order"><button
-                      class="btn btn-outline-info mb-3">done</button></a>
-                  <a id="link_approve_order" title="approve order"><button
-                      class="btn btn-outline-success mb-3">approve</button></a>
+                      class="btn btn-outline-info">done</button></a>
+                  <form method="post" id="form_approve_order"> {{-- define form action using jquery --}}
+                    @csrf
+                    <button class="btn btn-outline-success" id="button_logout">approve</button>
+                  </form>
                 </div>
                 <?php endif; ?>
 

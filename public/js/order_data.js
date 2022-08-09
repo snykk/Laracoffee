@@ -62,7 +62,19 @@ $("span.order-detail-link[title='order detail']").click(function (event) {
             // refusal reason form
             $("#form_reject_order").attr(
                 "action",
-                "/order/reject_order/" + response["id"]
+                "/order/reject_order/" +
+                    response["id"] +
+                    "/" +
+                    response["product_id"]
+            );
+
+            // approve order form
+            $("#form_approve_order").attr(
+                "action",
+                "/order/approve_order/" +
+                    response["id"] +
+                    "/" +
+                    response["product_id"]
             );
 
             if (response["coupon_used"] != null) {

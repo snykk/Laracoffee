@@ -152,7 +152,7 @@ class OrderController extends Controller
             return redirect("/order/order_data");
         }
 
-        if ($order->status_id = 5) {
+        if ($order->status_id == 5) {
             $message = "Order status is already canceled by user";
 
             myFlasherBuilder(message: $message, failed: true);
@@ -174,11 +174,11 @@ class OrderController extends Controller
         $order->fill($updated_data);
 
         if ($order->isDirty()) {
-            $order->save();
-
-            if ($order->status_id == 1) {
+            if ($order->getOriginal("status_id") == 1) {
                 $this->stockReturn($order, $product);
             }
+
+            $order->save();
 
             $this->couponBack($order);
 
@@ -197,5 +197,62 @@ class OrderController extends Controller
         if ($product->isDirty()) {
             $product->save();
         }
+    }
+
+
+    public function approveOrder(Order $order, Product $product)
+    {
+        if ($order->status_id == 1) {
+            $message = "Order status is already approved by admin";
+            myFlasherBuilder(message: $message, failed: true);
+
+            return redirect("/order/order_data");
+        }
+
+        if ($order->status_id == 3) {
+            $message = "Can't approve the order that have been rejected by admin";
+            myFlasherBuilder(message: $message, failed: true);
+
+            return redirect("/order/order_data");
+        }
+
+        if ($order->transaction_doc == env("IMAGE_PROOF")) {
+            $message = "No transfer proof uploaded!";
+            myFlasherBuilder(message: $message, failed: true);
+
+            return redirect("/order/order_data");
+        }
+
+        if ($product->stock - $order->quantity < 0) {
+            $message = "Quantity order is out of stock";
+            myFlasherBuilder(message: $message, failed: true);
+
+            return redirect("/order/order_data");
+        }
+
+        // Approve order
+        $updated_data = [
+            "status_id" => 1,
+            "refusal_reason" => null,
+            "note_id" => ($order->payment_id == 1) ? 4 : 1,
+        ];
+
+        $order->fill($updated_data);
+
+        if ($order->isDirty()) {
+            $order->save();
+        }
+
+        // Reduce product stock
+        $product->stock = $product->stock - $order->quantity;
+
+        if ($product->isDirty()) {
+            $product->save();
+        }
+
+        $message = "Order approved successfully!";
+        myFlasherBuilder(message: $message, success: true);
+
+        return redirect("/order/order_data");
     }
 }
