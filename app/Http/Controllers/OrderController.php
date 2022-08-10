@@ -102,9 +102,9 @@ class OrderController extends Controller
     }
 
 
-    public function getOrderData($id)
+    public function getOrderData(Order $order)
     {
-        $order = Order::with("product", "user", "note", "status", "bank", "payment")->find($id);
+        $order->load("product", "user", "note", "status", "bank", "payment");
         return $order;
     }
 
@@ -215,6 +215,13 @@ class OrderController extends Controller
 
         if ($order->status_id == 3) {
             $message = "Can't approve the order that have been rejected before";
+            myFlasherBuilder(message: $message, failed: true);
+
+            return redirect("/order/order_data");
+        }
+
+        if ($order->status_id == 5) {
+            $message = "Can't approve the order that have been canceled by user";
             myFlasherBuilder(message: $message, failed: true);
 
             return redirect("/order/order_data");

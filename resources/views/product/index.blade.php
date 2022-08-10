@@ -22,7 +22,7 @@
         @endif
 
         <h5 class="section-title h1">Our Product</h5>
-        @can('is_admin')
+        @can('add_product',App\Models\Product::class)
         <div class="d-flex align-items-end flex-column mb-4">
             <a style="text-decoration: none;" href="/product/add_product">
                 <div class="text-right button-kemren mr-lg-5 mr-sm-3">pe</div>
@@ -64,10 +64,11 @@
                                     <a href=""><button class="btn btn-primary btn-sm ubah">Review</button></a>
 
                                     <!-- [admin] ubah -->
-                                    @can('is_admin')
+                                    @can('edit_product',App\Models\Product::class)
                                     <a href="/product/edit_product/{{ $row->id }}"><button
                                           class="btn btn-primary btn-sm ubah">Edit</button></a>
-                                    @else
+                                    @endcan
+                                    @can('create_order',App\Models\Order::class)
                                     <a href="/order/make_order/{{ $row->id }}"><button
                                           class="btn btn-primary btn-sm ubah">Buy</button></a>
                                     @endcan

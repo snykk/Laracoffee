@@ -59,25 +59,31 @@ Route::middleware(['auth'])->group(function () {
     // Product
     Route::controller(ProductController::class)->group(function () {
         Route::get("/product", "index");
-        Route::get("/product/add_product", "addProductGet");
-        Route::get("/product/edit_product/{product:id}", "editProductGet");
-        Route::post("/product/add_product", "addProductPost");
-        Route::post("/product/edit_product/{product:id}", "editProductPost");
         Route::get("/product/data/{id}", "getProductData");
+
+        // admin only
+        Route::get("/product/add_product", "addProductGet")->can("add_product", App\Models\Product::class);
+        Route::get("/product/edit_product/{product:id}", "editProductGet")->can("edit_product", App\Models\Product::class);
+        Route::post("/product/add_product", "addProductPost")->can("add_product", App\Models\Product::class);
+        Route::post("/product/edit_product/{product:id}", "editProductPost")->can("edit_product", App\Models\Product::class);
     });
 
     // Order
     Route::controller(OrderController::class)->group(function () {
-        Route::get("/order/make_order/{product:id}", "makeOrderGet");
         Route::get("/order/order_data", "orderData");
         Route::get("/order/order_history", "orderHistory");
         Route::get("/order/order_data/{status_id}", "orderDataFilter");
-        Route::get("/order/data/{id}", "getOrderData");
-        Route::post("/order/make_order/{product:id}", "makeOrderPost");
-        Route::post("/order/cancel_order/{order:id}", "cancelOrder");
-        Route::post("/order/reject_order/{order}/{product}", "rejectOrder");
-        Route::post("/order/end_order/{order}/{product}", "endOrder");
-        Route::post("/order/approve_order/{order}/{product}", "approveOrder");
+        Route::get("/order/data/{order}", "getOrderData")->can("my_real_order", "order");
+
+        // customer only
+        Route::get("/order/make_order/{product:id}", "makeOrderGet")->can("create_order", App\Models\Order::class);
+        Route::post("/order/make_order/{product:id}", "makeOrderPost")->can("create_order", App\Models\Order::class);
+        Route::post("/order/cancel_order/{order}", "cancelOrder")->can("cancel_order", "order");
+
+        // admin only
+        Route::post("/order/reject_order/{order}/{product}", "rejectOrder")->can("reject_order", App\Models\Order::class);
+        Route::post("/order/end_order/{order}/{product}", "endOrder")->can("end_order", App\Models\Order::class);
+        Route::post("/order/approve_order/{order}/{product}", "approveOrder")->can("approve_order", App\Models\Order::class);
     });
 
     // Ongkir

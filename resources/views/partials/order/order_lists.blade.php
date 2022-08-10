@@ -40,8 +40,7 @@
 
         @if (isset($row->product_id) && auth()->user()->id == 2 && $row->is_done == 1)
         <div>
-          <a href="<?= base_url("ulasan?id_produk=") . $row[" id_produk"]; ?>" class="link-info"
-            style="text-decoration: none; font-size:0.9rem;">
+          <a href="/order/rewiew/" class="link-info" style="text-decoration: none; font-size:0.9rem;">
             Review Now!
           </a>
         </div>
