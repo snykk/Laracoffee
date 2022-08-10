@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Auth\Events\Failed;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\{Auth, Storage, Validator};
 use App\Models\{Order, Status, Product, Role, Transaction, User};
 
 class OrderController extends Controller
@@ -331,5 +331,43 @@ class OrderController extends Controller
         $status = Status::all();
 
         return view("/order/order_data", compact("title", "orders", "status"));
+    }
+
+
+    public function getProofOrder(Order $order)
+    {
+        return  $order;
+    }
+
+
+    public function uploadProof(Request $request, Order $order)
+    {
+        $validator = Validator::make($request->all(), [
+            'old_image_proof' => 'required',
+            'image_upload_proof' => 'required|image|max:2048',
+        ]);
+
+        if ($validator->fails()) {
+            $message = "Failed when upload an image";
+            myFlasherBuilder(message: $message, failed: true);
+
+            return redirect("/order/order_data");
+        }
+
+        if ($request->file("image_upload_proof")) {
+            if ($validator->validated()["old_image_proof"] != env("IMAGE_PROOF")) {
+                Storage::delete($validator->validated()["old_image_proof"]);
+            }
+
+            $new_image = $request->file("image_upload_proof")->store("proof");
+        }
+
+        $order->transaction_doc = $new_image;
+        $order->save();
+
+        $message = "Proof transfer uploaded successfully";
+        myFlasherBuilder(message: $message, success: true);
+
+        return redirect("/order/order_data");
     }
 }

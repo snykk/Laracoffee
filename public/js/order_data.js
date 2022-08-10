@@ -146,3 +146,75 @@ const setVisible = (elementOrSelector, visible) =>
         ? document.querySelector(elementOrSelector)
         : elementOrSelector
     ).style.display = visible ? "block" : "none");
+
+$("a.uploadProof[title='Upload Transfer Proof']").click(function (event) {
+    setVisible("#loading", true);
+    var id = $(this).attr("data-id");
+
+    $.ajax({
+        url: "/order/getProof/" + id,
+        method: "get",
+        dataType: "json",
+        success: function (response) {
+            $("#form_upload_proof").attr(
+                "action",
+                "/order/upload_proof/" + response["id"]
+            );
+            $("#old_image_proof").val(
+                "/storage/" + response["transaction_doc"]
+            );
+
+            $("#image_review_upload").attr(
+                "src",
+                response["transaction_doc"] !=
+                    "proof/fmg7fWMmb7mNvnHHA70IlRXxRF4wsD9J6dQAUZkV.png"
+                    ? "/storage/" + response["transaction_doc"]
+                    : "/storage/" +
+                          "proof/fmg7fWMmb7mNvnHHA70IlRXxRF4wsD9J6dQAUZkV.png"
+            );
+            $("#message_upload_proof").html(
+                $("#image_review_upload").attr("src") !=
+                    "/storage/proof/fmg7fWMmb7mNvnHHA70IlRXxRF4wsD9J6dQAUZkV.png"
+                    ? "image selected"
+                    : "no selected image"
+            );
+
+            if (response["status_id"] == "2") {
+                console.log("halo");
+                $("#ProofUploadModal").modal("show");
+            } else {
+                Swal.fire("Ooops something went wrong");
+            }
+
+            setVisible("#loading", false);
+        },
+    });
+});
+
+$("#image_upload_proof").on("change", function previewImage() {
+    const img = document.getElementById("image_upload_proof");
+    const imgPreview = document.getElementById("image_review_upload");
+
+    const oFReader = new FileReader();
+    oFReader.readAsDataURL(img.files[0]);
+
+    oFReader.onload = function (oFREvent) {
+        imgPreview.src = oFREvent.target.result;
+        $("#message_upload_proof").css("color", "black");
+        $("#message_upload_proof").html("image selected");
+    };
+});
+
+$("#form_upload_proof").submit(function (event) {
+    if (
+        $("#old_image_proof").val() != $("#image_upload_proof").val() &&
+        $("#image_upload_proof").val() != ""
+    ) {
+        return;
+    }
+
+    $("#message_upload_proof").html("Please select an image");
+    $("#message_upload_proof").css("color", "red");
+
+    event.preventDefault();
+});

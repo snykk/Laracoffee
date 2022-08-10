@@ -28,10 +28,7 @@
 
         @if ($row->payment->payment_method == "Transfer Bank" && auth()->user()->id == 2)
         <small>Action </small>
-        <a data-bs-placement="top" class="iniUploadBukti" data-bs-toggle="modal" data-id="{{ $row->id }}"
-          data-bs-target="
-                {{  ($row->status_id !=2) ? " #ModalUploadBuktiDitolak" : "#ModalUploadBukti" ; }}"
-          title="Sent transfer evidance">
+        <a data-bs-placement="top" class="uploadProof" title="Upload Transfer Proof" data-id="{{ $row->id }}">
           <div class="btn btn-danger btn-xs fa fa-fw fa-camera label-bukti"
             style="font-size: 0.75rem;padding:0.3rem; color:white">
           </div>

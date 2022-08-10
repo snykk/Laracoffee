@@ -49,8 +49,15 @@ class OrderPolicy
         return $user->role_id == Role::ADMIN_ID;
     }
 
+
     public function my_real_order(User $user, Order $order)
     {
         return  $user->role_id == Role::ADMIN_ID || ($user->role_id == Role::CUSTOMER_ID && $order->user_id == $user->id);
+    }
+
+
+    public function upload_proof(User $user, Order $order)
+    {
+        return $user->role_id == Role::CUSTOMER_ID && $order->user_id == $user->id;
     }
 }

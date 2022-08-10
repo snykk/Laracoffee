@@ -74,11 +74,14 @@ Route::middleware(['auth'])->group(function () {
         Route::get("/order/order_history", "orderHistory");
         Route::get("/order/order_data/{status_id}", "orderDataFilter");
         Route::get("/order/data/{order}", "getOrderData")->can("my_real_order", "order");
+        Route::get("/order/getProof/{order}", "getProofOrder")->can("my_real_order", "order");
+
 
         // customer only
         Route::get("/order/make_order/{product:id}", "makeOrderGet")->can("create_order", App\Models\Order::class);
         Route::post("/order/make_order/{product:id}", "makeOrderPost")->can("create_order", App\Models\Order::class);
         Route::post("/order/cancel_order/{order}", "cancelOrder")->can("cancel_order", "order");
+        Route::post("/order/upload_proof/{order}", "uploadProof")->can("upload_proof", "order");
 
         // admin only
         Route::post("/order/reject_order/{order}/{product}", "rejectOrder")->can("reject_order", App\Models\Order::class);
