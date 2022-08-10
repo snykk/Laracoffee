@@ -111,6 +111,12 @@ class OrderController extends Controller
 
     public function cancelOrder(Order $order)
     {
+        if ($order->status_id == 5) {
+            $message = "Your order is already canceled!";
+
+            myFlasherBuilder(message: $message, failed: true);
+            return redirect("/order/order_data");
+        }
         $updated_data = [
             "status_id" => 5,
             "note_id" => 6,
@@ -369,5 +375,82 @@ class OrderController extends Controller
         myFlasherBuilder(message: $message, success: true);
 
         return redirect("/order/order_data");
+    }
+
+
+    public function editOrderGet(Order $order)
+    {
+        if ($order->status_id == 5) {
+            $message = "Action failed, order has been canceled";
+            myFlasherBuilder(message: $message, failed: true);
+
+            return redirect("/order/edit_order/" . $order->id);
+        }
+
+        $title = "Edit Order";
+        $order->load("product", "user", "note", "status", "bank", "payment");
+
+        return view("/order/edit_order", compact("title", "order"));
+    }
+
+    public function editOrderPost(Request $request, Order $order)
+    {
+        $rules = [
+            'address' => 'required|max:255',
+            'quantity' => 'required|numeric|gt:0|lte:' . $order->product->stock,
+            'province' => 'required|numeric|gt:0',
+            'city' => 'required|numeric|gt:0',
+            'total_price' => 'required|gt:0',
+            'shipping_address' => 'required',
+            'coupon_used' => 'required|gte:0'
+        ];
+
+
+        $message = [
+            'payment_method.required' => 'Please select the payment method',
+            'province.gt' => 'Please select the province',
+            'city.gt' => 'Please select the city',
+            'quantity.lte' => 'sorry the current available stock is ' . $order->product->stock,
+        ];
+
+        if ($request->payment_method == 1) {
+            $rules['bank_id'] = 'required|numeric';
+            $message['bank_id.required'] = 'Please select the bank';
+        }
+
+        $validatedData = $request->validate($rules, $message);
+
+        $order->fill($validatedData);
+
+        if ($order->isDirty()) {
+            $order->save();
+
+            $message = "Order has beed updated!";
+            myFlasherBuilder(message: $message, success: true);
+
+            return redirect("/order/order_data");
+        } else {
+            $message = "Action failed, no changes detected";
+            myFlasherBuilder(message: $message, failed: true);
+
+            return redirect("/order/edit_order/" . $order->id);
+        }
+    }
+
+
+    public function deleteProof(Order $order)
+    {
+        if ($order->transaction_doc != env("IMAGE_PROOF")) {
+            Storage::delete($order->transaction_doc);
+        }
+
+        $order->transaction_doc = env("IMAGE_PROOF");
+
+        $order->save();
+
+        $message = "Transfer proof removed successfully!";
+        myFlasherBuilder(message: $message, success: true);
+
+        return redirect("/order/edit_order/" . $order->id);
     }
 }

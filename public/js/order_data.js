@@ -44,10 +44,14 @@ $("span.order-detail-link[title='order detail']").click(function (event) {
                     : response["note"]["order_notes"]
             );
             $("#total_price_detail").html(response["total_price"]);
-            $("#transaction_doc_detail").attr(
-                "src",
-                "/storage/" + response["transaction_doc"]
-            );
+
+            if (response["payment_id"] == 1) {
+                $("#transaction_doc_detail").attr(
+                    "src",
+                    "/storage/" + response["transaction_doc"]
+                );
+            }
+
             $("#product_name_detail").html(response["product"]["product_name"]);
             $("#image_product_detail").attr(
                 "src",
@@ -84,6 +88,12 @@ $("span.order-detail-link[title='order detail']").click(function (event) {
                     response["id"] +
                     "/" +
                     response["product_id"]
+            );
+
+            // edit order
+            $("#link_edit_order").attr(
+                "href",
+                "/order/edit_order/" + response["id"]
             );
 
             if (response["coupon_used"] != null) {
@@ -134,6 +144,8 @@ $("span.order-detail-link[title='order detail']").click(function (event) {
                 $("#form_cancel_order").css("display", "unset");
                 $("#message").css("display", "none");
             }
+
+            console.log("hmm");
 
             $("#OrderDetailModal").modal("show");
             setVisible("#loading", false);

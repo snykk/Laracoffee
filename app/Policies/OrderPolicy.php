@@ -32,6 +32,12 @@ class OrderPolicy
     }
 
 
+    public function edit_order(User $user, Order $order)
+    {
+        return $user->role_id == Role::CUSTOMER_ID && $order->user_id == $user->id;
+    }
+
+
     public function reject_order(User $user)
     {
         return $user->role_id == Role::ADMIN_ID;
@@ -57,6 +63,12 @@ class OrderPolicy
 
 
     public function upload_proof(User $user, Order $order)
+    {
+        return $user->role_id == Role::CUSTOMER_ID && $order->user_id == $user->id;
+    }
+
+
+    public function delete_proof(User $user, Order $order)
     {
         return $user->role_id == Role::CUSTOMER_ID && $order->user_id == $user->id;
     }

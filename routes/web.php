@@ -79,9 +79,12 @@ Route::middleware(['auth'])->group(function () {
 
         // customer only
         Route::get("/order/make_order/{product:id}", "makeOrderGet")->can("create_order", App\Models\Order::class);
+        Route::get("/order/edit_order/{order}", "editOrderGet")->can("edit_order", "order");
+        Route::get("/order/delete_proof/{order}", "deleteProof")->can("delete_proof", "order");
         Route::post("/order/make_order/{product:id}", "makeOrderPost")->can("create_order", App\Models\Order::class);
         Route::post("/order/cancel_order/{order}", "cancelOrder")->can("cancel_order", "order");
         Route::post("/order/upload_proof/{order}", "uploadProof")->can("upload_proof", "order");
+        Route::post("/order/edit_order/{order}", "editOrderPost")->can("edit_order", "order");
 
         // admin only
         Route::post("/order/reject_order/{order}/{product}", "rejectOrder")->can("reject_order", App\Models\Order::class);
