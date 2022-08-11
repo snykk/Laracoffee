@@ -147,6 +147,10 @@ $("span.order-detail-link[title='order detail']").click(function (event) {
                 $("#message").css("display", "none");
             }
 
+            // considered the listener on reject order
+            $("#message_reject_order").css("display", "none");
+            $("#message_reject_order").html();
+
             $("#OrderDetailModal").modal("show");
             setVisible("#loading", false);
         },
@@ -235,5 +239,111 @@ $("#link_transfer_proof").click(function () {
         imageWidth: 600,
         imageHeight: 350,
         imageAlt: "Transfer Proof",
+    });
+});
+
+// cancel order [customer]
+$("#button_cancel_order").click(function (e) {
+    e.preventDefault();
+    Swal.fire({
+        title: "Are you sure?",
+        text: "after this process, this order is no longer valid and can't be change",
+        icon: "question",
+        confirmButtonText: "Confirm",
+        cancelButtonColor: "#d33",
+        showCancelButton: true,
+        confirmButtonColor: "#08a10b",
+        timer: 10000,
+    }).then((result) => {
+        if (result.isConfirmed) {
+            setVisible("#loading", true);
+            $("#OrderDetailModal").modal("hide");
+
+            $("#form_cancel_order").submit();
+        } else if (result.isDismissed) {
+            Swal.fire("Action canceled", "", "info");
+        }
+    });
+});
+
+// approve order [admin]
+$("#button_approve_order").click(function (e) {
+    e.preventDefault();
+    Swal.fire({
+        title: "Are you sure?",
+        text: "the order will be considered valid and ready to be handed over to the customer",
+        icon: "question",
+        confirmButtonText: "Confirm",
+        cancelButtonColor: "#d33",
+        showCancelButton: true,
+        confirmButtonColor: "#08a10b",
+        timer: 10000,
+    }).then((result) => {
+        if (result.isConfirmed) {
+            setVisible("#loading", true);
+            $("#OrderDetailModal").modal("hide");
+
+            $("#form_approve_order").submit();
+        } else if (result.isDismissed) {
+            Swal.fire("Action canceled", "", "info");
+        }
+    });
+});
+
+// end order [admin]
+$("#button_end_order").click(function (e) {
+    e.preventDefault();
+    Swal.fire({
+        title: "Are you sure?",
+        text: "after the order is completed, this data will be considered as company income",
+        icon: "question",
+        confirmButtonText: "Confirm",
+        cancelButtonColor: "#d33",
+        showCancelButton: true,
+        confirmButtonColor: "#08a10b",
+        timer: 10000,
+    }).then((result) => {
+        if (result.isConfirmed) {
+            setVisible("#loading", true);
+            $("#OrderDetailModal").modal("hide");
+
+            $("#form_end_order").submit();
+        } else if (result.isDismissed) {
+            Swal.fire("Action canceled", "", "info");
+        }
+    });
+});
+
+// reject order [admin]
+$("#button_reject_order").click(function (e) {
+    e.preventDefault();
+
+    if ($("#refusal_reason").val() == "") {
+        console.log("hms");
+        $("#message_reject_order").html("Refusal reason cannot be empty");
+        $("#message_reject_order").css("display", "unset");
+        return;
+    }
+
+    Swal.fire({
+        title: "Are you sure?",
+        text: "after this process, this order is no longer valid and can't be change",
+        icon: "question",
+        confirmButtonText: "Confirm",
+        cancelButtonColor: "#d33",
+        showCancelButton: true,
+        confirmButtonColor: "#08a10b",
+        timer: 10000,
+    }).then((result) => {
+        if (result.isConfirmed) {
+            setVisible("#loading", true);
+            $("#ModalRejectOrder").modal("hide");
+
+            $("#form_reject_order").submit();
+        } else if (result.isDismissed) {
+            Swal.fire("Action canceled", "", "info");
+            $("#ModalRejectOrder").modal("hide");
+            $("#OrderDetailModal").modal("show");
+        }
     });
 });

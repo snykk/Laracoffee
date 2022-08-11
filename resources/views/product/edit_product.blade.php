@@ -40,7 +40,7 @@
                         </small></div>
                       <div class="mt-2">
                         <!-- Form -->
-                        <form action="/product/edit_product/{{ $product->id }}" method="post"
+                        <form id="form_edit_product" action="/product/edit_product/{{ $product->id }}" method="post"
                           enctype="multipart/form-data">
                           @csrf
                           <input type="hidden" name="oldImage" value="{{ $product->image }}">
@@ -144,7 +144,7 @@
                     <div class=" row">
                       <div class="col d-flex justify-content-end">
                         <a class="btn btn-primary mx-3" href="/product">Back to Product List</a>
-                        <button class="btn btn-primary" type="submit">Save Changes</button>
+                        <button class="btn btn-primary" type="submit" id="button_edit_product">Save Changes</button>
                       </div>
                     </div>
                     </form>

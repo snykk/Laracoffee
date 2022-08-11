@@ -53,7 +53,8 @@
                       <div class="mt-2">
 
                         <!-- Form -->
-                        <form action="/order/edit_order/{{ $order->id }}" enctype="multipart/form-data" method="post">
+                        <form action="/order/edit_order/{{ $order->id }}" enctype="multipart/form-data" method="post"
+                          id="form_edit_order">
                           @csrf
                       </div>
                     </div>
@@ -212,7 +213,7 @@
                     <div class="row">
                       <div class="col d-flex justify-content-end">
                         <a class="btn btn-outline-secondary mx-3" href="/order/order_data">Back to Order List</a>
-                        <button class="btn btn-dark" type="submit" id="submit_simpan_perubahan">Save Changes</button>
+                        <button class="btn btn-dark" type="submit" id="button_edit_order">Save Changes</button>
                       </div>
                     </div>
                   </div>

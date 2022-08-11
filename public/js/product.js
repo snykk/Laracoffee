@@ -62,3 +62,24 @@ $("#image").on("change", function () {
         image_preview_alt: "Product Image",
     });
 });
+
+// cancel order
+$("#button_edit_product").click(function (e) {
+    e.preventDefault();
+    Swal.fire({
+        title: "Are you sure?",
+        text: "after this process, product data will be changed",
+        icon: "warning",
+        confirmButtonText: "Confirm",
+        cancelButtonColor: "#d33",
+        showCancelButton: true,
+        confirmButtonColor: "#08a10b",
+        timer: 10000,
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $("#form_edit_product").submit();
+        } else if (result.isDismissed) {
+            Swal.fire("Action canceled", "", "info");
+        }
+    });
+});

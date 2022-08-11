@@ -127,33 +127,34 @@
                   <div>Total Harga: Rp.</div>
                   <div style="margin-left:5px" id="total_price_detail"></div>
                 </div>
-                @if (auth()->user()->id == 2)
+                @if (auth()->user()->role_id == 2)
                 <div class="d-flex justify-content-center align-items-center" style="display: block">
                   <a id="link_edit_order" title="Edit order data" style="text-decoration: none"><button
                       class="btn btn-outline-dark">edit</button></a>{{-- define href using jquery --}}
                   <form method="post" class="ms-2" id="form_cancel_order">{{-- define form action using jquery --}}
                     @csrf
-                    <button class="btn btn-outline-danger">cancel</button>
+                    <button class="btn btn-outline-danger" id="button_cancel_order">cancel</button>
                   </form>
                 </div>
                 <em id="message" class="link-danger"></em>
                 @endif
 
 
-                <?php if (auth()->user()->id == 1) : ?>
+                @if (auth()->user()->role_id == 1)
                 <div class="d-flex justify-content-center align-items-center">
                   <a id="link_reject_order" data-bs-dismiss="modal" data-bs-toggle="modal" href="#ModalRejectOrder"
                     title="reject order"><button class="btn btn-outline-danger">reject</button></a>
                   <form method="post" id="form_end_order" class="mx-2"> {{-- define form action using jquery --}}
                     @csrf
-                    <button class="btn btn-outline-info" id="button_logout">done</button>
+                    <button class="btn btn-outline-info" id="button_end_order">done</button>
                   </form>
                   <form method="post" id="form_approve_order"> {{-- define form action using jquery --}}
                     @csrf
-                    <button class="btn btn-outline-success" id="button_logout">approve</button>
+                    <button class="btn btn-outline-success" id="button_approve_order">approve</button>
                   </form>
                 </div>
-                <?php endif; ?>
+                @endif
+
 
               </div>
             </div>

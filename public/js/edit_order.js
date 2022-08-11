@@ -205,3 +205,24 @@ function setOngkir({
         },
     });
 }
+
+// cancel order
+$("#button_edit_order").click(function (e) {
+    e.preventDefault();
+    Swal.fire({
+        title: "Are you sure?",
+        text: "order data will be changed",
+        icon: "warning",
+        confirmButtonText: "Confirm",
+        cancelButtonColor: "#d33",
+        showCancelButton: true,
+        confirmButtonColor: "#08a10b",
+        timer: 10000,
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $("#form_edit_order").submit();
+        } else if (result.isDismissed) {
+            Swal.fire("Action canceled", "", "info");
+        }
+    });
+});
