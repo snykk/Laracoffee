@@ -5,7 +5,7 @@
 @endpush
 
 @push('scripts-dependencies')
-<script src="/js/image_preview.js"></script>
+<script src="/js/product.js" type="module"></script>
 @endpush
 
 @section('content')

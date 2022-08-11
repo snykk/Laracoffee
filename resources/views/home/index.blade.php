@@ -3,18 +3,18 @@
 @section('content')
 
 @push('css-dependencies')
-    <link rel="stylesheet" type="text/css" href="/css/home.css" />
+<link rel="stylesheet" type="text/css" href="/css/home.css" />
 @endpush
 
 <div class="mx-3">
     @if(session()->has('message'))
-        {!! session("message") !!}
+    {!! session("message") !!}
     @endif
 </div>
 
 @can('is_admin')
-    @include('/partials/home/home_admin')
+@include('/partials/home/home_admin')
 @else
-    @include('/partials/home/home_customers')
+@include('/partials/home/home_customers')
 @endcan
 @endsection

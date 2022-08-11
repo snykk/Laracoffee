@@ -342,6 +342,7 @@ class OrderController extends Controller
 
     public function getProofOrder(Order $order)
     {
+        $order->load("status");
         return  $order;
     }
 
@@ -350,7 +351,7 @@ class OrderController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'old_image_proof' => 'required',
-            'image_upload_proof' => 'required|image|max:2048',
+            'image_upload_proof' => 'required|image|file|max:2048',
         ]);
 
         if ($validator->fails()) {
@@ -381,10 +382,10 @@ class OrderController extends Controller
     public function editOrderGet(Order $order)
     {
         if ($order->status_id == 5) {
-            $message = "Action failed, order has been canceled";
+            $message = "Action failed, order is already canceled by the user";
             myFlasherBuilder(message: $message, failed: true);
 
-            return redirect("/order/edit_order/" . $order->id);
+            return redirect("/order/order_data/");
         }
 
         $title = "Edit Order";
@@ -407,22 +408,29 @@ class OrderController extends Controller
 
 
         $message = [
-            'payment_method.required' => 'Please select the payment method',
             'province.gt' => 'Please select the province',
             'city.gt' => 'Please select the city',
             'quantity.lte' => 'sorry the current available stock is ' . $order->product->stock,
         ];
 
-        if ($request->payment_method == 1) {
-            $rules['bank_id'] = 'required|numeric';
-            $message['bank_id.required'] = 'Please select the bank';
+        if ($request->file("image_proof_edit")) {
+            $rules["image_proof_edit"] = "image|file|max:2048";
         }
 
         $validatedData = $request->validate($rules, $message);
 
+        if ($request->file("image_proof_edit")) {
+            if ($order->transaction_doc != env("IMAGE_PROOF")) {
+                Storage::delete($order->transaction_doc);
+            }
+
+            $validatedData["transaction_doc"] = $request->file("image_proof_edit")->store("proof");
+        }
+
         $order->fill($validatedData);
 
         if ($order->isDirty()) {
+
             $order->save();
 
             $message = "Order has beed updated!";

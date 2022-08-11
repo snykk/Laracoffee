@@ -1,3 +1,5 @@
+import { previewImage } from "./image_preview.js";
+
 // modal order detail
 $("span.order-detail-link[title='order detail']").click(function (event) {
     setVisible("#loading", true);
@@ -63,6 +65,12 @@ $("span.order-detail-link[title='order detail']").click(function (event) {
                 "/order/cancel_order/" + response["id"]
             );
 
+            // transfer proof url
+            $("#link_transfer_proof").attr(
+                "data-imageUrl",
+                "/storage/" + response["transaction_doc"]
+            );
+
             // reject order form
             $("#form_reject_order").attr(
                 "action",
@@ -121,31 +129,23 @@ $("span.order-detail-link[title='order detail']").click(function (event) {
 
             // if order has been canceled by user
             if (response["status_id"] == 5) {
-                $("#link_edit_order").css("display", "none");
-                $("#form_cancel_order").css("display", "none");
+                console.log("benerkah");
+                $("#link_edit_order > button").css("display", "none");
+                $("#form_cancel_order > button").css("display", "none");
+                $("#message").css("display", "unset");
                 $("#message").html("Order has been canceled by user");
-                $("#message").css("display", "unset");
-            } else {
-                // to restore undisplayed elements
-                $("#link_edit_order").css("display", "unset");
-                $("#form_cancel_order").css("display", "unset");
-                $("#message").css("display", "none");
-            }
-
-            // if order has been rejected by admin
-            if (response["status_id"] == 3) {
+            } else if (response["status_id"] == 3) {
+                // if order has been rejected by admin
                 $("#link_edit_order").css("display", "none");
                 $("#form_cancel_order").css("display", "none");
-                $("#message").html("Order has been rejected by admin");
                 $("#message").css("display", "unset");
+                $("#message").html("Order has been rejected by admin");
             } else {
                 // to restore undisplayed elements
-                $("#link_edit_order").css("display", "unset");
-                $("#form_cancel_order").css("display", "unset");
+                $("#link_edit_order > button").css("display", "unset");
+                $("#form_cancel_order > button").css("display", "unset");
                 $("#message").css("display", "none");
             }
-
-            console.log("hmm");
 
             $("#OrderDetailModal").modal("show");
             setVisible("#loading", false);
@@ -192,10 +192,13 @@ $("a.uploadProof[title='Upload Transfer Proof']").click(function (event) {
             );
 
             if (response["status_id"] == "2") {
-                console.log("halo");
                 $("#ProofUploadModal").modal("show");
-            } else {
-                Swal.fire("Ooops something went wrong");
+            } else if (response["status_id"] != "4") {
+                Swal.fire(
+                    `Action denied, order is already ${
+                        response["status"]["order_status"]
+                    } by ${response["status_id"] != "5" ? "admin" : "you"}`
+                );
             }
 
             setVisible("#loading", false);
@@ -203,18 +206,12 @@ $("a.uploadProof[title='Upload Transfer Proof']").click(function (event) {
     });
 });
 
-$("#image_upload_proof").on("change", function previewImage() {
-    const img = document.getElementById("image_upload_proof");
-    const imgPreview = document.getElementById("image_review_upload");
-
-    const oFReader = new FileReader();
-    oFReader.readAsDataURL(img.files[0]);
-
-    oFReader.onload = function (oFREvent) {
-        imgPreview.src = oFREvent.target.result;
-        $("#message_upload_proof").css("color", "black");
-        $("#message_upload_proof").html("image selected");
-    };
+$("#image_upload_proof").on("change", function () {
+    previewImage({
+        image: "image_upload_proof",
+        image_preview: "image_review_upload",
+        image_preview_alt: "transfer proof",
+    });
 });
 
 $("#form_upload_proof").submit(function (event) {
@@ -229,4 +226,14 @@ $("#form_upload_proof").submit(function (event) {
     $("#message_upload_proof").css("color", "red");
 
     event.preventDefault();
+});
+
+$("#link_transfer_proof").click(function () {
+    Swal.fire({
+        title: "Transfer Proof",
+        imageUrl: $("#link_transfer_proof").attr("data-imageUrl"),
+        imageWidth: 600,
+        imageHeight: 350,
+        imageAlt: "Transfer Proof",
+    });
 });

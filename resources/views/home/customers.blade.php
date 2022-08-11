@@ -1,19 +1,20 @@
 @extends('/layouts/main')
 
 @push('css-dependencies')
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css" />
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css" />
 @endpush
 
 @push('scripts-dependencies')
-    <script src="/js/customers_table.js"></script>
-    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+<script src="/js/customers_table.js"></script>
+<script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
 @endpush
 
 @section('content')
 <main>
     <div class="container-fluid mt-4">
         <!-- inisial value -->
-        <input type="hidden" name="username" id="username" value="{{ (isset($_GET["username"])) ? $_GET["username"] : "" }}">
+        <input type="hidden" name="username" id="username" value="{{ (isset($_GET['username'])) ? $_GET['username']
+          : '' }}">
 
         <div class="card mb-4">
             <div class="card-header">
@@ -36,16 +37,16 @@
                     </thead>
                     <tbody>
                         @foreach ($customers as $row)
-                            <tr>
-                                <td>{{ $row->fullname }}</td>
-                                <td>{{ $row->username }}</td>
-                                <td>{{ $row->email }}</td>
-                                <td>{{ $row->role->role_name }}</td>
-                                <td>{{ $row->gender == "M" ? "Male" : "Female" }}</td>
-                                <td>{{ $row->phone }}</td>
-                                <td>{{ $row->address }}</td>
-                                <td>{{ date('d-m-Y', strtotime($row->created_at))  }}</td>
-                            </tr>
+                        <tr>
+                            <td>{{ $row->fullname }}</td>
+                            <td>{{ $row->username }}</td>
+                            <td>{{ $row->email }}</td>
+                            <td>{{ $row->role->role_name }}</td>
+                            <td>{{ $row->gender == "M" ? "Male" : "Female" }}</td>
+                            <td>{{ $row->phone }}</td>
+                            <td>{{ $row->address }}</td>
+                            <td>{{ date('d-m-Y', strtotime($row->created_at)) }}</td>
+                        </tr>
                         @endforeach
                     </tbody>
                 </table>

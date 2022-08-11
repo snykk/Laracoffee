@@ -6,6 +6,7 @@
 
 @push('scripts-dependencies')
 <script src="/js/edit_order.js"></script>
+<script src="/js/edit_order_proof.js" type="module"></script>
 <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
 @endpush
 
@@ -52,7 +53,7 @@
                       <div class="mt-2">
 
                         <!-- Form -->
-                        <form action="/order/edit_order/{{ $order->id }}" method="post">
+                        <form action="/order/edit_order/{{ $order->id }}" enctype="multipart/form-data" method="post">
                           @csrf
                       </div>
                     </div>
@@ -182,12 +183,17 @@
                               <label for="transfer_proof" class="d-flex justify-content-center align-items-center mb-2"
                                 style="font-size: 20px;">Transfer Proof</label>
                               <div class="d-flex flex-column align-items-center text-center">
-                                <img src="{{ asset('storage/' . $order->transaction_doc) }}" width="150">
+                                <img src="{{ asset('storage/' . $order->transaction_doc) }}" width="150"
+                                  id="image_preview_proof_edit">
                                 <div class="mt-3">
                                   <p class="text-secondary mb-1">upload tranfer proof</p>
                                   <div class="d-flex justify-content-between align-items-center">
                                     <div class="custom-file">
-                                      <input type="file" class="form-control" id="image" name="image" value="">
+                                      <input type="file" class="form-control" id="image_proof_edit"
+                                        name="image_proof_edit">
+                                      @error('image_proof_edit')
+                                      <div class="text-danger">{{ $message }}</div>
+                                      @enderror
                                     </div>
                                     @if ($order->transaction_doc != env("IMAGE_PROOF"))
                                     <a id="button_delete_proof" href="/order/delete_proof/{{ $order->id }}"

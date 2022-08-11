@@ -1,7 +1,7 @@
 @extends('/layouts/auth')
 
 @push('css-dependencies')
-    <link href="/css/auth.css" rel="stylesheet" /> 
+<link href="/css/auth.css" rel="stylesheet" />
 @endpush
 
 @section("content")
@@ -23,21 +23,25 @@
                                 </div>
 
                                 @if(session()->has('message'))
-                                    {!! session("message") !!}
+                                {!! session("message") !!}
                                 @endif
 
                                 <form class="user" method="post" action="/auth/login">
                                     @csrf
                                     <div class="form-group">
-                                        <input type="text" class="form-control @error('email') is-invalid @enderror" id="email" name="email" placeholder="Enter an email address" value="{{ @old("email") }}" >
+                                        <input type="text" class="form-control @error('email') is-invalid @enderror"
+                                          id="email" name="email" placeholder="Enter an email address" value="{{ @old("
+                                          email") }}">
                                         @error('email')
-                                            <div class="text-danger">{{ $message }}</div>
+                                        <div class="text-danger">{{ $message }}</div>
                                         @enderror
                                     </div>
                                     <div class="form-group">
-                                        <input type="password" class="form-control @error('password') is-invalid @enderror" id="password" name="password" placeholder="Password" data-toggle="password">
+                                        <input type="password"
+                                          class="form-control @error('password') is-invalid @enderror" id="password"
+                                          name="password" placeholder="Password" data-toggle="password">
                                         @error('password')
-                                            <div class="text-danger">{{ $message }}</div>
+                                        <div class="text-danger">{{ $message }}</div>
                                         @enderror
                                     </div>
                                     <button type="submit" class="btn btn-info btn-block">
@@ -61,5 +65,3 @@
 
 </div>
 @endsection
-
-

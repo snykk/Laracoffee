@@ -1,3 +1,5 @@
+import { previewImage } from "/js/image_preview.js";
+
 $("button.detail").click(function (event) {
     var id = $(this).attr("data-id");
     setVisible("#loading", true);
@@ -52,3 +54,11 @@ const setVisible = (elementOrSelector, visible) =>
         ? document.querySelector(elementOrSelector)
         : elementOrSelector
     ).style.display = visible ? "block" : "none");
+
+$("#image").on("change", function () {
+    previewImage({
+        image: "image",
+        image_preview: "image-preview",
+        image_preview_alt: "Product Image",
+    });
+});

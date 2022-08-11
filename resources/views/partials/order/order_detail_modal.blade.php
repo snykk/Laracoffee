@@ -54,7 +54,7 @@
                   <tr>
                     <td>
                       <div class="d-flex flex-column">
-                        <span class="heading d-block">payment method</span>
+                        <span class="heading d-block">payment</span>
                         <span class="subheadings" id="payment_method_detail">
                           <!-- content metode -->
                         </span>
@@ -95,11 +95,10 @@
                     <td id="modal_section_payment_proof">
                       <div class="d-flex flex-column">
                         <span class="heading d-block">payment proof</span>
-                        <span class="d-flex flex-row gallery"> <a data-bs-dismiss="modal" data-bs-toggle="modal"
-                            href="#DetailBukti" id="link_bukti_transfer"><img id="transaction_doc_detail"
-                              src="{{ asset('storage/' .  env('IMAGE_PROOF')) }}" style="transition:1s;cursor:pointer;"
-                              onMouseOver="this.style.width='110px'" onMouseOut="this.style.width='100px'" width="100px"
-                              class="rounded" alt="bukti
+                        <span class="d-flex flex-row gallery"> <a id="link_transfer_proof"><img
+                              id="transaction_doc_detail" src="{{ asset('storage/' .  env('IMAGE_PROOF')) }}"
+                              style="transition:1s;cursor:pointer;" onMouseOver="this.style.width='110px'"
+                              onMouseOut="this.style.width='100px'" width="100px" class="rounded" alt="bukti
                             transfer"></a> </span>
                       </div>
                     </td>
@@ -128,17 +127,18 @@
                   <div>Total Harga: Rp.</div>
                   <div style="margin-left:5px" id="total_price_detail"></div>
                 </div>
-                <?php if (auth()->user()->id == 2) : ?>
-                <div class="d-flex justify-content-center align-items-center">
-                  <a id="link_edit_order" title="Edit order data"><button
+                @if (auth()->user()->id == 2)
+                <div class="d-flex justify-content-center align-items-center" style="display: block">
+                  <a id="link_edit_order" title="Edit order data" style="text-decoration: none"><button
                       class="btn btn-outline-dark">edit</button></a>{{-- define href using jquery --}}
                   <form method="post" class="ms-2" id="form_cancel_order">{{-- define form action using jquery --}}
                     @csrf
                     <button class="btn btn-outline-danger">cancel</button>
                   </form>
                 </div>
-                <div><em id="message" class="link-danger"></em></div>
-                <?php endif; ?>
+                <em id="message" class="link-danger"></em>
+                @endif
+
 
                 <?php if (auth()->user()->id == 1) : ?>
                 <div class="d-flex justify-content-center align-items-center">

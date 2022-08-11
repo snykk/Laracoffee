@@ -1,11 +1,11 @@
 @extends('/layouts/auth')
 
 @push('css-dependencies')
-    <link href="/css/landing.css" rel="stylesheet" /> 
+<link href="/css/landing.css" rel="stylesheet" />
 @endpush
 
 @push('scripts-dependencies')
-    <script src="/js/landing.js"></script> 
+<script src="/js/landing.js"></script>
 @endpush
 
 @section("content")

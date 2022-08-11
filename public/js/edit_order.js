@@ -17,9 +17,6 @@ $(document).ready(function () {
     sub_total = price * quantity;
     shipping = $("#total_price").val() - sub_total;
 
-    console.log(price);
-    console.log(sub_total);
-
     $("#sub-total").val(sub_total);
     $("#sub-total").html(sub_total);
 
