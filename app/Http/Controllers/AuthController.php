@@ -10,9 +10,9 @@ class AuthController extends Controller
 {
     public function loginGet()
     {
-        $data["title"] = "Login";
+        $title = "Login";
 
-        return view('auth.login', $data);
+        return view('/auth/login', compact("title"));
     }
 
     public function loginPost(Request $request)
@@ -38,9 +38,9 @@ class AuthController extends Controller
 
     public function registrationGet()
     {
-        $data["title"] = "Registration";
+        $title = "Registration";
 
-        return view('auth.register', $data);
+        return view('/auth/register', compact("title"));
     }
 
     public function registrationPost(Request $request)

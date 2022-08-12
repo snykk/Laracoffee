@@ -1,14 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AuthController;
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\OrderController;
-use App\Http\Controllers\ReviewController;
-use App\Http\Controllers\ProductController;
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\RajaOngkirController;
-use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\{AuthController, HomeController, OrderController, ReviewController, ProductController, ProfileController, RajaOngkirController, TransactionController};
 
 /*
 |--------------------------------------------------------------------------
@@ -65,8 +58,8 @@ Route::middleware(['auth'])->group(function () {
 
         // admin only
         Route::get("/product/add_product", "addProductGet")->can("add_product", App\Models\Product::class);
-        Route::get("/product/edit_product/{product:id}", "editProductGet")->can("edit_product", App\Models\Product::class);
         Route::post("/product/add_product", "addProductPost")->can("add_product", App\Models\Product::class);
+        Route::get("/product/edit_product/{product:id}", "editProductGet")->can("edit_product", App\Models\Product::class);
         Route::post("/product/edit_product/{product:id}", "editProductPost")->can("edit_product", App\Models\Product::class);
     });
 
@@ -81,12 +74,12 @@ Route::middleware(['auth'])->group(function () {
 
         // customer only
         Route::get("/order/make_order/{product:id}", "makeOrderGet")->can("create_order", App\Models\Order::class);
-        Route::get("/order/edit_order/{order}", "editOrderGet")->can("edit_order", "order");
-        Route::get("/order/delete_proof/{order}", "deleteProof")->can("delete_proof", "order");
         Route::post("/order/make_order/{product:id}", "makeOrderPost")->can("create_order", App\Models\Order::class);
+        Route::get("/order/edit_order/{order}", "editOrderGet")->can("edit_order", "order");
+        Route::post("/order/edit_order/{order}", "editOrderPost")->can("edit_order", "order");
+        Route::get("/order/delete_proof/{order}", "deleteProof")->can("delete_proof", "order");
         Route::post("/order/cancel_order/{order}", "cancelOrder")->can("cancel_order", "order");
         Route::post("/order/upload_proof/{order}", "uploadProof")->can("upload_proof", "order");
-        Route::post("/order/edit_order/{order}", "editOrderPost")->can("edit_order", "order");
 
         // admin only
         Route::post("/order/reject_order/{order}/{product}", "rejectOrder")->can("reject_order", App\Models\Order::class);
@@ -115,8 +108,8 @@ Route::middleware(['auth'])->group(function () {
     Route::controller(TransactionController::class)->group(function () {
         Route::get("/transaction", "index")->can("is_admin");
         Route::get("/transaction/add_outcome", "addOutcomeGet")->can("is_admin");
-        Route::get("/transaction/edit_outcome/{transaction}", "editOutcomeGet")->can("is_admin");
         Route::post("/transaction/add_outcome", "addOutcomePost")->can("is_admin");
+        Route::get("/transaction/edit_outcome/{transaction}", "editOutcomeGet")->can("is_admin");
         Route::post("/transaction/edit_outcome/{transaction}", "editOutcomePost")->can("is_admin");
     });
 

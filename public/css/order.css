@@ -314,6 +314,55 @@ span.strikethrough:before {
     text-indent: 0;
 }
 
+/* modal */
+
+.program-modal .modal-dialog {
+    margin: 1rem;
+    max-width: 100vw !important;
+}
+.program-modal .modal-content {
+    padding-top: 6rem;
+    padding-bottom: 6rem;
+    /* text-align: center; */
+    /* font-family: "Roboto Slab", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"; */
+    /* font-family: "My Soul", cursive; */
+    font-family: "Merriweather", serif;
+}
+.program-modal .modal-content h2,
+.program-modal .modal-content .h2 {
+    font-size: 3rem;
+    line-height: 3rem;
+    text-align: center;
+}
+.program-modal .modal-content p.item-intro {
+    font-style: italic;
+    margin-bottom: 2rem;
+}
+.program-modal .modal-content ul.list-inline {
+    margin-bottom: 2rem;
+}
+.program-modal .modal-content img {
+    margin-bottom: 2rem;
+}
+.program-modal .close-modal {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    width: 3rem;
+    height: 3rem;
+    cursor: pointer;
+    background-color: transparent;
+}
+.program-modal .close-modal:hover {
+    opacity: 0.3;
+}
+
+.pembagi {
+    height: 3px;
+    background: #921515;
+    margin-bottom: 1rem;
+}
+
 #loading {
     display: flex;
     position: fixed;

@@ -10,7 +10,7 @@ class TransactionController extends Controller
 {
     public function index()
     {
-        $title = "Transaction Page";
+        $title = "Transaction List";
         $transactions = Transaction::with("category")->get();
 
         return view("/transaction/index", compact("title", "transactions"));

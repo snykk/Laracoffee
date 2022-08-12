@@ -10,10 +10,10 @@ class ProductController extends Controller
 {
     public function index()
     {
-        $data["title"] = "Product";
-        $data["product"] = Product::all();
+        $title = "Product";
+        $product = Product::all();
 
-        return view('/product/index', $data);
+        return view('/product/index', compact("title", "product"));
     }
 
 
@@ -27,9 +27,9 @@ class ProductController extends Controller
 
     public function addProductGet()
     {
-        $data["title"] = "Add Product";
+        $title = "Add Product";
 
-        return view('/product/add_product', $data);
+        return view('/product/add_product', compact("title"));
     }
 
 

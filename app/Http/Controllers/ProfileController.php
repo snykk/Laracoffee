@@ -12,17 +12,17 @@ class ProfileController extends Controller
 {
     public function myProfile()
     {
-        $data["title"] = "My Profile";
+        $title = "My Profile";
 
-        return view('/profile/my_profile', $data);
+        return view('/profile/my_profile', compact("title"));
     }
 
 
     public function editProfileGet()
     {
-        $data["title"] = "Edit Profile";
+        $title = "Edit Profile";
 
-        return view("/profile/edit_profile", $data);
+        return view("/profile/edit_profile", compact("title"));
     }
 
 
@@ -79,9 +79,9 @@ class ProfileController extends Controller
 
     public function changePasswordGet()
     {
-        $data["title"] = "Change Password";
+        $title = "Change Password";
 
-        return view("/profile/change_password", $data);
+        return view("/profile/change_password", compact("title"));
     }
 
 

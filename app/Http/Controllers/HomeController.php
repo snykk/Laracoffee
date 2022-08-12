@@ -11,21 +11,18 @@ class HomeController extends Controller
 {
     public function index()
     {
-        return view('home.index', [
-            "title" => "Home",
-        ]);
+        $title = "Home";
+
+        return view("/home/index", compact("title"));
     }
 
     public function customers()
     {
         $this->authorize("is_admin");
 
-        // $customers = DB::table("users")->where("role_id", ROLE::IS_CUSTOMER)->get();
+        $title = "Customers";
         $customers = User::with("role")->get();
 
-        return view("home/customers", [
-            "title" => "Customers",
-            "customers" => $customers,
-        ]);
+        return view("home/customers",  compact("title", "customers"));
     }
 }

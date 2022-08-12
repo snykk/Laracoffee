@@ -22,6 +22,8 @@
     {!! session("message") !!}
     @endif
 
+    @include('/partials/breadcumb')
+
     <div class="card mb-4">
       <div class="card-header">
         <i class="fas fa-fw fa-solid fa-money-check-dollar me-1"></i>
@@ -66,10 +68,10 @@
                 {{$transaction->outcome ? $transaction->outcome : "----"}}
               </td>
               <td>
-                {{$transaction->created_at}}
+                {{$transaction->created_at->format('d-m-Y')}}
               </td>
               <td>
-                {{ $transaction->updated_at }}
+                {{$transaction->updated_at->format('d-m-Y')}}
               </td>
               <td>
                 <button class="btn btn-secondary button_edit_transaction" data-transactionId="{{ $transaction->id }}"

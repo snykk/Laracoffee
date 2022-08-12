@@ -9,15 +9,19 @@
 <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
 @endpush
 
+@push('modals-dependencies')
+@include('/partials/order/transfer_instructions_modal')
+@endpush
+
 @section('content')
-<div class="container">
+<div class="container-fluid px-2 px-lg-4">
   <h1 class="main-title">
     {{ $title }}
   </h1>
   <div class="row">
 
     <!-- Left -->
-    <div class="col-lg-9">
+    <div class="col-12 col-lg-9">
       <div class="accordion" id="accordionMain">
 
         <!-- top field -->
@@ -132,7 +136,7 @@
           <div id="collapseCC" class="accordion-collapse collapse {{ old('payment_method')==1 ? 'show' : '' }}"
             data-bs-parent="#accordionMain">
             <div class="accordion-body">
-              <div>Pilih Bank:</div>
+              <div>Select Bank:</div>
               <div id="mandiri" class="form-check w-100 collapsed">
                 <span><img src="{{ asset('storage/icons/bank-mandiri.svg') }}" alt="mandiri logo" width="40px"></span>
                 <input type="radio" id="bank_mandiri" class="bank" name="bank_id" value="1" {{ old('bank_id')=='1'
@@ -229,68 +233,95 @@
 
               <!-- petunjuk -->
               <div class="container mt-3" id="container-petunjuk">
+                <div class="mt-4">
+                  <h6>Transfer Instructions</h6>
+                  <p class="text-muted">BRI Bank Virtual Accounts only accept transfers from BRI Bank accounts. For
+                    payments with a BRI
+                    Syariah Bank account, use a Bank Mandiri virtual account. The following are transfer instructions if
+                    you use Bank BRI.</p>
+                </div>
                 <div class="accordion" id="accordionPetunjuk">
+                  <div class="item">
+                    <div class="item-header" id="headingOne">
+                      <h2 class="mb-0">
+                        <button class="btn btn-link collapsed d-flex justify-content-between align-items-center"
+                          type="button" data-bs-toggle="collapse" data-bs-target="#atm" aria-expanded="false"
+                          aria-controls="atm">
+                          <div class="title-accordion-petunjuk">ATM</div>
+                          <img class="title-accordion-petunjuk" src="{{ asset('storage/icons/angle-down.svg') }}"
+                            alt="angle down fas icon" width="18px">
+                        </button>
+                      </h2>
+                    </div>
+                    <div id="atm" class="collapse" aria-labelledby="headingOne" data-bs-parent="#accordionPetunjuk">
+                      <div class="t-p">
+                        <ol>
+                          <li>Select Other Transactions > Payments > Others > select BRIVA.</li>
+                          <li>Enter no. BRIVA listed on the Payment page (consisting of 3 (three) Bank code numbers +
+                            User mobile number/random number) and select True.</li>
+                          <li>Double-check the information on the screen. Make sure the Merchant is Shopee, the total
+                            bill is correct, and your username is {username}. If it is correct, select Yes.</li>
+                        </ol>
+                      </div>
+                    </div>
+                  </div>
                   <div class="item">
                     <div class="item-header" id="headingTwo">
                       <h2 class="mb-0">
                         <button class="btn btn-link collapsed d-flex justify-content-between align-items-center"
-                          type="button" data-bs-toggle="collapse" data-bs-target="#transfer-mbanking"
-                          aria-expanded="false" aria-controls="transfer-mbanking">
-                          <div class="title-accordion-petunjuk">Petunjuk transfer mBanking</div>
+                          type="button" data-bs-toggle="collapse" data-bs-target="#e-banking" aria-expanded="false"
+                          aria-controls="e-banking">
+                          <div class="title-accordion-petunjuk">E-Banking</div>
                           <img class="title-accordion-petunjuk" src="{{ asset('storage/icons/angle-down.svg') }}"
                             alt="angle down fas icon" width="18px">
                         </button>
                       </h2>
                     </div>
-                    <div id="transfer-mbanking" class="collapse" aria-labelledby="headingTwo"
+                    <div id="e-banking" class="collapse" aria-labelledby="headingTwo"
                       data-bs-parent="#accordionPetunjuk">
                       <div class="t-p">
                         <ol>
-                          <li>Pilih m-transfer > antar rekening</li>
-                          <li>Masukkan [No. Rekening Admin] beserta jumlah uang</li>
-                          <li>klik <strong>send</strong></li>
-                          <li>Masukkan pin mBanking anda dan pilih "OK"</li>
+                          <li>Select the Payment menu > select BRIVA.</li>
+                          <li>Select the original account, then select Fill in Pay Code and enter the Pay Code listed on
+                            the Payment page (consisting of 3 (three) Bank code numbers + User mobile number/random
+                            number) and select Send.</li>
+                          <li>Check the information on the screen. Make sure the Merchant is Shopee, the total bill is
+                            correct, and your username is {username}. If it is correct, enter your E-Banking Password
+                            and mToken, then select Send.</li>
                         </ol>
                       </div>
                     </div>
                   </div>
                   <div class="item">
-                    <div class="item-header" id="headingFour">
+                    <div class="item-header" id="headingThree">
                       <h2 class="mb-0">
                         <button class="btn btn-link collapsed d-flex justify-content-between align-items-center"
-                          type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false"
-                          aria-controls="collapseFour">
-                          <div class="title-accordion-petunjuk">Petunjuk transfer ATM</div>
+                          type="button" data-bs-toggle="collapse" data-bs-target="#m-banking" aria-expanded="false"
+                          aria-controls="m-banking">
+                          <div class="title-accordion-petunjuk">M-Banking</div>
                           <img class="title-accordion-petunjuk" src="{{ asset('storage/icons/angle-down.svg') }}"
                             alt="angle down fas icon" width="18px">
                         </button>
                       </h2>
                     </div>
-                    <div id="collapseFour" class="collapse" aria-labelledby="headingFour"
+                    <div id="m-banking" class="collapse" aria-labelledby="headingThree"
                       data-bs-parent="#accordionPetunjuk">
                       <div class="t-p">
                         <ol>
-                          <li>Masukkan kartu ATM ke slot mesin ATM</li>
-                          <li>Masukkan nomor PIN</li>
-                          <li>Pilih jenis transaksi transfer</li>
-                          <li>Pilih tujuan transfer
-                            <ul>
-                              <li>Pilih <strong>Transfer Sesama Bank</strong> apabila nomor rekening tujuan berasal dari
-                                bank yang sama dengan anda, kemudian masukkan nomor rekening, lalu pilih Benar.</li>
-                              <li>Pilih <strong>Transfer Antar Bank</strong> apabila nomor rekening tujuan berasal dari
-                                bank yang berbeda dengan anda. Kemudian masukkan kode bank terkait dan nomor rekening
-                                tujuan, lalu pilih Benar.</li>
-                            </ul>
+                          <li>Go to BRI Mobile Banking main page > Payment > select BRIVA.</li>
+                          <li>Enter no. BRIVA listed on the Payment page (consisting of 3 (three) Bank code numbers +
+                            User mobile number/random number).</li>
+                          <li>Enter your PIN > select Send. If a confirmation message appears for transactions using
+                            SMS, select OK. Transaction status will be sent via SMS and can be used as proof of payment.
                           </li>
-                          <li>Masukkan jumlah transfer</li>
-                          <li>Transaksi berhasil diproses</li>
-                          <li>Menunggu konfirmasi. Pilih Ya jika ingin melanjutkan atau pilih Tidak jika ingin
-                            menyudahi.</li>
-                          <li>Tunggu bukti transfer</li>
                         </ol>
                       </div>
                     </div>
                   </div>
+                </div>
+                <div class="d-flex justify-content-end">
+                  <a class="btn btn-info px-1 py-0" href="#TransferInstructionsModal" data-bs-toggle="modal">See
+                    More</a>
                 </div>
               </div>
             </div>
@@ -327,7 +358,7 @@
       </div>
     </div>
     <!-- Right -->
-    <div class="col-lg-3">
+    <div class="col-12 col-lg-3">
       <div class="card position-sticky top-0">
         <div class="p-3 bg-light bg-opacity-10">
           <h6 class="card-title mb-3">Order Summary</h6>

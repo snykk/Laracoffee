@@ -11,10 +11,10 @@ class OrderController extends Controller
 {
     public function makeOrderGet(Product $product)
     {
-        $data["title"] = "Make Order";
-        $data["product"] = $product;
+        $title = "Make Order";
+        $product = $product;
 
-        return view("/order/make_order", $data);
+        return view("/order/make_order", compact("title", "product"));
     }
 
 
