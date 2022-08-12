@@ -17,8 +17,7 @@
                             <p class="orientasi text-center">
                                 <!-- Orientation -->
                             </p>
-                            <img id="modal-image" src="{{ asset('storage/') }}" width="70%"
-                              class="img-fluid d-block mx-auto" alt="" />
+                            <img id="modal-image" width="70%" class="img-fluid d-block mx-auto" alt="" />
                             <div>
                                 <h3>
                                     Description

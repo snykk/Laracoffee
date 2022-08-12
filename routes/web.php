@@ -1,12 +1,13 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RajaOngkirController;
-use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -97,6 +98,16 @@ Route::middleware(['auth'])->group(function () {
         Route::get("/shipping/province", "province");
         Route::get("/shipping/city/{province_id}", "city");
         Route::get("/shipping/cost/{origin}/{destination}/{quantity}/{courier}", "cost");
+    });
+
+
+    // review
+    Route::controller(ReviewController::class)->group(function () {
+        Route::get("/review/product/{product}", "productReview");
+        Route::get("/review/data/{review}", "getDataReview");
+        Route::post("/review/add_review/", "addReview");
+        Route::post("/review/edit_review/{review}", "editReview")->can("edit_review", "review");
+        Route::post("/review/delete_review/{review}", "deleteReview")->can("delete_review", "review");
     });
 
     // Logout

@@ -5,7 +5,7 @@
 @endpush
 
 @push('scripts-dependencies')
-<script src="/js/product.js"></script>
+<script src="/js/product.js" type="module"></script>
 @endpush
 
 @push('modals-dependencies')
@@ -61,7 +61,8 @@
                                       class="btn btn-primary btn-sm detail">Detail</button>
 
                                     <!-- ulasan -->
-                                    <a href=""><button class="btn btn-primary btn-sm ubah">Review</button></a>
+                                    <a href="/review/product/{{ $row->id }}"><button
+                                          class="btn btn-primary btn-sm ubah">Review</button></a>
 
                                     <!-- [admin] ubah -->
                                     @can('edit_product',App\Models\Product::class)

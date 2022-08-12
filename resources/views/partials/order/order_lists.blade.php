@@ -26,7 +26,7 @@
           Notes: {{ (isset($row->refusal_reason)) ? $row->refusal_reason : $row->note->order_notes }}
         </small><br>
 
-        @if ($row->payment->payment_method == "Transfer Bank" && auth()->user()->id == 2)
+        @if ($row->payment->payment_method == "Transfer Bank" && auth()->user()->role_id == 2)
         <small>Action </small>
         <a data-bs-placement="top" class="uploadProof" title="Upload Transfer Proof" data-id="{{ $row->id }}">
           <div class="btn btn-danger btn-xs fa fa-fw fa-camera label-bukti"
