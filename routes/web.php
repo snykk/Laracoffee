@@ -8,6 +8,7 @@ use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RajaOngkirController;
+use App\Http\Controllers\TransactionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -108,6 +109,15 @@ Route::middleware(['auth'])->group(function () {
         Route::post("/review/add_review/", "addReview");
         Route::post("/review/edit_review/{review}", "editReview")->can("edit_review", "review");
         Route::post("/review/delete_review/{review}", "deleteReview")->can("delete_review", "review");
+    });
+
+    // transaction
+    Route::controller(TransactionController::class)->group(function () {
+        Route::get("/transaction", "index")->can("is_admin");
+        Route::get("/transaction/add_outcome", "addOutcomeGet")->can("is_admin");
+        Route::get("/transaction/edit_outcome/{transaction}", "editOutcomeGet")->can("is_admin");
+        Route::post("/transaction/add_outcome", "addOutcomePost")->can("is_admin");
+        Route::post("/transaction/edit_outcome/{transaction}", "editOutcomePost")->can("is_admin");
     });
 
     // Logout

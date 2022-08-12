@@ -310,7 +310,7 @@ class OrderController extends Controller
         $user->save();
 
         $transactional_data = [
-            "title" => "product sale",
+            "category_id" => 1,
             "description" => "sales of {$order->quantity} unit of product {$product->product_name}",
             "income" => $order->total_price,
             "outcome" => null,
