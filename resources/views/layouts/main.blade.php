@@ -41,9 +41,6 @@
   <script src="/js/datatables-simple.js"></script>
 
   <script src="/js/scripts.js"></script>
-  <script src="/js/chart-area.js"></script>
-  <script src="/js/chart-bar.js"></script>
-
   <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
   @stack('scripts-dependencies')

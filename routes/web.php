@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\{AuthController, HomeController, OrderController, PointController, ReviewController, ProductController, ProfileController, RajaOngkirController, TransactionController};
 
@@ -120,6 +121,57 @@ Route::middleware(['auth'])->group(function () {
     });
 
 
+    // chart
+    Route::middleware(['can:is_admin'])->group(function () {
+        // sales chart
+        Route::get("/chart/sales_chart", function () {
+            $oneWeekAgo = DB::select(DB::raw('SELECT DATE_FORMAT(DATE_SUB(CURDATE(), INTERVAL 6 DAY), "%Y-%m-%d") AS date'))[0]->date;
+
+            $now = date('Y-m-d', time());
+
+            $array_result = [
+                "one_week_ago" => $oneWeekAgo,
+                "now" => $now,
+            ];
+
+            //disable ONLY_FULL_GROUP_BY
+            DB::statement("SET sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''));");
+            $array_result["data"] = DB::table("orders")
+                ->selectSub("count(*)", "sales_total")
+                ->selectSub("DATE_FORMAT(orders.updated_at, '%d')", "day")
+                ->selectSub("DATE_FORMAT(orders.updated_at, '%Y-%m-%d')", "date")
+                ->where("is_done", 1)
+                ->whereBetween(DB::raw("DATE_FORMAT(orders.updated_at, '%Y-%m-%d')"), ["$oneWeekAgo", $now])
+                ->groupByRaw("DATE_FORMAT(orders.updated_at, '%Y-%m-%d')")
+                ->get();
+            //re-enable ONLY_FULL_GROUP_BY
+            DB::statement("SET sql_mode=(SELECT CONCAT(@@sql_mode, ',ONLY_FULL_GROUP_BY'));");
+
+            echo json_encode($array_result);
+        });
+        // profits chart
+        Route::get("/chart/profits_chart", function () {
+            $six_month_ago = DB::select(DB::raw('SELECT DATE_FORMAT(DATE_SUB(CURDATE(), INTERVAL 5 MONTH), "%Y-%m") AS month'))[0]->month;
+            $now = date('Y-m', time());
+            $array_result = [
+                "six_month_ago" => $six_month_ago,
+                "now" => $now,
+            ];
+
+            //disable ONLY_FULL_GROUP_BY
+            DB::statement("SET sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''));");
+            $array_result["data"] = DB::table("transactions")
+                ->selectSub("SUM(income) - SUM(outcome)", "profits")
+                ->selectSub("DATE_FORMAT(transactions.created_at, '%Y-%m')", "date")
+                ->whereBetween(DB::raw("DATE_FORMAT(transactions.created_at, '%Y-%m')"), ["$six_month_ago", $now])
+                ->groupByRaw("DATE_FORMAT(transactions.created_at, '%Y-%m')")
+                ->get();
+            //re-enable ONLY_FULL_GROUP_BY
+            DB::statement("SET sql_mode=(SELECT CONCAT(@@sql_mode, ',ONLY_FULL_GROUP_BY'));");
+
+            echo json_encode($array_result);
+        });
+    });
 
     // Logout
     Route::post('/auth/logout', [AuthController::class, "logoutPost"]);
