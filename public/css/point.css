@@ -1,0 +1,35 @@
+#wrapper {
+    display: flex;
+}
+#wrapper #content-wrapper {
+    background-color: #fff;
+    width: 100%;
+    height: 88vh;
+    overflow-x: hidden;
+}
+#wrapper #content-wrapper #content {
+    flex: 1 0 auto;
+}
+.point {
+    color: #5a5c69;
+    font-size: 7rem;
+    position: relative;
+    line-height: 1;
+    width: 12.5rem;
+}
+.lead {
+    font-size: 1.25rem;
+    font-weight: 300;
+}
+
+#loading {
+    display: flex;
+    position: fixed;
+    z-index: 100;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(192, 192, 192, 0.5);
+    background-image: url("https://i.stack.imgur.com/MnyxU.gif");
+    background-repeat: no-repeat;
+    background-position: center;
+}

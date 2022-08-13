@@ -21,6 +21,10 @@
                 <div class="sb-nav-link-icon"><i class="fas fa-fw fa-home-alt"></i></i></div>
                 Home
             </a>
+            <a class="nav-link" href="/point/user_point">
+                <div class="sb-nav-link-icon"><i class="fa-solid fa-fw fa-paw"></i></div>
+                My Point
+            </a>
             @endcan
 
             <div class="sb-sidenav-menu-heading">Interface</div>

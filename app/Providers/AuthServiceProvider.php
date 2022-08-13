@@ -4,8 +4,8 @@ namespace App\Providers;
 
 // use Illuminate\Support\Facades\Gate;
 
-use App\Models\{Order, Product};
-use App\Policies\{OrderPolicy, ProductPolicy};
+use App\Models\{Order, Product, Review, User};
+use App\Policies\{OrderPolicy, ProductPolicy, ReviewPolicy, PointPolicy};
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
 class AuthServiceProvider extends ServiceProvider
@@ -18,6 +18,9 @@ class AuthServiceProvider extends ServiceProvider
     protected $policies = [
         Product::class => ProductPolicy::class,
         Order::class => OrderPolicy::class,
+        Review::class => ReviewPolicy::class,
+        Order::class => OrderPolicy::class,
+        User::class => PointPolicy::class,
         // 'App\Models\Model' => 'App\Policies\ModelPolicy',
     ];
 

@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\{AuthController, HomeController, OrderController, ReviewController, ProductController, ProfileController, RajaOngkirController, TransactionController};
+use App\Http\Controllers\{AuthController, HomeController, OrderController, PointController, ReviewController, ProductController, ProfileController, RajaOngkirController, TransactionController};
 
 /*
 |--------------------------------------------------------------------------
@@ -112,6 +112,14 @@ Route::middleware(['auth'])->group(function () {
         Route::get("/transaction/edit_outcome/{transaction}", "editOutcomeGet")->can("is_admin");
         Route::post("/transaction/edit_outcome/{transaction}", "editOutcomePost")->can("is_admin");
     });
+
+    // point
+    Route::controller(PointController::class)->group(function () {
+        Route::get("/point/user_point", "user_point")->can("user_point", App\Models\User::class);
+        Route::post("/point/convert_point", "convert_point")->can("convert_point", App\Models\User::class);
+    });
+
+
 
     // Logout
     Route::post('/auth/logout', [AuthController::class, "logoutPost"]);
