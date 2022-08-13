@@ -1,7 +1,7 @@
 * text=auto
 
 *.blade.php diff=html
-*.css diff=css
+*.css linguist-vendored
 *.html diff=html
 *.md diff=markdown
 *.php diff=php
