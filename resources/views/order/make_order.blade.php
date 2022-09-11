@@ -387,7 +387,7 @@
                 (no coupon)
                 @else
                 <span class="align-items-center">
-                  <label for="use_coupon">Use</label>
+                  <label for="use_coupon" style="cursor:pointer">(use coupon</label>
                 </span>
                 <span>
                   <input id="use_coupon" type="checkbox" onchange="changeStatesCoupon()">

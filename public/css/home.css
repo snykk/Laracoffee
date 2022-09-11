@@ -1,3 +1,7 @@
+body {
+    background-color: #fff !important;
+}
+
 /* Hero home user */
 #hero {
     height: calc(100vh - 56px);

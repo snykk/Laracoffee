@@ -9,7 +9,7 @@
 @endpush
 
 @section('content')
-<div class="main-body px-5">
+<div class="main-body px-1 px-md-3 px-lg-4 px-xl-5">
 
     @include('/partials/breadcumb')
 
@@ -105,7 +105,7 @@
                     </div>
 
                     <!-- Save changes button-->
-                    <div class="col-6 d-flex justify-content-start align-items-center">
+                    <div class="col-12 d-flex justify-content-start align-items-center">
                         <a href="/profile/my_profile" class="btn btn-outline-secondary me-2">Back</a>
                         <button class="btn btn-dark" type="submit">Save Changes</button>
                     </div>

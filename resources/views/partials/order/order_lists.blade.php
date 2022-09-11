@@ -35,17 +35,18 @@
         </a>
         @endif
 
-        @if (isset($row->product_id) && auth()->user()->id == 2 && $row->is_done == 1)
+        @if (isset($row->product_id) && auth()->user()->role_id == 2 && $row->is_done == 1)
         <div>
-          <a href="/order/rewiew/" class="link-info" style="text-decoration: none; font-size:0.9rem;">
+          <a href="/review/product/{{ $row->product_id }}" class="link-info"
+            style="text-decoration: none; font-size:0.9rem;">
             Review Now!
           </a>
         </div>
         @endif
       </div>
       @php
-      if (auth()->user()->id == 1) {
-      $dest = "/home/customers?username=" . $row["username"];
+      if (auth()->user()->role_id == 1) {
+      $dest = "/home/customers?username=" . $row->user->username;
       }
       else {
       $dest = "/profile/my_profile";
@@ -58,7 +59,7 @@
       </div>
       @else
       <div class="col-md-12">order created at {{ $row->created_at->format('d M Y') }} by <a href="{{ $dest }}"
-          style="text-decoration:none;">{{ "@" . auth()->user()->username }}</a>
+          style="text-decoration:none;">{{ "@" . $row->user->username }}</a>
       </div>
       @endif
     </div>
