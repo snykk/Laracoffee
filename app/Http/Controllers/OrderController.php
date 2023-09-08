@@ -370,6 +370,7 @@ class OrderController extends Controller
         }
 
         $order->transaction_doc = $new_image;
+        $order->note_id = 3;
         $order->save();
 
         $message = "Proof transfer uploaded successfully";

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\{Auth, Hash};
 
 class AuthController extends Controller
@@ -58,7 +59,13 @@ class AuthController extends Controller
 
         $validatedData['password'] = Hash::make($validatedData['password']);
         $validatedData['image'] = env("IMAGE_PROFILE");
-
+        $validatedData = array_merge($validatedData, [
+            "role_id" => 1,
+            "coupon" => 0,
+            "point" => 0,
+            'remember_token' => Str::random(30),
+        ]);
+        
         try {
             User::create($validatedData);
             $message = "Congratulations, your account has been created!";
