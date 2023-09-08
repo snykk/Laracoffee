@@ -162,6 +162,13 @@ class OrderController extends Controller
             return redirect("/order/order_data");
         }
 
+        if ($order->status_id == 4) {
+            $message = "Order status is already succeded by admin";
+
+            myFlasherBuilder(message: $message, failed: true);
+            return redirect("/order/order_data");
+        }
+
         if ($order->status_id == 5) {
             $message = "Order status is already canceled by user";
 
@@ -276,6 +283,13 @@ class OrderController extends Controller
 
     public function endOrder(Order $order, Product $product)
     {
+        if ($order->status->order_status == "done") {
+            $message = "The order has already succeded by admin!";
+            myFlasherBuilder(message: $message, failed: true);
+
+            return redirect("/order/order_data");
+        }
+
         if ($order->status->order_status != "approve") {
             $message = "Order has not been approved by the admin!";
             myFlasherBuilder(message: $message, failed: true);
@@ -286,7 +300,7 @@ class OrderController extends Controller
         // change order status
         $updated_data = [
             "status_id" => 4,
-            "note_id" => $order->payment->payment_method == "COD" ? 1 : 4,
+            "note_id" => 5,
             "is_done" => 1,
             "refusal_reason" => null,
         ];
