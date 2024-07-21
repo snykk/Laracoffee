@@ -88,7 +88,7 @@
                         <div class="col-md-6">
                             <label class="small mb-1" for="gender">Gender</label>
                             <input class="form-control" id="gender" name="gender" type="text"
-                              value="{{ auth()->user()->gender == " M" ? "Male" : "Female" }}"" readonly>
+                              value="{{ auth()->user()->gender == 'M' ? 'Male' : 'Female' }}" readonly>
                         </div>
                     </div>
 

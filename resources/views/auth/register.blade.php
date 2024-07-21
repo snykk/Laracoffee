@@ -24,21 +24,21 @@
                             @csrf
                             <div class="form-group">
                                 <input type="text" class="form-control @error('fullname') is-invalid @enderror"
-                                  id="fullname" name="fullname" placeholder="Full Name" value="{{ @old(" fullname") }}">
+                                  id="fullname" name="fullname" placeholder="Full Name" value="{{ @old('fullname') }}">
                                 @error('fullname')
                                 <div class="text-danger">{{ $message }}</div>
                                 @enderror
                             </div>
                             <div class="form-group">
                                 <input type="text" class="form-control @error('username') is-invalid @enderror"
-                                  id="username" name="username" placeholder="Username" value="{{ @old(" username") }}">
+                                  id="username" name="username" placeholder="Username" value="{{ @old('username') }}">
                                 @error('username')
                                 <div class="text-danger">{{ $message }}</div>
                                 @enderror
                             </div>
                             <div class="form-group">
                                 <input type="text" class="form-control @error('email') is-invalid @enderror" id="email"
-                                  name="email" placeholder="Email Address" value="{{ @old(" email") }}">
+                                  name="email" placeholder="Email Address" value="{{ @old('email') }}">
                                 @error('email')
                                 <div class="text-danger">{{ $message }}</div>
                                 @enderror
@@ -81,14 +81,14 @@
                             </div>
                             <div class="form-group mt-3">
                                 <input type="text" class="form-control @error('phone') is-invalid @enderror" id="phone"
-                                  name="phone" placeholder="Phone" value="{{ @old(" phone") }}">
+                                  name="phone" placeholder="Phone" value="{{ @old('phone') }}">
                                 @error('phone')
                                 <div class="text-danger">{{ $message }}</div>
                                 @enderror
                             </div>
                             <div class="form-group">
                                 <input type="text" class="form-control @error('address') is-invalid @enderror"
-                                  id="address" name="address" placeholder="Address" value="{{ @old(" address") }}">
+                                  id="address" name="address" placeholder="Address" value="{{ @old('address') }}">
                                 @error('address')
                                 <div class="text-danger">{{ $message }}</div>
                                 @enderror

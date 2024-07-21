@@ -72,8 +72,8 @@
                             <div class="form-group">
                               <label for="product_name">Product Name</label>
                               <input class="form-control @error('product_name') is-invalid @enderror" type="text"
-                                id="product_name" name="product_name" placeholder="Enter product name" value="{{ old("
-                                product_name", $product->product_name) }}">
+                                id="product_name" name="product_name" placeholder="Enter product name"
+                                value="{{ old('product_name', $product->product_name) }}">
                               @error('product_name')
                               <div class="text-danger">{{ $message }}</div>
                               @enderror
@@ -83,7 +83,7 @@
                             <div class="form-group">
                               <label for="stock">Stock</label>
                               <input class="form-control @error('product_name') is-invalid @enderror" type="text"
-                                id="stock" name="stock" placeholder="Enter available stock" value="{{ old(" stock",
+                                id="stock" name="stock" placeholder="Enter available stock" value="{{ old('stock',
                                 $product->stock) }}">
                               @error('stock')
                               <div class="text-danger">{{ $message }}</div>
@@ -94,7 +94,7 @@
                             <div class="form-group">
                               <label for="price">Price</label>
                               <input class="form-control @error('price') is-invalid @enderror" id="price" name="price"
-                                type="text" placeholder="Enter product price" value="{{ old(" price", $product->price)
+                                type="text" placeholder="Enter product price" value="{{ old('price', $product->price)
                               }}">
                               @error('price')
                               <div class="text-danger">{{ $message }}</div>
@@ -105,8 +105,8 @@
                             <div class="form-group">
                               <label for="discount">Discount</label>
                               <input class="form-control @error('discount') is-invalid @enderror" type="text"
-                                id="discount" name="discount" placeholder="Masukkan price produk" value="{{ old("
-                                discount", $product->discount) }}">
+                                id="discount" name="discount" placeholder="Masukkan price produk"
+                                value="{{ old('discount', $product->discount) }}">
                               @error('discount')
                               <div class="text-danger">{{ $message }}</div>
                               @enderror
@@ -118,7 +118,7 @@
                             <div class="form-group">
                               <label for="orientation">Product Orientation</label>
                               <input class="form-control @error('orientation') is-invalid @enderror" id="orientation"
-                                name="orientation" placeholder="Enter product orientation" value="{{ old(" orientation",
+                                name="orientation" placeholder="Enter product orientation" value="{{ old('orientation',
                                 $product->orientation) }}">
                               @error('orientation')
                               <div class="text-danger">{{ $message }}</div>
@@ -131,8 +131,8 @@
                             <div class="form-group">
                               <label for="description">Product Description</label>
                               <input class="form-control @error('description') is-invalid @enderror" id="description"
-                                placeholder="Masukkan description produk" name="description" value="{{ old("
-                                description", $product->description) }}">
+                                placeholder="Masukkan description produk" name="description"
+                                value="{{ old('description', $product->description) }}">
                               @error('description')
                               <div class="text-danger">{{ $message }}</div>
                               @enderror

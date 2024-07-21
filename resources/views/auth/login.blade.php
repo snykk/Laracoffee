@@ -30,8 +30,8 @@
                                     @csrf
                                     <div class="form-group">
                                         <input type="text" class="form-control @error('email') is-invalid @enderror"
-                                          id="email" name="email" placeholder="Enter an email address" value="{{ @old("
-                                          email") }}">
+                                          id="email" name="email" placeholder="Enter an email address"
+                                          value="{{ @old('email') }}">
                                         @error('email')
                                         <div class="text-danger">{{ $message }}</div>
                                         @enderror
