@@ -59,6 +59,15 @@ To run Laracoffee locally, follow these steps:
     ```bash
     php artisan key:generate
     ```
+
+6. Create a symbolic link for the storage directory
+   ```bash
+   php artisan storage:link
+   ```
+8. Set the filesystem disk to public in the .env file
+   ```bash
+   FILESYSTEM_DISK=public
+   ```
 6. Migrate the database
     ```bash
     php artisan migrate
