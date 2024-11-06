@@ -10,7 +10,7 @@
         <p>No orders with status {{ $is_filtered }}</p>
         @endif
 
-        @if (auth()->user()->id == 2)
+        @if (auth()->user()->role_id == 2)
         <a href="/product" class="link-info">
           <i class="fas fa-arrow-left me-1"></i>
           Buy some good product now
