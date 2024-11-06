@@ -54,7 +54,6 @@ class AuthController extends Controller
             'phone' => 'required|numeric',
             'gender' => 'required',
             'address' => 'required',
-            'role_id' => 'required|numeric',
         ]);
 
         $validatedData['password'] = Hash::make($validatedData['password']);
@@ -63,6 +62,7 @@ class AuthController extends Controller
             "coupon" => 0,
             "point" => 0,
             'remember_token' => Str::random(30),
+            'role_id' => 2 // value 2 for customer role
         ]);
         
         try {

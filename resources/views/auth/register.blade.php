@@ -93,7 +93,6 @@
                                 <div class="text-danger">{{ $message }}</div>
                                 @enderror
                             </div>
-                            <input type="hidden" name="role_id" value="2" /> {{-- role 2 for customer --}}
                             <button type="submit" class="btn btn-info btn-block">
                                 Submit
                             </button>
